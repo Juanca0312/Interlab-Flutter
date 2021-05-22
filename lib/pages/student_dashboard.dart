@@ -32,7 +32,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
       appBar: InterlabAppBar(index: _currentIndex, height: height,),
       body: Center(child: tabs[_currentIndex]),
       bottomNavigationBar: DotNavigationBar(
-        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
         currentIndex: _currentIndex,
         onTap: (index){
           setState(() {
