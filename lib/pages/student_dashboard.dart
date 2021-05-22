@@ -42,12 +42,12 @@ class _StudentDashboardState extends State<StudentDashboard> {
               )
           ),
           child: Padding(
-            padding: EdgeInsets.only(top: height*1.15),
+            padding: EdgeInsets.only(top: height*1.2),
             child: Center(child: tabs[_currentIndex]),
           )
       ),
       bottomNavigationBar: DotNavigationBar(
-        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
