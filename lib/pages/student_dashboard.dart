@@ -25,8 +25,10 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height * 0.15;
-
+    height = MediaQuery
+        .of(context)
+        .size
+        .height * 0.15;
 
     return Scaffold(
       appBar: InterlabAppBar(index: _currentIndex, height: height,),
@@ -34,37 +36,37 @@ class _StudentDashboardState extends State<StudentDashboard> {
       bottomNavigationBar: DotNavigationBar(
         margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
         currentIndex: _currentIndex,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
         items: [
-          /// Home
+
           DotNavigationBarItem(
               icon: Icon(Icons.home),
               selectedColor: Colors.grey[900],
               unselectedColor: Colors.grey[500]
           ),
 
-          /// Likes
+
           DotNavigationBarItem(
               icon: Icon(Icons.person),
               selectedColor: Colors.grey[900],
               unselectedColor: Colors.grey[500]
           ),
 
-          /// Search
+
           DotNavigationBarItem(
               icon: Icon(Icons.access_time),
-              selectedColor:Colors.grey[900],
+              selectedColor: Colors.grey[900],
               unselectedColor: Colors.grey[500]
           ),
 
-          /// Profile
+
           DotNavigationBarItem(
               icon: Icon(Icons.search),
-              selectedColor:Colors.grey[900],
+              selectedColor: Colors.grey[900],
               unselectedColor: Colors.grey[500]
 
           ),
@@ -72,5 +74,5 @@ class _StudentDashboardState extends State<StudentDashboard> {
       ),
     );
   }
-}
 
+}
