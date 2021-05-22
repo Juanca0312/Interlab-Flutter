@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:interlab/pages/student_profile.dart';
+import 'package:interlab/pages/student_home.dart';
 import 'package:interlab/widgets/interlab_student_app_bar.dart';
 
 class StudentDashboard extends StatefulWidget {
@@ -16,7 +17,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
   static double height;
 
   final tabs = [
-    Center(child: Text('Home'),),
+    Home(),
     Profile(subtitle: _currentIndex),
     Center(child: Text('History'),),
     Center(child: Text('Search'),),
