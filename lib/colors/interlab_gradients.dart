@@ -19,4 +19,8 @@ class IGradients{
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
       colors: [IColors.lightblue, IColors.blue]);
+  static const LinearGradient blue_lightblue = LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      colors: [IColors.blue, IColors.lightblue]);
 }
