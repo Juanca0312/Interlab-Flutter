@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:interlab/services/profile_student.dart';
+
 
 class Profile extends StatefulWidget {
   final int subtitle;
@@ -16,40 +19,56 @@ class _ProfileState extends State<Profile> {
   String _university = 'Universidad Peruana de Ciencias Aplicadas';
   String _bio =
       'Estudiante de 9no ciclo de la carrera de Ingeniería de Software. Especializado en tecnologías. Front End y Mobile, con conocimento en: HTML, CSS, JavaScript,  React y Vue. 1 año de experiencia';
+  String _phone = '999124365';
+  String _email = 'email@email.com';
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _name = 'Cargando...';
+  ProfileS profile = ProfileS();
+
+  final _formKey = GlobalKey<FormState>();
+
+  void getData() async {
+    await profile.getData();
+    setState(() {
+      _name = profile.firstName;
+    });
+  }
 
   Widget _buildCarrera() {
     return TextFormField(
       initialValue: _carrera,
       decoration: InputDecoration(labelText: 'Soy estudiante de:'),
-      validator: (String value) {
-        if (value.isEmpty) {
+      validator: (value) {
+        if (value == null) {
           return 'Carrera es requerida';
         }
+        return null;
       },
-      onSaved: (String value) {
-        _carrera = value;
+      onChanged: (String value) {
+        setState(() {
+          _carrera = value;
+        });
       },
     );
   }
-
   Widget _buildCiclo() {
     return TextFormField(
-      initialValue: '${_ciclo}° ciclo',
+      initialValue: _ciclo,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(labelText: 'En el ciclo:'),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Carrera es requerida';
         }
+        return null;
       },
-      onSaved: (String value) {
-        _ciclo = '${value}° ciclo';
+      onChanged: (String value) {
+        setState(() {
+          _ciclo = value;
+        });
       },
     );
   }
-
   Widget _buildUniversity() {
     return TextFormField(
       initialValue: _university,
@@ -57,38 +76,80 @@ class _ProfileState extends State<Profile> {
       decoration: InputDecoration(labelText: 'En la universidad: '),
       validator: (String value) {
         if (value.isEmpty) {
-          return 'Carrera es requerida';
+          return 'Universidad es requerida';
         }
+        return null;
       },
-      onSaved: (String value) {
-        _university = value;
+      onChanged: (String value) {
+        setState(() {
+          _university = value;
+        });
       },
     );
   }
-
-  Widget _buildBio() {
+  Widget _buildBio( ) {
     return TextFormField(
       initialValue: _bio,
       maxLines: 5,
       decoration: InputDecoration(labelText: 'Bio'),
       validator: (String value) {
         if (value.isEmpty) {
-          return 'Carrera es requerida';
+          return 'Bio es requerida';
         }
+        return null;
       },
-      onSaved: (String value) {
-        _bio = value;
+      onChanged: (String value) {
+        setState(() {
+          _bio = value;
+        });
+      },
+    );
+  }
+  Widget _buildPhone( ) {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      initialValue: _phone,
+      decoration: InputDecoration(labelText: 'Numero de Telefono'),
+      validator: (String value) {
+        if (value.isEmpty && value.length < 8) {
+          return 'Telefono invalido';
+        }
+        return null;
+      },
+      onChanged: (String value) {
+        setState(() {
+          _phone = value;
+        });
+      },
+    );
+  }
+  Widget _buildEmail() {
+    return TextFormField(
+      initialValue: _email,
+      decoration: InputDecoration(labelText: 'Email'),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Email es requerido';
+        }
+        return null;
+      },
+      onChanged: (String value) {
+        setState(() {
+          _email = value;
+        });
       },
     );
   }
 
   @override
-  void initState() {
+  void initState(){
+    // TODO: implement initState
     super.initState();
+    getData();
   }
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         body: SizedBox.expand(
           child: Container(
@@ -118,7 +179,7 @@ class _ProfileState extends State<Profile> {
                         ],
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(15))),
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    margin: EdgeInsets.symmetric(vertical: 130, horizontal: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
@@ -145,7 +206,7 @@ class _ProfileState extends State<Profile> {
                                             vertical: 0, horizontal: 10),
                                         //color: Colors.lightGreenAccent,
                                         child: Text(
-                                          'Marcelo Martinez',
+                                          _name,
                                           style: TextStyle(fontSize: 20),
                                         )),
                                     Container(
@@ -176,8 +237,20 @@ class _ProfileState extends State<Profile> {
                                 _buildCiclo(),
                                 _buildUniversity(),
                                 _buildBio(),
-                                _buildUniversity(),
-                                _buildBio(),
+                                _buildPhone(),
+                                _buildEmail(),
+                                SizedBox(height: 10,),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+
+                                  ),
+                                  onPressed: _ciclo == '' || _carrera == ''
+                                      || _university == '' || _bio == ''
+                                      || _phone == '' || _email == ''? null : (){
+                                    //funcion guardar en http
+                                  }, child: _ciclo == '' || _carrera == ''
+                                    || _university == '' || _bio == ''
+                                    || _phone == '' || _email == ''? Text('Llenar datos') : Text('Guardar'),)
                               ],
                             ),
                           ),
@@ -192,3 +265,6 @@ class _ProfileState extends State<Profile> {
         ));
   }
 }
+
+
+
