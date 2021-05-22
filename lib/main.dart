@@ -9,6 +9,7 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => StudentDashboard(),
+      '/studentDashboard': (context) => StudentDashboard(),
     },
   ));
 }
