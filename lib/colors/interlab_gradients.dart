@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'interlab_colors.dart';
+import 'package:interlab/colors/interlab_colors.dart';
 
 class IGradients{
   static const LinearGradient green_lightblue = LinearGradient(
