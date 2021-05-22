@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interlab/colors/interlab_gradients.dart';
 class Home extends StatefulWidget {
   const Home();
 
@@ -28,7 +29,7 @@ class _HomeState extends State<Home> {
   }
   Widget _buildRow(Application application){
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 21),
       child: applicationWidget(application),
     );
   }
@@ -116,9 +117,9 @@ class Application {
   LinearGradient bgGradient;
   Application(this.title, this.company, this.location, this.status){
     switch (status){
-      case 'Active': bgGradient=LinearGradient(colors: [Colors.lightGreenAccent[100], Colors.lightBlueAccent[100]]); break;
-      case 'Rejected': bgGradient=LinearGradient(colors: [Colors.yellow[300], Colors.orange[300]]); break;
-      case 'Pending': bgGradient=LinearGradient(colors: [Colors.deepPurple[200], Colors.pinkAccent[100]]); break;
+      case 'Active': bgGradient=IGradients.green_lightblue; break;
+      case 'Rejected': bgGradient=IGradients.yellow_orange; break;
+      case 'Pending': bgGradient=IGradients.purple_pink; break;
     }
   }
 }
