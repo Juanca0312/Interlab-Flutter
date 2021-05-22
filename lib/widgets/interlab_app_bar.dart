@@ -40,7 +40,7 @@ class _InterlabAppBarState extends State<InterlabAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white.withOpacity(0),
       elevation: 0,
       toolbarHeight: MediaQuery.of(context).size.height * 0.15,
       title: Padding(
