@@ -97,9 +97,9 @@ class _HomeState extends State<Home> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(.5),
+              color: Colors.grey.withOpacity(.3),
               spreadRadius: 1,
-              blurRadius: 6,
+              blurRadius: 5,
               offset: Offset(5, 5),
             ),
           ]
@@ -116,9 +116,9 @@ class Application {
   LinearGradient bgGradient;
   Application(this.title, this.company, this.location, this.status){
     switch (status){
-      case 'Active': bgGradient=LinearGradient(colors: [Colors.green, Colors.lightGreen]); break;
-      case 'Rejected': bgGradient=LinearGradient(colors: [Colors.yellow, Colors.yellowAccent]); break;
-      case 'Pending': bgGradient=LinearGradient(colors: [Colors.purple, Colors.pink]); break;
+      case 'Active': bgGradient=LinearGradient(colors: [Colors.lightGreenAccent[100], Colors.lightBlueAccent[100]]); break;
+      case 'Rejected': bgGradient=LinearGradient(colors: [Colors.yellow[300], Colors.orange[300]]); break;
+      case 'Pending': bgGradient=LinearGradient(colors: [Colors.deepPurple[200], Colors.pinkAccent[100]]); break;
     }
   }
 }
