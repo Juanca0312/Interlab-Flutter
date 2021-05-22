@@ -151,16 +151,11 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
         body: SizedBox.expand(
           child: Container(
-            //margin: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-            //color: Colors.amberAccent,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background.png'),
-                  fit: BoxFit.cover,
-                )
-            ),
+            //height:  MediaQuery.of(context).size.height * 0.85,
+            margin: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height * 0.15, 0, 0),
             child: SingleChildScrollView(
               child: Column(
                 //crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -179,7 +174,7 @@ class _ProfileState extends State<Profile> {
                         ],
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(15))),
-                    margin: EdgeInsets.symmetric(vertical: 130, horizontal: 30),
+                    margin: EdgeInsets.fromLTRB(30, 10,  30, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
