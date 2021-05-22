@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:interlab/services/profile_student.dart';
-
+import 'package:interlab/colors/interlab_gradients.dart';
 
 class Profile extends StatefulWidget {
-  final int subtitle;
 
-  const Profile({this.subtitle});
+  const Profile();
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -101,7 +100,7 @@ class _ProfileState extends State<Profile> {
   Widget _buildBio( ) {
     return TextFormField(
       controller: bio,
-      maxLines: 5,
+      maxLines: 3,
       decoration: InputDecoration(labelText: 'Bio'),
       validator: (String value) {
         if (value.isEmpty) {
@@ -191,16 +190,13 @@ class _ProfileState extends State<Profile> {
                         Container(
                           ///TODO: CARD Inicio
                           decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Colors.cyanAccent[200],
-                                Colors.blueAccent
-                              ]),
+                              gradient: IGradients.blue_lightblue ,
                               borderRadius: BorderRadius.all(Radius.circular(15))),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20.0),
                             child: Row(
-                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //mainAxisAlignment: MainA xisAlignment.spaceBetween,
                               children: [
                                 Image.asset('assets/user.png'),
                                 Column(
