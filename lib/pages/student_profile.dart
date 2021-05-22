@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:interlab/services/profile_student.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
+import 'package:interlab/widgets/loading.dart';
+
 
 class Profile extends StatefulWidget {
 
@@ -20,6 +22,7 @@ class _ProfileState extends State<Profile> {
   TextEditingController phone = TextEditingController();
   TextEditingController email = TextEditingController();
   String _name = 'Cargando...';
+  bool loading = true;
 
   ProfileS profile = ProfileS();
 
@@ -27,6 +30,7 @@ class _ProfileState extends State<Profile> {
 
   void asignData () {
     setState(() {
+      loading = false;
       _name = '${profile.firstName} ${profile.lastName}';
       degree.text = profile.degree;
       semester.text = profile.semester;
@@ -159,7 +163,7 @@ class _ProfileState extends State<Profile> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.transparent,
         body: SizedBox.expand(
           child: Container(
@@ -266,6 +270,8 @@ class _ProfileState extends State<Profile> {
         ));
   }
 }
+
+
 
 
 
