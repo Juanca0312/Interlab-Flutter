@@ -41,7 +41,10 @@ class _StudentDashboardState extends State<StudentDashboard> {
                 fit: BoxFit.cover,
               )
           ),
-          child: Center(child: tabs[_currentIndex])
+          child: Padding(
+            padding: EdgeInsets.only(top: height*1.15),
+            child: Center(child: tabs[_currentIndex]),
+          )
       ),
       bottomNavigationBar: DotNavigationBar(
         margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
