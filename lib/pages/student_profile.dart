@@ -155,7 +155,7 @@ class _ProfileState extends State<Profile> {
         body: SizedBox.expand(
           child: Container(
             //height:  MediaQuery.of(context).size.height * 0.85,
-            margin: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height * 0.15, 0, 0),
+            //margin: EdgeInsets.fromLTRB(0,0, 0, 10),
             child: SingleChildScrollView(
               child: Column(
                 //crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -174,7 +174,7 @@ class _ProfileState extends State<Profile> {
                         ],
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(15))),
-                    margin: EdgeInsets.fromLTRB(30, 10,  30, 0),
+                    margin: EdgeInsets.fromLTRB(30, 10,  30, 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
