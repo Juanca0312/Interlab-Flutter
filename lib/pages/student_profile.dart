@@ -14,29 +14,40 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
 
-  String _carrera = 'Ingenieria de Software';
-  String _ciclo = '9';
-  String _university = 'Universidad Peruana de Ciencias Aplicadas';
-  String _bio =
-      'Estudiante de 9no ciclo de la carrera de Ingeniería de Software. Especializado en tecnologías. Front End y Mobile, con conocimento en: HTML, CSS, JavaScript,  React y Vue. 1 año de experiencia';
-  String _phone = '999124365';
-  String _email = 'email@email.com';
-
+  TextEditingController degree = TextEditingController();
+  TextEditingController semester = TextEditingController();
+  TextEditingController university = TextEditingController();
+  TextEditingController bio = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController email = TextEditingController();
   String _name = 'Cargando...';
+
   ProfileS profile = ProfileS();
 
   final _formKey = GlobalKey<FormState>();
 
+  void asignData () {
+    setState(() {
+      _name = '${profile.firstName} ${profile.lastName}';
+      degree.text = profile.degree;
+      semester.text = profile.semester;
+      university.text = profile.university;
+      bio.text = profile.description;
+      phone.text = profile.phone;
+      email.text = profile.email;
+      print(profile.degree);
+    });
+  }
+
   void getData() async {
     await profile.getData();
-    setState(() {
-      _name = profile.firstName;
-    });
+    //print('hola1');
+    asignData();
   }
 
   Widget _buildCarrera() {
     return TextFormField(
-      initialValue: _carrera,
+      controller: degree,
       decoration: InputDecoration(labelText: 'Soy estudiante de:'),
       validator: (value) {
         if (value == null) {
@@ -46,32 +57,32 @@ class _ProfileState extends State<Profile> {
       },
       onChanged: (String value) {
         setState(() {
-          _carrera = value;
+          degree.text = value;
         });
       },
     );
   }
   Widget _buildCiclo() {
     return TextFormField(
-      initialValue: _ciclo,
+      controller: semester,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(labelText: 'En el ciclo:'),
       validator: (String value) {
         if (value.isEmpty) {
-          return 'Carrera es requerida';
+          return 'Ciclo es requerida';
         }
         return null;
       },
       onChanged: (String value) {
         setState(() {
-          _ciclo = value;
+          semester.text = value;
         });
       },
     );
   }
   Widget _buildUniversity() {
     return TextFormField(
-      initialValue: _university,
+      controller: university,
       maxLines: 2,
       decoration: InputDecoration(labelText: 'En la universidad: '),
       validator: (String value) {
@@ -82,14 +93,14 @@ class _ProfileState extends State<Profile> {
       },
       onChanged: (String value) {
         setState(() {
-          _university = value;
+          university.text = value;
         });
       },
     );
   }
   Widget _buildBio( ) {
     return TextFormField(
-      initialValue: _bio,
+      controller: bio,
       maxLines: 5,
       decoration: InputDecoration(labelText: 'Bio'),
       validator: (String value) {
@@ -100,7 +111,7 @@ class _ProfileState extends State<Profile> {
       },
       onChanged: (String value) {
         setState(() {
-          _bio = value;
+          bio.text = value;
         });
       },
     );
@@ -108,7 +119,7 @@ class _ProfileState extends State<Profile> {
   Widget _buildPhone( ) {
     return TextFormField(
       keyboardType: TextInputType.number,
-      initialValue: _phone,
+      controller: phone,
       decoration: InputDecoration(labelText: 'Numero de Telefono'),
       validator: (String value) {
         if (value.isEmpty && value.length < 8) {
@@ -118,14 +129,14 @@ class _ProfileState extends State<Profile> {
       },
       onChanged: (String value) {
         setState(() {
-          _phone = value;
+          phone.text = value;
         });
       },
     );
   }
   Widget _buildEmail() {
     return TextFormField(
-      initialValue: _email,
+      controller: email,
       decoration: InputDecoration(labelText: 'Email'),
       validator: (String value) {
         if (value.isEmpty) {
@@ -135,7 +146,7 @@ class _ProfileState extends State<Profile> {
       },
       onChanged: (String value) {
         setState(() {
-          _email = value;
+          email.text = value;
         });
       },
     );
@@ -149,7 +160,6 @@ class _ProfileState extends State<Profile> {
   }
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.transparent,
         body: SizedBox.expand(
@@ -239,13 +249,13 @@ class _ProfileState extends State<Profile> {
                                   style: ButtonStyle(
 
                                   ),
-                                  onPressed: _ciclo == '' || _carrera == ''
-                                      || _university == '' || _bio == ''
-                                      || _phone == '' || _email == ''? null : (){
-                                    //funcion guardar en http
-                                  }, child: _ciclo == '' || _carrera == ''
-                                    || _university == '' || _bio == ''
-                                    || _phone == '' || _email == ''? Text('Llenar datos') : Text('Guardar'),)
+                                  onPressed: semester.text == '' || degree.text == ''
+                                      || university.text == '' || bio.text == ''
+                                      || phone.text == '' || email.text == ''? null : (){
+                                    //endpoint put
+                                  }, child: semester.text == '' || degree.text == ''
+                                    || university.text == '' || bio.text == ''
+                                    || phone.text == '' || email.text == '' ? Text('Llenar datos') : Text('Guardar'),)
                               ],
                             ),
                           ),
