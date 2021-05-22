@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:interlab/pages/student_profile.dart';
-import 'package:interlab/widgets/interlab_app_bar.dart';
+import 'package:interlab/widgets/interlab_student_app_bar.dart';
 
 class StudentDashboard extends StatefulWidget {
   const StudentDashboard({Key key}) : super(key: key);
