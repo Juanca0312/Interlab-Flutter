@@ -22,6 +22,20 @@ class _SearchState extends State<Search> {
     new Internship(title: 'C++ Junior programmer', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' ),
   ];
 
+  Internship pruebita = Internship(title: 'Summer Internship 2021', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' );
+
+  void getData() async {
+    await pruebita.getData();
+    //print(pruebita)
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
