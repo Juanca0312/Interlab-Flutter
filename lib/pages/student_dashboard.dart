@@ -31,6 +31,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
         .height * 0.15;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: InterlabStudentAppBar(index: _currentIndex, height: height,),
       body: Center(child: tabs[_currentIndex]),
       bottomNavigationBar: DotNavigationBar(

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:interlab/services/profile_student.dart';
 
@@ -178,7 +179,7 @@ class _ProfileState extends State<Profile> {
                         ],
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(15))),
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    margin: EdgeInsets.symmetric(vertical: 130, horizontal: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
