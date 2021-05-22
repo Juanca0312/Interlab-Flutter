@@ -33,7 +33,7 @@ class _InterlabRecruiterAppBarState extends State<InterlabRecruiterAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       //Color del appbar
-      backgroundColor: Colors.white.withOpacity(0),
+      backgroundColor: Colors.transparent,
       //Quita el separador/sombra
       elevation: 0,
       //Altura del appbar
