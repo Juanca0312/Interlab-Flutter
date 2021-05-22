@@ -8,19 +8,20 @@ class InterlabAppBar extends StatefulWidget implements PreferredSizeWidget  {
 
   const InterlabAppBar({this.index, this.height});
 
-
-
   @override
   _InterlabAppBarState createState() => _InterlabAppBarState();
 
   @override
   Size get preferredSize => new Size.fromHeight(height);
-
-
 }
 
 class _InterlabAppBarState extends State<InterlabAppBar> {
-
+  List<String> titles = [
+    'Home',
+    'My Profile',
+    'Internship History',
+    'Search Results'
+  ];
   List<String> subtitles = [
     'Tus aplicaciones recientes.',
     'Personaliza como te ven las empresas.',
@@ -28,20 +29,16 @@ class _InterlabAppBarState extends State<InterlabAppBar> {
     'Encuentra su pasantia deseada.'
   ];
 
-  List<String> titles = [
-    'Home',
-    'My Profile',
-    'Internship History',
-    'Search Results'
-  ];
-
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      //Color del appbar
       backgroundColor: Colors.white.withOpacity(0),
+      //Quita el separador/sombra
       elevation: 0,
+      //Altura del appbar
       toolbarHeight: MediaQuery.of(context).size.height * 0.15,
+      //Contenido del appbar
       title: Padding(
         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
         child: Row(
@@ -52,7 +49,6 @@ class _InterlabAppBarState extends State<InterlabAppBar> {
               children: [
                 Text(
                     '${titles[widget.index]}',
-
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w600,
