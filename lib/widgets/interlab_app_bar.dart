@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class InterlabAppBar extends StatefulWidget implements PreferredSizeWidget  {
   final int index;
@@ -53,26 +52,21 @@ class _InterlabAppBarState extends State<InterlabAppBar> {
               children: [
                 Text(
                     '${titles[widget.index]}',
-                    style: GoogleFonts.getFont(
-                        'Poppins',
-                        textStyle: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black87,
-                        )
+
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
                     )
                 ),
                 Text(
                     '${subtitles[widget.index]}',
-                    style: GoogleFonts.getFont(
-                        'Poppins',
-                        textStyle: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w300,
-                          decoration: TextDecoration.underline,
-                          color: Colors.black87,
-                        )
-                    )
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w300,
+                      decoration: TextDecoration.underline,
+                      color: Colors.black87,
+                    ),
                 ),
               ],
             ),
