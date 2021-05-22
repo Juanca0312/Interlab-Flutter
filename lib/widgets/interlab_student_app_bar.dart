@@ -2,20 +2,20 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class InterlabAppBar extends StatefulWidget implements PreferredSizeWidget  {
+class InterlabStudentAppBar extends StatefulWidget implements PreferredSizeWidget  {
   final int index;
   final double height;
 
-  const InterlabAppBar({this.index, this.height});
+  const InterlabStudentAppBar({this.index, this.height});
 
   @override
-  _InterlabAppBarState createState() => _InterlabAppBarState();
+  _InterlabStudentAppBarState createState() => _InterlabStudentAppBarState();
 
   @override
   Size get preferredSize => new Size.fromHeight(height);
 }
 
-class _InterlabAppBarState extends State<InterlabAppBar> {
+class _InterlabStudentAppBarState extends State<InterlabStudentAppBar> {
   List<String> titles = [
     'Home',
     'My Profile',

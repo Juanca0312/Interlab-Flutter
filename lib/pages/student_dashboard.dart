@@ -29,7 +29,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
 
     return Scaffold(
-      appBar: InterlabAppBar(index: _currentIndex, height: height,),
+      appBar: InterlabStudentAppBar(index: _currentIndex, height: height,),
       body: Center(child: tabs[_currentIndex]),
       bottomNavigationBar: DotNavigationBar(
         margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
