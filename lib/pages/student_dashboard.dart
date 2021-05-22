@@ -3,6 +3,7 @@ import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:interlab/pages/student_profile.dart';
 import 'package:interlab/pages/student_home.dart';
 import 'package:interlab/widgets/interlab_student_app_bar.dart';
+import 'package:interlab/pages/student_search.dart';
 
 class StudentDashboard extends StatefulWidget {
   const StudentDashboard({Key key}) : super(key: key);
@@ -13,14 +14,14 @@ class StudentDashboard extends StatefulWidget {
 
 class _StudentDashboardState extends State<StudentDashboard> {
 
-  static int _currentIndex = 1;
+  static int _currentIndex = 0;
   static double height;
 
   final tabs = [
     Home(),
-    Profile(subtitle: _currentIndex),
+    Profile(),
     Center(child: Text('History'),),
-    Center(child: Text('Search'),),
+    Search(),
   ];
 
 
