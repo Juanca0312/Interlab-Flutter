@@ -22,6 +22,12 @@ class _ProfileState extends State<Profile> {
   TextEditingController phone = TextEditingController();
   TextEditingController email = TextEditingController();
   String _name = 'Cargando...';
+  String Idegree;
+  String Isemester;
+  String Iuniversity;
+  String Ibio;
+  String Iphone;
+  String Iemail;
   bool loading = true;
 
   ProfileS profile = ProfileS();
@@ -38,7 +44,15 @@ class _ProfileState extends State<Profile> {
       bio.text = profile.description;
       phone.text = profile.phone;
       email.text = profile.email;
+
       print(profile.degree);
+
+      Idegree = degree.text;
+      Isemester = semester.text;
+      Iuniversity = university.text;
+      Ibio = bio.text;
+      Iphone = phone.text;
+      Iemail = email.text;
     });
   }
 
@@ -58,9 +72,9 @@ class _ProfileState extends State<Profile> {
         }
         return null;
       },
-      onChanged: (String value) {
+      onChanged: (item){
         setState(() {
-          degree.text = value;
+
         });
       },
     );
@@ -76,9 +90,9 @@ class _ProfileState extends State<Profile> {
         }
         return null;
       },
-      onChanged: (String value) {
+      onChanged: (item){
         setState(() {
-          semester.text = value;
+
         });
       },
     );
@@ -94,9 +108,9 @@ class _ProfileState extends State<Profile> {
         }
         return null;
       },
-      onChanged: (String value) {
+      onChanged: (item){
         setState(() {
-          university.text = value;
+
         });
       },
     );
@@ -112,9 +126,9 @@ class _ProfileState extends State<Profile> {
         }
         return null;
       },
-      onChanged: (String value) {
+      onChanged: (item){
         setState(() {
-          bio.text = value;
+
         });
       },
     );
@@ -130,9 +144,9 @@ class _ProfileState extends State<Profile> {
         }
         return null;
       },
-      onChanged: (String value) {
+      onChanged: (item){
         setState(() {
-          phone.text = value;
+
         });
       },
     );
@@ -147,18 +161,54 @@ class _ProfileState extends State<Profile> {
         }
         return null;
       },
-      onChanged: (String value) {
+      onChanged: (item){
         setState(() {
-          email.text = value;
+
         });
       },
     );
+  }
+
+  bool edited(){
+    if(Idegree != degree.text ||
+    Isemester != semester.text ||
+    Iuniversity != university.text ||
+    Ibio != bio.text ||
+    Iphone != phone.text ||
+    Iemail != email.text){
+      print('true');
+      return true;
+
+    }
+    else{
+      print('false');
+      return false;
+    }
+  }
+
+  void modificarPerfil(){
+    setState(() {
+      Idegree = degree.text;
+      Isemester = semester.text;
+      Iuniversity = university.text;
+      Ibio = bio.text;
+      Iphone = phone.text;
+      Iemail = email.text;
+    });
+    //llamada al papi
   }
 
   @override
   void initState(){
     // TODO: implement initState
     super.initState();
+    degree.addListener(() {print(degree.text);});
+    semester.addListener(() {print(semester.text);});
+    university.addListener(() {print(university.text);});
+    bio.addListener(() {print(bio.text);});
+    phone.addListener(() {print(phone.text);});
+    email.addListener(() {print(email.text);});
+
     getData();
   }
   @override
@@ -249,11 +299,9 @@ class _ProfileState extends State<Profile> {
                                   style: ButtonStyle(
 
                                   ),
-                                  onPressed: semester.text == '' || degree.text == ''
-                                      || university.text == '' || bio.text == ''
-                                      || phone.text == '' || email.text == ''? null : (){
-                                    //endpoint put
-                                  }, child: semester.text == '' || degree.text == ''
+                                  onPressed: edited() ? null : (){
+                                    print('AAAAAAAAAA${degree.text}');},
+                                  child: semester.text == '' || degree.text == ''
                                     || university.text == '' || bio.text == ''
                                     || phone.text == '' || email.text == '' ? Text('Llenar datos') : Text('Guardar'),)
                               ],
