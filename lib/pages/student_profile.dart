@@ -34,32 +34,33 @@ class _ProfileState extends State<Profile> {
 
   final _formKey = GlobalKey<FormState>();
 
-  void asignData () {
+  void assignData () {
+    loading = false;
+    _name = '${profile.firstName} ${profile.lastName}';
+    degree.text = profile.degree;
+    semester.text = profile.semester;
+    university.text = profile.university;
+    bio.text = profile.description;
+    phone.text = profile.phone;
+    email.text = profile.email;
+
+    print(profile.degree);
+
+    Idegree = degree.text;
+    Isemester = semester.text;
+    Iuniversity = university.text;
+    Ibio = bio.text;
+    Iphone = phone.text;
+    Iemail = email.text;
     setState(() {
-      loading = false;
-      _name = '${profile.firstName} ${profile.lastName}';
-      degree.text = profile.degree;
-      semester.text = profile.semester;
-      university.text = profile.university;
-      bio.text = profile.description;
-      phone.text = profile.phone;
-      email.text = profile.email;
 
-      print(profile.degree);
-
-      Idegree = degree.text;
-      Isemester = semester.text;
-      Iuniversity = university.text;
-      Ibio = bio.text;
-      Iphone = phone.text;
-      Iemail = email.text;
     });
   }
 
   void getData() async {
     await profile.getData();
     //print('hola1');
-    asignData();
+    assignData();
   }
 
   Widget _buildCarrera() {
