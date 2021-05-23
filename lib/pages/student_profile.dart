@@ -185,6 +185,22 @@ class _ProfileState extends State<Profile> {
       return false;
     }
   }
+  bool vacio(){
+    if('' == degree.text ||
+        '' == semester.text ||
+        '' == university.text ||
+        '' == bio.text ||
+        '' == phone.text ||
+        '' == email.text){
+      print('esta vacio');
+      return true;
+
+    }
+    else{
+      print('campos llenos');
+      return false;
+    }
+  }
 
   void modificarPerfil(){
     setState(() {
@@ -299,11 +315,10 @@ class _ProfileState extends State<Profile> {
                                   style: ButtonStyle(
 
                                   ),
-                                  onPressed: edited() ? null : (){
-                                    print('AAAAAAAAAA${degree.text}');},
-                                  child: semester.text == '' || degree.text == ''
-                                    || university.text == '' || bio.text == ''
-                                    || phone.text == '' || email.text == '' ? Text('Llenar datos') : Text('Guardar'),)
+                                  onPressed: edited() && !vacio() ? (){
+                                    //llamada al papi modificarPerfil();
+                                    } : null,
+                                  child: Text('Guardar'),)
                               ],
                             ),
                           ),
