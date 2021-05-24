@@ -10,6 +10,7 @@ class ApplicationService{
   Future<void> getData() async {
     try {
       Response response = await get(
+        //change userId to 2, in order to showcase a user with to applications.
         Uri.parse('https://interlabapi.herokuapp.com/api/users/1/internships'),
         headers: {
           HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
@@ -20,8 +21,7 @@ class ApplicationService{
         applicationList.add(
             new Application(
                 data['content'][i]['jobTitle'],
-                //TODO: Change to data['content'][i]['*company'], when API exposes CompanyName
-                'MockCompany',
+                data['content'][i]['company']['name'],
                 data['content'][i]['location'],
                 data['content'][i]['state'])
         );
