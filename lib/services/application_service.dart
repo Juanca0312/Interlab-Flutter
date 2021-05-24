@@ -20,6 +20,7 @@ class ApplicationService{
         applicationList.add(
             new Application(
                 data['content'][i]['jobTitle'],
+                //TODO: Change to data['content'][i]['*company'], when API exposes CompanyName
                 'MockCompany',
                 data['content'][i]['location'],
                 data['content'][i]['state'])
