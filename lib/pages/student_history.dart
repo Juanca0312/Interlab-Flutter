@@ -29,37 +29,7 @@ class _HistoryState extends State<History> {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Empresa',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      Text(
-                        'Contratación',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                          color: Colors.black87,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  gradient: IGradients.yellow_orange
-                ),
-              ),
+              tableTitleWidget(),
               Expanded(
                 child: Container(
                   child: MediaQuery.removePadding(
@@ -78,6 +48,7 @@ class _HistoryState extends State<History> {
               ),
             ],
           ),
+          //To clip the border radius, since Container does not clip inside elements
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         decoration: BoxDecoration(
@@ -126,6 +97,39 @@ class _HistoryState extends State<History> {
             )
           ],
         ),
+      ),
+    );
+  }
+  Widget tableTitleWidget() {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Empresa',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                decoration: TextDecoration.underline,
+                color: Colors.black87,
+              ),
+            ),
+            Text(
+              'Contratación',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                decoration: TextDecoration.underline,
+                color: Colors.black87,
+              ),
+            )
+          ],
+        ),
+      ),
+      decoration: BoxDecoration(
+          gradient: IGradients.yellow_orange
       ),
     );
   }
