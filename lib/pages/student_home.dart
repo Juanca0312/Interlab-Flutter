@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/models/application.dart';
 import 'package:basic_utils/basic_utils.dart';
+import 'package:interlab/services/application_service.dart';
+import 'package:interlab/widgets/loading.dart';
+import 'package:interlab/widgets/student_home_empty.dart';
 class Home extends StatefulWidget {
   const Home();
 
@@ -9,22 +12,35 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Application> mockApplications=[
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'active'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'rejected'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
-  ];
+  ApplicationService applicationService=new ApplicationService();
+  List<Application> applications=[];
+  bool loading=true;
+
+  void getData() async {
+    await applicationService.getData();
+    assignData();
+  }
+  void assignData(){
+    loading=false;
+    setState(() {
+      applications=applicationService.applicationList;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return loading ? Loading() :
+    applications.isEmpty ? StudentHomeEmpty() : ListView.builder(
         padding: const EdgeInsets.all(16),
-        itemCount: mockApplications.length,
+        itemCount: applications.length,
         itemBuilder: (BuildContext context, int i) {
-          return _buildRow(mockApplications[i]);
+          return _buildRow(applications[i]);
         }
     );
   }
