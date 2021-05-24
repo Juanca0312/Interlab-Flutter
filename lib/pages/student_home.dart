@@ -90,11 +90,8 @@ class _HomeState extends State<Home> {
       ),
       decoration: BoxDecoration(
           gradient: application.bgGradient,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15),
-            bottomLeft: Radius.circular(15),
-            bottomRight: Radius.circular(15),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
           ),
           boxShadow: [
             BoxShadow(
