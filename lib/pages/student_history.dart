@@ -37,6 +37,13 @@ class _HistoryState extends State<History> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return loading ? Loading() :
     historicApplications.isEmpty ? StudentHistoryEmpty() : Padding(
