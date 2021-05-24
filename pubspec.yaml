@@ -33,6 +33,7 @@ dependencies:
   http: ^0.13.3
   flutter_spinkit: ^5.0.0
   basic_utils: ^3.1.0
+  ms_undraw: ^3.0.0+0
 
 dev_dependencies:
   flutter_test:
