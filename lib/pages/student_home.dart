@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/models/application.dart';
+import 'package:basic_utils/basic_utils.dart';
 class Home extends StatefulWidget {
   const Home();
 
@@ -9,13 +10,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Application> mockApplications=[
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'Active'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'Rejected'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'Pending'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'Pending'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'Pending'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'Pending'),
-    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'Pending'),
+    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'active'),
+    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'rejected'),
+    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
+    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
+    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
+    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
+    new Application('Summer Internship 2021', 'Empresa ACME', 'Palo Alto, CA', 'pending'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,7 @@ class _HomeState extends State<Home> {
               child: Padding(
                 padding: const EdgeInsets.only(right: 17),
                 child: Text(
-                  application.status,
+                  StringUtils.capitalize(application.status),
                   style: TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.w700,
