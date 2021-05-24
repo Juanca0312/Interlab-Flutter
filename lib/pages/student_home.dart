@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
   }
   Widget _buildRow(Application application){
     return Padding(
-      padding: const EdgeInsets.only(bottom: 21),
+      padding: const EdgeInsets.only(bottom: 0),
       child: applicationWidget(application),
     );
   }
