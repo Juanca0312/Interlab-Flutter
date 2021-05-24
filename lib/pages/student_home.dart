@@ -3,6 +3,7 @@ import 'package:interlab/models/application.dart';
 import 'package:basic_utils/basic_utils.dart';
 import 'package:interlab/services/application_service.dart';
 import 'package:interlab/widgets/loading.dart';
+import 'package:interlab/widgets/student_home_empty.dart';
 class Home extends StatefulWidget {
   const Home();
 
@@ -34,7 +35,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading() : ListView.builder(
+    return loading ? Loading() :
+    applications.isEmpty ? StudentHomeEmpty() : ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: applications.length,
         itemBuilder: (BuildContext context, int i) {
