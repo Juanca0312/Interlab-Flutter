@@ -261,7 +261,7 @@ class _ProfileState extends State<Profile> {
                         Container(
                           ///TODO: CARD Inicio
                           decoration: BoxDecoration(
-                              gradient: IGradients.blue_lightblue ,
+                              gradient: IGradients.lightblue_blue,
                               borderRadius: BorderRadius.all(Radius.circular(15))),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
