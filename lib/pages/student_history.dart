@@ -3,6 +3,7 @@ import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/models/historic_application.dart';
 import 'package:interlab/services/historic_application_service.dart';
 import 'package:interlab/widgets/loading.dart';
+import 'package:interlab/widgets/student_history_empty.dart';
 class History extends StatefulWidget {
   const History();
 
@@ -35,7 +36,7 @@ class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() :
-    Padding(
+    historicApplications.isEmpty ? StudentHistoryEmpty() : Padding(
       padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
       child: Container(
         child: ClipRRect(
