@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/models/historic_application.dart';
+import 'package:interlab/services/historic_application_service.dart';
+import 'package:interlab/widgets/loading.dart';
 class History extends StatefulWidget {
   const History();
 
@@ -9,19 +11,31 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  List<HistoricApplication> mockHistoricApplications=[
-    new HistoricApplication('ACME', '20-01-2020'),
-    new HistoricApplication('Google', '20-01-2020'),
-    new HistoricApplication('Novatronic', '20-01-2020'),
-    new HistoricApplication('Facebook', '20-01-2020'),
-    new HistoricApplication('Amazon', '20-01-2020'),
-    new HistoricApplication('Facebook', '20-01-2020'),
-    new HistoricApplication('Amazon', '20-01-2020')
-  ];
+  HistoricApplicationService historicApplicationService=new HistoricApplicationService();
+  List<HistoricApplication> historicApplications=[];
+  bool loading=true;
+
+  void getData() async {
+    await historicApplicationService.getData();
+    assignData();
+  }
+  void assignData(){
+    loading=false;
+    setState(() {
+      historicApplications=historicApplicationService.historicApplicationList;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return loading ? Loading() :
+    Padding(
       padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
       child: Container(
         child: ClipRRect(
@@ -30,19 +44,17 @@ class _HistoryState extends State<History> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               tableTitleWidget(),
-              Expanded(
-                child: Container(
-                  child: MediaQuery.removePadding(
-                    removeTop: true,
-                    context: context,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: mockHistoricApplications.length,
-                      itemBuilder: (BuildContext context, int i){
-                        return _buildRow(mockHistoricApplications[i], i);
-                      }
-                    ),
+              Container(
+                child: MediaQuery.removePadding(
+                  removeTop: true,
+                  context: context,
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: historicApplications.length,
+                    itemBuilder: (BuildContext context, int i){
+                      return _buildRow(historicApplications[i], i);
+                    }
                   ),
                 ),
               ),
