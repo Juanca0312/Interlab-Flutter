@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/models/historic_application.dart';
 import 'package:interlab/services/historic_application_service.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_history_empty.dart';
+import 'package:ms_undraw/illustrations.g.dart';
+import 'package:ms_undraw/ms_undraw.dart';
 class History extends StatefulWidget {
   const History();
 
@@ -45,15 +48,18 @@ class _HistoryState extends State<History> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               tableTitleWidget(),
-              Container(
+              Expanded(
                 child: MediaQuery.removePadding(
                   removeTop: true,
                   context: context,
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: historicApplications.length,
+                    itemCount: historicApplications.length+1,
                     itemBuilder: (BuildContext context, int i){
+                      if (i==historicApplications.length){
+                        return _buildIllustration();
+                      }
                       return _buildRow(historicApplications[i], i);
                     }
                   ),
@@ -83,6 +89,12 @@ class _HistoryState extends State<History> {
   }
   Widget _buildRow(HistoricApplication historicApplication, int i){
     return historicApplicationWidget(historicApplication, i);
+  }
+  Widget _buildIllustration(){
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+      child: UnDraw(illustration: UnDrawIllustration.back_home, color: IColors.lightblue, height: 100,),
+    );
   }
   Widget historicApplicationWidget(HistoricApplication historicApplication, int i){
     return Container(
