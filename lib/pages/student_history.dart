@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
+import 'package:interlab/models/historic_application.dart';
 class History extends StatefulWidget {
   const History();
 
@@ -128,10 +129,4 @@ class _HistoryState extends State<History> {
       ),
     );
   }
-}
-
-class HistoricApplication{
-  String company;
-  String hiringDate;
-  HistoricApplication(this.company, this.hiringDate);
 }
