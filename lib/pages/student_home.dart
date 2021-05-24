@@ -34,6 +34,13 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return loading ? Loading() :
     applications.isEmpty ? StudentHomeEmpty() : ListView.builder(
