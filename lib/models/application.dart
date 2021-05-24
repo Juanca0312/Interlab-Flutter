@@ -9,9 +9,12 @@ class Application {
   LinearGradient bgGradient;
   Application(this.title, this.company, this.location, this.status){
     switch (status){
-      case 'Active': bgGradient=IGradients.green_lightblue; break;
-      case 'Rejected': bgGradient=IGradients.yellow_orange; break;
-      case 'Pending': bgGradient=IGradients.purple_pink; break;
+      case 'Active':
+      case 'active': bgGradient=IGradients.green_lightblue; break;
+      case 'Rejected':
+      case 'rejected': bgGradient=IGradients.yellow_orange; break;
+      case 'Pending':
+      case 'pending': bgGradient=IGradients.purple_pink; break;
     }
   }
 }
