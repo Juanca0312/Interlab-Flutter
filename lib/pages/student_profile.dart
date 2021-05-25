@@ -21,6 +21,7 @@ class _ProfileState extends State<Profile> {
   TextEditingController bio = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController email = TextEditingController();
+
   String _name = 'Cargando...';
   String Idegree;
   String Isemester;
