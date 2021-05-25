@@ -44,7 +44,6 @@ class _ProfileState extends State<Profile> {
     phone.text = profile.phone;
     email.text = profile.email;
 
-    print(profile.degree);
 
     Idegree = degree.text;
     Isemester = semester.text;
@@ -59,7 +58,6 @@ class _ProfileState extends State<Profile> {
 
   void getData() async {
     await profile.getData();
-    //print('hola1');
     assignData();
   }
 
@@ -177,12 +175,10 @@ class _ProfileState extends State<Profile> {
     Ibio != bio.text ||
     Iphone != phone.text ||
     Iemail != email.text){
-      print('true');
       return true;
 
     }
     else{
-      print('false');
       return false;
     }
   }
@@ -193,12 +189,10 @@ class _ProfileState extends State<Profile> {
         '' == bio.text ||
         '' == phone.text ||
         '' == email.text){
-      print('esta vacio');
       return true;
 
     }
     else{
-      print('campos llenos');
       return false;
     }
   }
@@ -219,6 +213,12 @@ class _ProfileState extends State<Profile> {
   void initState(){
     // TODO: implement initState
     super.initState();
+
+
+
+
+
+
     degree.addListener(() {print(degree.text);});
     semester.addListener(() {print(semester.text);});
     university.addListener(() {print(university.text);});

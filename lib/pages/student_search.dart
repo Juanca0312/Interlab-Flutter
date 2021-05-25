@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:interlab/colors/interlab_gradients.dart';
-import 'package:interlab/services/internship.dart';
+import 'package:interlab/services/internship_service.dart';
+import 'package:interlab/models/internship.dart';
+import 'package:interlab/widgets/loading.dart';
 
 class Search extends StatefulWidget {
   const Search({Key key}) : super(key: key);
@@ -12,21 +13,21 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
 
-  List<Internship> mockApplications=[
-    new Internship(title: 'Summer Internship 2021', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' ),
-    new Internship(title: 'Diseñador Web', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' ),
-    new Internship(title: 'Diseñador Mobil', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' ),
-    new Internship(title: 'Arquitecto de Software', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' ),
-    new Internship(title: 'Backend Developer', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' ),
-    new Internship(title: 'Angular Developer', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' ),
-    new Internship(title: 'C++ Junior programmer', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' ),
-  ];
+  InternshipService internshipService = new InternshipService();
+  List<Internship> internships=[];
+  bool loading = true;
 
-  Internship pruebita = Internship(title: 'Summer Internship 2021', company: 'Empresa ACME', location:'Palo Alto, CA', salary: ' S/ 5,000 a S/ 6,000 al mes', description: 'Trabajo para empresa ACME, se busca diseñador web' );
 
   void getData() async {
-    await pruebita.getData();
-    //print(pruebita)
+    await internshipService.getData();
+    assignData();
+  }
+
+  void assignData(){
+    loading=false;
+    setState(() {
+      internships=internshipService.internships;
+    });
   }
 
   @override
@@ -38,9 +39,9 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return loading? Loading() : ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: mockApplications.length,
+      itemCount: internships.length,
         itemBuilder: (BuildContext context, int i) {
           return Container(
             //TODO: CARD GENERAL
@@ -60,7 +61,7 @@ class _SearchState extends State<Search> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                CardNav(mockApplications: mockApplications, i: i,), //TODO: CardSuperior
+                CardNav(internships: internships, i: i,), //TODO: CardSuperior
 
                 Container( //TODO: CardCuerpo
                   margin: EdgeInsets.all(10),
@@ -71,7 +72,7 @@ class _SearchState extends State<Search> {
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Text(
-                            'Salario: ${mockApplications[i].salary}',
+                            'Salario: S/. ${internships[i].salary}',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -80,12 +81,12 @@ class _SearchState extends State<Search> {
                       ),
                       Container(
                         child: Text(
-                          mockApplications[i].description
+                            internships[i].description
                         ),
                       ),
                       Container(
                         child: Text(
-                            'Lugar: ${mockApplications[i].location}'
+                            'Lugar: ${internships[i].location}'
                         ),
                       )
                     ],
@@ -104,17 +105,17 @@ class CardNav extends StatelessWidget {
   final i;
   const CardNav({
     Key key,
-    @required this.mockApplications, this.i
+    @required this.internships, this.i
   }) : super(key: key);
 
-  final List<Internship> mockApplications;
+  final List<Internship> internships;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       ///TODO: CARD Inicio
       decoration: BoxDecoration(
-          gradient: mockApplications[i].bgGradient,
+          gradient: internships[i].bgGradient,
           borderRadius: BorderRadius.all(Radius.circular(15))),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10.0),
@@ -129,7 +130,7 @@ class CardNav extends StatelessWidget {
                         vertical: 0, horizontal: 10),
                     //color: Colors.lightGreenAccent,
                     child: Text(
-                      mockApplications[i].title,
+                      internships[i].title,
                       style: TextStyle(fontSize: 16),
                     )),
                 Container(
@@ -137,7 +138,7 @@ class CardNav extends StatelessWidget {
                         vertical: 0, horizontal: 10),
                     //color: Colors.pink,
                     child: Text(
-                      mockApplications[i].company,
+                      internships[i].company,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w300,
