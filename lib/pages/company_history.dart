@@ -5,6 +5,7 @@ import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_history_empty.dart';
 import 'package:ms_undraw/illustrations.g.dart';
 import 'package:ms_undraw/ms_undraw.dart';
+import 'package:interlab/models/offer_history.dart';
 
 class History extends StatefulWidget {
   const History();
@@ -15,14 +16,14 @@ class History extends StatefulWidget {
 
 class _HistoryState extends State<History> {
 
-  List<Internship> mockApplications=[
-    new Internship('Junnior HUrtado', '20-01-2020'),
-    new Internship('Jeremy Salazar', '20-01-2020'),
-    new Internship('Alberto Humo', '20-01-2020'),
-    new Internship('Alberto Hum', '20-01-2020'),
-    new Internship('Jeremy Bazán', '20-01-2020'),
-    new Internship('Jeremy Salazar', '20-01-2021'),
-    new Internship('Jeremy Salazar', '20-01-2020')
+  List<Offer> mockApplications=[
+    new Offer('Junnior HUrtado', '20-01-2020'),
+    new Offer('Jeremy Salazar', '20-01-2020'),
+    new Offer('Alberto Humo', '20-01-2020'),
+    new Offer('Alberto Hum', '20-01-2020'),
+    new Offer('Jeremy Bazán', '20-01-2020'),
+    new Offer('Jeremy Salazar', '20-01-2021'),
+    new Offer('Jeremy Salazar', '20-01-2020')
   ];
 
   //bool loading=true;
@@ -78,8 +79,8 @@ class _HistoryState extends State<History> {
       ),
     );
   }
-  Widget _buildRow(Internship internship, int i){
-    return internshipWidget(internship, i);
+  Widget _buildRow(Offer offer, int i){
+    return offerWidget(offer, i);
   }
   Widget _buildIllustration(){
     return Padding(
@@ -87,7 +88,7 @@ class _HistoryState extends State<History> {
       child: UnDraw(illustration: UnDrawIllustration.back_home, color: IColors.lightblue, height: 100,),
     );
   }
-  Widget internshipWidget(Internship  internship, int i){
+  Widget offerWidget(Offer  offer, int i){
     return Container(
       color: Colors.grey[50+250*(i%2)],
       child: Padding(
@@ -96,7 +97,7 @@ class _HistoryState extends State<History> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              internship.name,
+              offer.name,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
@@ -104,7 +105,7 @@ class _HistoryState extends State<History> {
               ),
             ),
             Text(
-              internship.date,
+              offer.date,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w300,
@@ -124,7 +125,7 @@ class _HistoryState extends State<History> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Empresa',
+              'Estudiante',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -151,10 +152,3 @@ class _HistoryState extends State<History> {
   }
 }
 
-class Internship {
-  String name;
-  String date;
-
-  LinearGradient bgGradient;
-  Internship(this.name, this.date){}
-}
