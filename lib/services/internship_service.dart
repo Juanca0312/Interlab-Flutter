@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'dart:math';
+import 'package:interlab/models/internship.dart';
 import 'dart:io';
 import 'package:http/http.dart';
 import 'dart:convert';
 
-class Internship {
-  String title;
-  String company;
-  String location;
-  String salary;
-  String description;
-  int status;
-  LinearGradient bgGradient;
-  var rng = new Random();
-  Internship({this.title, this.company, this.location, this.salary, this.description}){
-    status = rng.nextInt(4);
-    switch (status){
-      case 0: bgGradient=IGradients.green_lightblue; break;
-      case 1: bgGradient=IGradients.yellow_orange; break;
-      case 2: bgGradient=IGradients.purple_pink; break;
-      case 3: bgGradient=IGradients.blue_lightblue; break;
-    }
-  }
+class InternshipService {
+  List<Internship> internships = [];
 
   Future<void> getData() async {
     try{
@@ -35,14 +20,19 @@ class Internship {
       );
 
       Map data = jsonDecode(response.body);
-      print(data['content'][1]);
+      for(var i = 0; i<data['numberOfElements']; i++){
+        internships.add(new Internship(title: data['content'][i]['jobTitle'],
+        company: data['content'][i]['company']['name'],
+        location: data['content'][i]['location'],
+        salary: data['content'][i]['salary'].toString(),
+        description: data['content'][i]['description']));
+      }
 
 
     }
     catch(e){
       print('caught error $e');
       print('error');
-      //firstName = 'could not get name data';
     }
   }
 
