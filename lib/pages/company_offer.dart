@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:interlab/widgets/textBox.dart';
+
 
 
 class Offter extends StatefulWidget {
@@ -19,6 +21,42 @@ class _OffterState extends State<Offter> {
   TextEditingController email = TextEditingController();
 
 
+  Widget Arrow() {
+    return DropdownButtonFormField<String>(
+
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_drop_down),
+      iconSize: 24,
+      elevation: 16,
+      style: const TextStyle(color: Colors.deepPurple),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor:  Colors.white,
+        labelText: 'Titulo de Empresa',
+        //border: new CustomBorderTextFieldSkin().getSkin(),
+      ),
+    //... underline: Container(
+    //...   height: 2,
+    //...   color: Colors.deepPurpleAccent,
+    //... ),
+      //onChanged: (String? newValue) {
+      //  setState(() {
+      //    dropdownValue = newValue!;
+      //  });
+      //},
+      items: <String>['UX Designer Intern', 'Web']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+
+
+
+
   final _formKey = GlobalKey<FormState>();
   Widget buildTitle() {
     return TextFormField(
@@ -36,6 +74,7 @@ class _OffterState extends State<Offter> {
         });
       },
     );
+
   }
   Widget builName() {
     return TextFormField(
@@ -73,25 +112,26 @@ class _OffterState extends State<Offter> {
       },
     );
   }
-  Widget buildDetail( ) {
-    return TextFormField(
-      controller: bio,
-      maxLines: 3,
-      decoration: InputDecoration(labelText: 'Detalles de la oferta:'),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Se requiere Detalles ';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
+// Widget buildDetail( ) {
+//   return TextFormField(
+//     controller: bio,
+//     maxLines: 3,
+//     decoration: InputDecoration(labelText: 'Detalles de la oferta:'),
+//     validator: (String value) {
+//       if (value.isEmpty) {
+//         return 'Se requiere Detalles ';
+//       }
+//       return null;
+//     },
+//     onChanged: (item){
+//       setState(() {
 
-        });
-      },
-    );
-  }
-
+//       });
+//     },
+//   );
+// }
+  String dropdownValue = 'UX Designer Intern';
+  @override
 
 
 
@@ -132,10 +172,10 @@ class _OffterState extends State<Offter> {
                                 vertical: 10, horizontal: 20.0),
                             child: Column(
                               children: [
-                                buildTitle(),
+                                Arrow(),
                                 builName(),
                                 buildSalary(),
-                                buildDetail(),
+                                TextBox(placeHolder:'Detalles de la oferta:', keyboardType : TextInputType.multiline),
                                 SizedBox(height: 10,),
                                 ElevatedButton(
                                   style: ButtonStyle(),
