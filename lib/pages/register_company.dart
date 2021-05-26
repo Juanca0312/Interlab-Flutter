@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_colors.dart';
+import 'package:interlab/pages/login.dart';
 import 'package:interlab/pages/register_student.dart';
-import 'package:interlab/pages/student_dashboard.dart';
+import 'package:interlab/util/navigate.dart';
 import 'package:interlab/widgets/dark_button.dart';
 import 'package:interlab/widgets/text_field.dart';
 import 'package:interlab/widgets/text_link.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:interlab/util/navigate.dart';
 
 const url = 'https://8rb.github.io/Interlab-Landing-Page/';
 
-class LoginPage extends StatelessWidget {
+class RegisterCompany extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,11 +30,22 @@ class LoginPage extends StatelessWidget {
                   width: 600,
                   color: Colors.white,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset(
                         'assets/brandLogo.png',
                         width: 100.0,
                       ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
+                          'Empresa',
+                          style: TextStyle(
+                              color: IColors.dark_blue,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16.0),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -52,7 +63,7 @@ class LoginPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Bienvenido a',
+                              'Regístrate en',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
@@ -68,7 +79,7 @@ class LoginPage extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: Text(
-                                'Inicia sesión en tu cuenta',
+                                'Ingresa tus datos para continuar',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300,
@@ -85,7 +96,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Container(
-            height: 400,
+            height: 500,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -94,28 +105,40 @@ class LoginPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
                           name: 'Nombre de usuario',
-                          hint: 'student@interlab.com',
+                          hint: 'company@gmail.com',
                           type: 'email')),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                      child: ITextField(
+                          name: 'Nombres y Apellidos',
+                          hint: 'Ángel Velásquez',
+                          type: 'text')),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
                           name: 'Contraseña',
                           hint: '••••••••••••••',
                           type: 'password')),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                      child: ITextField(
+                          name: 'Confirme su ontraseña',
+                          hint: '••••••••••••••',
+                          type: 'password')),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ITextLink(
-                          text: 'Crear cuenta',
+                          text: 'Eres Estudiante?',
                           event: () => Navigate.to(context, RegisterStudent())),
                       ITextLink(
-                          text: 'Olvidaste tu contraseña',
-                          event: () => Navigate.to(context, RegisterStudent())),
+                          text: 'Ya tienes cuenta?',
+                          event: () => Navigate.to(context, LoginPage())),
                     ],
                   ),
                   IDarkButton(
-                    text: 'INICIAR SESIÓN',
-                    event: () => Navigate.to(context, StudentDashboard()),
+                    text: 'REGISTRARSE',
+                    event: () => Navigate.to(context, LoginPage()),
                   ),
                 ],
               ),
