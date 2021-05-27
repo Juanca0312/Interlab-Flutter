@@ -9,12 +9,14 @@ class IRegisterInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250,
+      height: MediaQuery.of(context).size.height * .15,
+      width: MediaQuery.of(context).size.width * .55,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 15.0),
             child: Text(title,
                 style: TextStyle(
                     color: Colors.black,
@@ -23,7 +25,7 @@ class IRegisterInfo extends StatelessWidget {
                     fontWeight: FontWeight.w400)),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15.0),
             child: Text(text,
                 style: TextStyle(
                     color: Colors.black54,
