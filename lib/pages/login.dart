@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/pages/register_student.dart';
 import 'package:interlab/pages/student_dashboard.dart';
+import 'package:interlab/widgets/banner.dart';
 import 'package:interlab/widgets/dark_button.dart';
+import 'package:interlab/widgets/outlined_button.dart';
 import 'package:interlab/widgets/text_field.dart';
 import 'package:interlab/widgets/text_link.dart';
+import 'package:interlab/widgets/top_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:interlab/util/navigate.dart';
 
@@ -25,62 +27,9 @@ class LoginPage extends StatelessWidget {
             color: Colors.white,
             child: Column(
               children: [
-                Container(
-                  height: 100,
-                  width: 600,
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/brandLogo.png',
-                        width: 100.0,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 100,
-                  width: 600,
-                  child: Stack(
-                    children: [
-                      Image.asset('assets/TitleBG.png',
-                          width: 420.0, height: 550.0, fit: BoxFit.cover),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Bienvenido a',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 25.0),
-                            ),
-                            Text(
-                              'Interlab',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25.0),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(
-                                'Inicia sesión en tu cuenta',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 10.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
+                ITopBar(text: ''),
+                IBanner(
+                    title: 'Bienvenido a', hint: 'Inicia sesión en tu cuenta')
               ],
             ),
           ),
@@ -125,29 +74,7 @@ class LoginPage extends StatelessWidget {
             height: 100,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
-                  child: ElevatedButton(
-                    onPressed: _launchURL,
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      onSurface: Colors.grey,
-                      shadowColor: Colors.white,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 13, horizontal: 20),
-                      side: BorderSide(color: Colors.black45, width: 1),
-                    ),
-                    child: Text(
-                      'SABER MÁS',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
-              ],
+              children: [IOutlinedButton(text: 'SABER MÁS', event: _launchURL)],
             ),
           ),
         ]))));
