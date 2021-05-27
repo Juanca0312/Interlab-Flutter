@@ -32,6 +32,7 @@ class _InterlabStudentAppBarState extends State<InterlabStudentAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       //Color del appbar
       backgroundColor: Colors.transparent,
       //Quita el separador/sombra
