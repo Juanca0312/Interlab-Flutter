@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:interlab/pages/register_student.dart';
-import 'package:interlab/pages/student_dashboard.dart';
+import 'package:interlab/pages/login.dart';
+import 'package:interlab/pages/register_company.dart';
+import 'package:interlab/util/navigate.dart';
 import 'package:interlab/widgets/banner.dart';
 import 'package:interlab/widgets/dark_button.dart';
 import 'package:interlab/widgets/outlined_button.dart';
+import 'package:interlab/widgets/register_info.dart';
 import 'package:interlab/widgets/text_field.dart';
 import 'package:interlab/widgets/text_link.dart';
 import 'package:interlab/widgets/top_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:interlab/util/navigate.dart';
 
 const url = 'https://8rb.github.io/Interlab-Landing-Page/';
 
-class LoginPage extends StatelessWidget {
+class RegisterStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,14 +28,15 @@ class LoginPage extends StatelessWidget {
             color: Colors.white,
             child: Column(
               children: [
-                ITopBar(text: ''),
+                ITopBar(text: 'Estudiante'),
                 IBanner(
-                    title: 'Bienvenido a', hint: 'Inicia sesión en tu cuenta')
+                    title: 'Regístrate en',
+                    hint: 'Ingresa tus datos para continuar')
               ],
             ),
           ),
           Container(
-            height: 400,
+            height: 500,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -43,28 +45,40 @@ class LoginPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
                           name: 'Nombre de usuario',
-                          hint: 'student@interlab.com',
+                          hint: 'student@gmail.com',
                           type: 'email')),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                      child: ITextField(
+                          name: 'Nombres y Apellidos',
+                          hint: 'Marcelo Martínez Torres',
+                          type: 'text')),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
                           name: 'Contraseña',
                           hint: '••••••••••••••',
                           type: 'password')),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                      child: ITextField(
+                          name: 'Confirme su ontraseña',
+                          hint: '••••••••••••••',
+                          type: 'password')),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ITextLink(
-                          text: 'Crear cuenta',
-                          event: () => Navigate.to(context, RegisterStudent())),
+                          text: 'Eres Empresa?',
+                          event: () => Navigate.to(context, RegisterCompany())),
                       ITextLink(
-                          text: 'Olvidaste tu contraseña',
-                          event: () => Navigate.to(context, RegisterStudent())),
+                          text: 'Ya tienes cuenta?',
+                          event: () => Navigate.to(context, LoginPage())),
                     ],
                   ),
                   IDarkButton(
-                    text: 'INICIAR SESIÓN',
-                    event: () => Navigate.to(context, StudentDashboard()),
+                    text: 'REGISTRARSE',
+                    event: () => Navigate.to(context, LoginPage()),
                   ),
                 ],
               ),
@@ -73,8 +87,14 @@ class LoginPage extends StatelessWidget {
           Container(
             height: 100,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [IOutlinedButton(text: 'SABER MÁS', event: _launchURL)],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IRegisterInfo(
+                    title: 'Registrándose como Estudiante:',
+                    text:
+                        'Te permitirá enviar solicitudes a ofertas de pasantías, acceder a un dashboard y manejar tus solicitudes en un solo lugar.'),
+                IOutlinedButton(text: 'SABER MÁS', event: _launchURL),
+              ],
             ),
           ),
         ]))));
