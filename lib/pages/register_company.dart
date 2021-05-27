@@ -18,14 +18,12 @@ class RegisterCompany extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            body: SafeArea(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+            body: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
           Container(
-            height: 200,
-            width: 600,
-            color: Colors.white,
+            height: MediaQuery.of(context).size.height * .3,
+            width: MediaQuery.of(context).size.width * 1,
             child: Column(
               children: [
                 ITopBar(text: 'Empresa'),
@@ -36,7 +34,7 @@ class RegisterCompany extends StatelessWidget {
             ),
           ),
           Container(
-            height: 500,
+            height: MediaQuery.of(context).size.height * .55,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -85,19 +83,22 @@ class RegisterCompany extends StatelessWidget {
             ),
           ),
           Container(
-            height: 100,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IRegisterInfo(
-                    title: 'Registrándose como Empresa:',
-                    text:
-                        'Te permitirá publicar ofertas de pasantías, acceder a un dashboard y manejar tus potenciales pasantes a dichas ofertas.'),
-                IOutlinedButton(text: 'SABER MÁS', event: _launchURL),
-              ],
+            height: MediaQuery.of(context).size.height * .15,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IRegisterInfo(
+                      title: 'Registrándose como Empresa:',
+                      text:
+                          'Te permitirá publicar ofertas de pasantías, acceder a un dashboard y manejar tus potenciales pasantes a dichas ofertas.'),
+                  IOutlinedButton(text: 'SABER MÁS', event: _launchURL),
+                ],
+              ),
             ),
           ),
-        ]))));
+        ])));
   }
 }
 

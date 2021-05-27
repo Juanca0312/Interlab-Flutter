@@ -8,23 +8,19 @@ class IOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 20.0),
-      child: ElevatedButton(
-        onPressed: event,
-        style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-          onSurface: Colors.grey,
-          shadowColor: Colors.white,
-          padding: EdgeInsets.symmetric(vertical: 13, horizontal: 20),
-          side: BorderSide(color: Colors.black45, width: 1),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
-        ),
+    return ElevatedButton(
+      onPressed: event,
+      style: ElevatedButton.styleFrom(
+        primary: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        onSurface: Colors.grey,
+        shadowColor: Colors.white,
+        padding: EdgeInsets.symmetric(vertical: 13, horizontal: 20),
+        side: BorderSide(color: Colors.black45, width: 1),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
       ),
     );
   }

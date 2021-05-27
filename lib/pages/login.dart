@@ -4,6 +4,7 @@ import 'package:interlab/pages/student_dashboard.dart';
 import 'package:interlab/widgets/banner.dart';
 import 'package:interlab/widgets/dark_button.dart';
 import 'package:interlab/widgets/outlined_button.dart';
+import 'package:interlab/widgets/register_info.dart';
 import 'package:interlab/widgets/text_field.dart';
 import 'package:interlab/widgets/text_link.dart';
 import 'package:interlab/widgets/top_bar.dart';
@@ -17,14 +18,12 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            body: SafeArea(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+            body: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
           Container(
-            height: 200,
-            width: 600,
-            color: Colors.white,
+            height: MediaQuery.of(context).size.height * 0.3,
+            width: MediaQuery.of(context).size.height * 1,
             child: Column(
               children: [
                 ITopBar(text: ''),
@@ -34,7 +33,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Container(
-            height: 400,
+            height: MediaQuery.of(context).size.height * 0.5,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -71,13 +70,16 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Container(
-            height: 100,
+            height: MediaQuery.of(context).size.height * .15,
+            width: MediaQuery.of(context).size.width * 1,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [IOutlinedButton(text: 'SABER MÁS', event: _launchURL)],
-            ),
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IRegisterInfo(title: '', text: ''),
+                  IOutlinedButton(text: 'SABER MÁS', event: _launchURL),
+                ]),
           ),
-        ]))));
+        ])));
   }
 }
 
