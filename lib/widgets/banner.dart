@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:interlab/colors/interlab_colors.dart';
 
 class IBanner extends StatelessWidget {
   IBanner({Key key, this.title, this.hint}) : super(key: key);

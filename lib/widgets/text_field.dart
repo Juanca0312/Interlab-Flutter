@@ -7,6 +7,7 @@ class ITextField extends StatelessWidget {
       this.name,
       this.hint,
       this.type,
+      this.controller,
       InputDecoration decoration,
       Color cursorColor})
       : super(key: key);
@@ -14,10 +15,12 @@ class ITextField extends StatelessWidget {
   final String name;
   final String hint;
   final String type;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       cursorColor: IColors.dark_purple,
       decoration: InputDecoration(
           labelText: name,
