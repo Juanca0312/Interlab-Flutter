@@ -10,10 +10,35 @@ import 'package:interlab/widgets/text_link.dart';
 import 'package:interlab/widgets/top_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:interlab/util/navigate.dart';
+import 'package:interlab/services/auth_service.dart';
 
 const url = 'https://8rb.github.io/Interlab-Landing-Page/';
 
-class LoginPage extends StatelessWidget {
+class Login extends StatefulWidget {
+  const Login({Key key}) : super(key: key);
+
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  AuthService authService = new AuthService();
+  String token = "";
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  void _login() async {
+    String tokenResponse = await authService.login(
+        usernameController.text, passwordController.text);
+    print('Token: $token');
+    setState(() {
+      token = tokenResponse;
+    });
+    if (token != null) {
+      //TODO: validate user type
+      Navigate.to(context, StudentDashboard());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,12 +66,14 @@ class LoginPage extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
+                          controller: usernameController,
                           name: 'Nombre de usuario',
                           hint: 'student@interlab.com',
                           type: 'email')),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
+                          controller: passwordController,
                           name: 'Contraseña',
                           hint: '••••••••••••••',
                           type: 'password')),
@@ -63,7 +90,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   IDarkButton(
                     text: 'INICIAR SESIÓN',
-                    event: () => Navigate.to(context, StudentDashboard()),
+                    event: _login,
                   ),
                 ],
               ),
