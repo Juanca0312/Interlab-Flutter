@@ -71,12 +71,12 @@ class RegisterStudent extends StatelessWidget {
                           event: () => Navigate.to(context, RegisterCompany())),
                       ITextLink(
                           text: 'Ya tienes cuenta?',
-                          event: () => Navigate.to(context, LoginPage())),
+                          event: () => Navigate.to(context, Login())),
                     ],
                   ),
                   IDarkButton(
                     text: 'REGISTRARSE',
-                    event: () => Navigate.to(context, LoginPage()),
+                    event: () => Navigate.to(context, Login()),
                   ),
                 ],
               ),
