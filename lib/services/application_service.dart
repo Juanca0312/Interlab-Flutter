@@ -23,6 +23,8 @@ class ApplicationService{
             new Application(
                 data['content'][i]['jobTitle'],
                 data['content'][i]['company']['name'],
+                data['content'][i]['company']['email'],
+                data['content'][i]['company']['phone'],
                 data['content'][i]['location'],
                 data['content'][i]['state'],
                 data['content'][i]['salary'].toString(),
