@@ -11,7 +11,7 @@ void main() {
     routes: {
       '/': (context) => StudentDashboard(),
       '/studentDashboard': (context) => StudentDashboard(),
-      '/login': (context) => LoginPage(),
+      '/login': (context) => Login(),
       '/registerStudent': (context) => RegisterStudent(),
       '/registerCompany': (context) => RegisterCompany(),
     },
