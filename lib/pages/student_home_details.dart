@@ -126,10 +126,10 @@ class _StudentHomeDetailsState extends State<StudentHomeDetails> {
                 TitleAndContentWithIcon("Descripción", widget.application.description, Icons.description, IColors.blue),
                 TitleAndContentWithIcon("Salario", 'S/ ${widget.application.salary}', Icons.payments, IColors.pink),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: UnDraw(illustration: UnDrawIllustration.feeling_proud, color: IColors.lightblue)
-                  )
+                    child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: UnDraw(illustration: UnDrawIllustration.feeling_proud, color: IColors.lightblue)
+                    )
                 ),
               ],
             ),

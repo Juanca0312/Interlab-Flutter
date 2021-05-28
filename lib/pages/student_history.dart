@@ -106,59 +106,55 @@ class _HistoryState extends State<History> {
   Widget applicationWidget(Application application, int i){
     return Container(
       color: Colors.grey[50+250*(i%2)],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              application.company,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-                color: Colors.black87,
-              ),
+      padding: EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            application.company,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+              color: Colors.black87,
             ),
-            Text(
-              application.startingDate,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w300,
-                color: Colors.black87,
-              ),
-            )
-          ],
-        ),
+          ),
+          Text(
+            application.startingDate,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w300,
+              color: Colors.black87,
+            ),
+          )
+        ],
       ),
     );
   }
   Widget tableTitleWidget() {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Empresa',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                decoration: TextDecoration.underline,
-                color: Colors.black87,
-              ),
+      padding: EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Empresa',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              decoration: TextDecoration.underline,
+              color: Colors.black87,
             ),
-            Text(
-              'Contratación',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                decoration: TextDecoration.underline,
-                color: Colors.black87,
-              ),
-            )
-          ],
-        ),
+          ),
+          Text(
+            'Contratación',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              decoration: TextDecoration.underline,
+              color: Colors.black87,
+            ),
+          )
+        ],
       ),
       decoration: BoxDecoration(
           gradient: IGradients.yellow_orange
