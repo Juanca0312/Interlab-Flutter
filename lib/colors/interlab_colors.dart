@@ -6,7 +6,7 @@ class IColors {
   static const Color blue = const Color(0xFF80A2FF);
   static const Color yellow = const Color(0xFFFFEE80);
   static const Color orange = const Color(0xFFFFBB80);
-  static const Color purple = const Color(0xFF80A2FF);
+  static const Color purple = const Color(0xFF808DFF);
   static const Color pink = const Color(0xFFFF80EE);
   static const Color blue_accent = const Color(0xFF808DFF);
   static const Color dark_purple = const Color(0xFF2C305B);
