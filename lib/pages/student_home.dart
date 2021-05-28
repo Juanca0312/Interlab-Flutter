@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/models/application.dart';
 import 'package:basic_utils/basic_utils.dart';
+import 'package:interlab/pages/student_home_details.dart';
 import 'package:interlab/services/application_service.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_home_empty.dart';
@@ -51,10 +53,24 @@ class _HomeState extends State<Home> {
         }
     );
   }
+
   Widget _buildRow(Application application){
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 21),
-      child: applicationWidget(application),
+    return GestureDetector(
+      onTap: () =>
+          showAnimatedDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (BuildContext context) {
+                return StudentHomeDetails(application);
+              },
+              animationType: DialogTransitionType.slideFromTop,
+              curve: Curves.fastOutSlowIn,
+              duration: Duration(milliseconds: 500)
+          ),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 21),
+        child: applicationWidget(application),
+      ),
     );
   }
   Widget applicationWidget(Application application){
