@@ -20,17 +20,18 @@ class ApplicationService{
       Map data = jsonDecode(response.body);
       for(var i = 0; i<data['numberOfElements']; i++){
         applicationList.add(
-            new Application(
-                data['content'][i]['jobTitle'],
-                data['content'][i]['company']['name'],
-                data['content'][i]['company']['email'],
-                data['content'][i]['company']['phone'],
-                data['content'][i]['location'],
-                data['content'][i]['state'],
-                data['content'][i]['salary'].toString(),
-                StringUtils.truncate(data['content'][i]['startingDate'], 10, symbol: ''),
-                StringUtils.truncate(data['content'][i]['finishingDate'], 10, symbol: ''),
-                data['content'][i]['description']),
+          new Application(
+            data['content'][i]['jobTitle'],
+            data['content'][i]['company']['name'],
+            data['content'][i]['company']['email'],
+            data['content'][i]['company']['phone'],
+            data['content'][i]['location'],
+            data['content'][i]['state'],
+            data['content'][i]['salary'].toString(),
+            StringUtils.truncate(data['content'][i]['startingDate'], 10, symbol: ''),
+            StringUtils.truncate(data['content'][i]['finishingDate'], 10, symbol: ''),
+            data['content'][i]['description']
+          ),
         );
       }
     }

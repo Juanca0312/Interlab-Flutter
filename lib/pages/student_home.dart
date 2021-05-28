@@ -46,27 +46,27 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return loading ? Loading() :
     applications.isEmpty ? StudentHomeEmpty() : ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: applications.length,
-        itemBuilder: (BuildContext context, int i) {
-          return _buildRow(applications[i]);
-        }
+      padding: const EdgeInsets.all(16),
+      itemCount: applications.length,
+      itemBuilder: (BuildContext context, int i) {
+        return _buildRow(applications[i]);
+      }
     );
   }
 
   Widget _buildRow(Application application){
     return GestureDetector(
       onTap: () =>
-          showAnimatedDialog(
-              context: context,
-              barrierDismissible: true,
-              builder: (BuildContext context) {
-                return StudentHomeDetails(application);
-              },
-              animationType: DialogTransitionType.slideFromTop,
-              curve: Curves.fastOutSlowIn,
-              duration: Duration(milliseconds: 500)
-          ),
+        showAnimatedDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return StudentHomeDetails(application);
+          },
+          animationType: DialogTransitionType.slideFromTop,
+          curve: Curves.fastOutSlowIn,
+          duration: Duration(milliseconds: 500)
+        ),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 21),
         child: applicationWidget(application),
@@ -75,72 +75,68 @@ class _HomeState extends State<Home> {
   }
   Widget applicationWidget(Application application){
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  application.title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
-                ),
-                Text(
-                  '${application.company} - ${application.location}',
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black54,
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              width: 120,
-              height: 60,
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 17),
-                child: Text(
-                  StringUtils.capitalize(application.status),
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.white,
-                  ),
+      padding: EdgeInsets.only(left: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                application.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
                 ),
               ),
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
+              Text(
+                '${application.company} - ${application.location}',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black54,
                 ),
               ),
+            ],
+          ),
+          Container(
+            width: 120,
+            height: 60,
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.only(right: 17),
+            child: Text(
+              StringUtils.capitalize(application.status),
+              style: TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.w700,
+                fontStyle: FontStyle.italic,
+                color: Colors.white,
+              ),
             ),
-          ],
-        ),
+            decoration: BoxDecoration(
+              color: Colors.grey[900],
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+              ),
+            ),
+          ),
+        ],
       ),
       decoration: BoxDecoration(
-          gradient: application.bgGradient,
-          borderRadius: BorderRadius.all(
-            Radius.circular(15),
+        gradient: application.bgGradient,
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(.3),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(5, 5),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(.3),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: Offset(5, 5),
-            ),
-          ]
+        ]
       ),
     );
   }
