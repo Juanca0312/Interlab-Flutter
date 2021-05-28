@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
-import 'package:interlab/models/historic_application.dart';
-import 'package:interlab/services/historic_application_service.dart';
+import 'package:interlab/models/application.dart';
+import 'package:interlab/services/application_service.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_history_empty.dart';
 import 'package:ms_undraw/illustrations.g.dart';
@@ -15,18 +15,18 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  HistoricApplicationService historicApplicationService=new HistoricApplicationService();
-  List<HistoricApplication> historicApplications=[];
+  ApplicationService applicationService=new ApplicationService();
+  List<Application> applications=[];
   bool loading=true;
 
   void getData() async {
-    await historicApplicationService.getData();
+    await applicationService.getData();
     assignData();
   }
   void assignData(){
     loading=false;
     setState(() {
-      historicApplications=historicApplicationService.historicApplicationList;
+      applications=applicationService.applicationList;
     });
   }
 
@@ -46,7 +46,7 @@ class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() :
-    historicApplications.isEmpty ? StudentHistoryEmpty() : Padding(
+    applications.isEmpty ? StudentHistoryEmpty() : Padding(
       padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
       child: Container(
         child: ClipRRect(
@@ -62,12 +62,12 @@ class _HistoryState extends State<History> {
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: historicApplications.length+1,
+                    itemCount: applications.length+1,
                     itemBuilder: (BuildContext context, int i){
-                      if (i==historicApplications.length){
+                      if (i==applications.length){
                         return _buildIllustration();
                       }
-                      return _buildRow(historicApplications[i], i);
+                      return _buildRow(applications[i], i);
                     }
                   ),
                 ),
@@ -94,8 +94,8 @@ class _HistoryState extends State<History> {
       ),
     );
   }
-  Widget _buildRow(HistoricApplication historicApplication, int i){
-    return historicApplicationWidget(historicApplication, i);
+  Widget _buildRow(Application application, int i){
+    return applicationWidget(application, i);
   }
   Widget _buildIllustration(){
     return Padding(
@@ -103,7 +103,7 @@ class _HistoryState extends State<History> {
       child: UnDraw(illustration: UnDrawIllustration.back_home, color: IColors.lightblue, height: 100,),
     );
   }
-  Widget historicApplicationWidget(HistoricApplication historicApplication, int i){
+  Widget applicationWidget(Application application, int i){
     return Container(
       color: Colors.grey[50+250*(i%2)],
       child: Padding(
@@ -112,7 +112,7 @@ class _HistoryState extends State<History> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              historicApplication.company,
+              application.company,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
@@ -120,7 +120,7 @@ class _HistoryState extends State<History> {
               ),
             ),
             Text(
-              historicApplication.hiringDate,
+              application.startingDate,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w300,

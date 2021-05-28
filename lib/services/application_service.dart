@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:basic_utils/basic_utils.dart';
 import 'package:http/http.dart';
 import 'package:interlab/models/application.dart';
 
@@ -23,7 +24,11 @@ class ApplicationService{
                 data['content'][i]['jobTitle'],
                 data['content'][i]['company']['name'],
                 data['content'][i]['location'],
-                data['content'][i]['state'])
+                data['content'][i]['state'],
+                data['content'][i]['salary'].toString(),
+                StringUtils.truncate(data['content'][i]['startingDate'], 10, symbol: ''),
+                StringUtils.truncate(data['content'][i]['finishingDate'], 10, symbol: ''),
+                data['content'][i]['description']),
         );
       }
     }
