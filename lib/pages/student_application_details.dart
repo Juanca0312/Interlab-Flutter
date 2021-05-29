@@ -19,7 +19,7 @@ class _StudentApplicationDetailsState extends State<StudentApplicationDetails> {
     return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      insetPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 100),
+      insetPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 80),
       child: Column(
         children: [
           Container(
@@ -36,6 +36,7 @@ class _StudentApplicationDetailsState extends State<StudentApplicationDetails> {
                       children: [
                         Text(
                           widget.application.title,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -44,6 +45,7 @@ class _StudentApplicationDetailsState extends State<StudentApplicationDetails> {
                         ),
                         Text(
                           '${widget.application.company} - ${widget.application.location}',
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
@@ -52,6 +54,7 @@ class _StudentApplicationDetailsState extends State<StudentApplicationDetails> {
                         ),
                         Text(
                           '${widget.application.companyEmail} - ${widget.application.companyPhone}',
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w400,
