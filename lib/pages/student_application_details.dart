@@ -5,15 +5,15 @@ import 'package:interlab/models/application.dart';
 import 'package:interlab/widgets/title_and_content_with_icon.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
-class StudentHomeDetails extends StatefulWidget {
+class StudentApplicationDetails extends StatefulWidget {
   final Application application;
-  const StudentHomeDetails(this.application);
+  const StudentApplicationDetails(this.application);
 
   @override
-  _StudentHomeDetailsState createState() => _StudentHomeDetailsState();
+  _StudentApplicationDetailsState createState() => _StudentApplicationDetailsState();
 }
 
-class _StudentHomeDetailsState extends State<StudentHomeDetails> {
+class _StudentApplicationDetailsState extends State<StudentApplicationDetails> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
