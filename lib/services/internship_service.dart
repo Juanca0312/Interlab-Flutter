@@ -19,7 +19,7 @@ class InternshipService {
         },
       );
 
-      Map data = jsonDecode(response.body);
+      Map data = jsonDecode(utf8.decode(response.bodyBytes));
       for(var i = 0; i<data['numberOfElements']; i++){
         internships.add(new Internship(title: data['content'][i]['jobTitle'],
         company: data['content'][i]['company']['name'],

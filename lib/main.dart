@@ -6,6 +6,7 @@ import 'package:interlab/pages/student_dashboard.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(fontFamily: 'Poppins'),
     initialRoute: '/login',
     routes: {
