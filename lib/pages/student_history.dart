@@ -3,7 +3,7 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/models/application.dart';
-import 'package:interlab/pages/student_home_details.dart';
+import 'package:interlab/pages/student_application_details.dart';
 import 'package:interlab/services/application_service.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_history_empty.dart';
