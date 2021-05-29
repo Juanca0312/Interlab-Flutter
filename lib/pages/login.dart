@@ -4,6 +4,7 @@ import 'package:interlab/pages/student_dashboard.dart';
 import 'package:interlab/widgets/banner.dart';
 import 'package:interlab/widgets/dark_button.dart';
 import 'package:interlab/widgets/outlined_button.dart';
+import 'package:interlab/widgets/password_field.dart';
 import 'package:interlab/widgets/register_info.dart';
 import 'package:interlab/widgets/text_field.dart';
 import 'package:interlab/widgets/text_link.dart';
@@ -24,6 +25,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   AuthService authService = new AuthService();
   String token = "";
+  bool authValidator = false;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   void _login() async {
@@ -36,7 +38,20 @@ class _LoginState extends State<Login> {
     if (token != null) {
       //TODO: validate user type
       Navigate.to(context, StudentDashboard());
+    } else {
+      authValidator = true;
     }
+  }
+
+  void _onChangePassword() {
+    authValidator = false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Start listening to changes.
+    passwordController.addListener(_onChangePassword);
   }
 
   @override
@@ -66,20 +81,26 @@ class _LoginState extends State<Login> {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
-                          controller: usernameController,
-                          name: 'Nombre de usuario',
-                          hint: 'student@interlab.com',
-                          type: 'email')),
+                        controller: usernameController,
+                        name: 'Nombre de usuario',
+                        hint: 'student@interlab.com',
+                        type: 'email',
+                        validation: false,
+                      )),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: ITextField(
-                          controller: passwordController,
-                          name: 'Contraseña',
-                          hint: '••••••••••••••',
-                          type: 'password')),
+                      child: IPasswordField(
+                        controller: passwordController,
+                        name: 'Contraseña',
+                        hint: '••••••••••••••',
+                        validation: authValidator,
+                        errorMessage:
+                            'Nombre de usuario o contraseña incorrectos',
+                      )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      //TODO: update fields to register student and company
                       ITextLink(
                           text: 'Crear cuenta',
                           event: () => Navigate.to(context, RegisterStudent())),
@@ -107,6 +128,13 @@ class _LoginState extends State<Login> {
                 ]),
           ),
         ])));
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    usernameController.dispose();
+    super.dispose();
   }
 }
 
