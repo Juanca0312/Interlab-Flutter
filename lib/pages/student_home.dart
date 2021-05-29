@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/models/application.dart';
 import 'package:basic_utils/basic_utils.dart';
-import 'package:interlab/pages/student_home_details.dart';
+import 'package:interlab/pages/student_application_details.dart';
 import 'package:interlab/services/application_service.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_home_empty.dart';
@@ -61,9 +61,9 @@ class _HomeState extends State<Home> {
           context: context,
           barrierDismissible: true,
           builder: (BuildContext context) {
-            return StudentHomeDetails(application);
+            return StudentApplicationDetails(application);
           },
-          animationType: DialogTransitionType.slideFromTop,
+          animationType: DialogTransitionType.slideFromBottom,
           curve: Curves.fastOutSlowIn,
           duration: Duration(milliseconds: 500)
         ),

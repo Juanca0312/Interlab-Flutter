@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/models/application.dart';
+import 'package:interlab/pages/student_application_details.dart';
 import 'package:interlab/services/application_service.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_history_empty.dart';
@@ -95,7 +97,19 @@ class _HistoryState extends State<History> {
     );
   }
   Widget _buildRow(Application application, int i){
-    return applicationWidget(application, i);
+    return GestureDetector(
+      onTap: () =>
+        showAnimatedDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return StudentApplicationDetails(application);
+          },
+          animationType: DialogTransitionType.slideFromBottom,
+          curve: Curves.fastOutSlowIn,
+          duration: Duration(milliseconds: 500)
+        ),
+      child: applicationWidget(application, i));
   }
   Widget _buildIllustration(){
     return Padding(
