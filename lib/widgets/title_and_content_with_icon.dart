@@ -18,22 +18,25 @@ class TitleAndContentWithIcon extends StatelessWidget {
           child: Container(child: Icon(icon, size: 35, color: color,)),
         ),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  color: color,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 17
+          child: Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 17
+                  ),
                 ),
-              ),
-              SizedBox(height: 5,),
-              Text(
-                  content
-              )
-            ],
+                SizedBox(height: 5,),
+                Text(
+                    content
+                )
+              ],
+            ),
           ),
         ),
       ],

@@ -17,7 +17,7 @@ class ApplicationService{
           HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
         },
       );
-      Map data = jsonDecode(response.body);
+      Map data = jsonDecode(utf8.decode(response.bodyBytes));
       for(var i = 0; i<data['numberOfElements']; i++){
         applicationList.add(
           new Application(
