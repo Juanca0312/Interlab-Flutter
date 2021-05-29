@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 
-class ITextField extends StatelessWidget {
-  ITextField(
-      {Key key,
-      this.name,
-      this.hint,
-      this.type,
-      this.controller,
-      InputDecoration decoration,
-      this.validation,
-      this.errorMessage,
-      Color cursorColor})
-      : super(key: key);
+class IPasswordField extends StatefulWidget {
+  const IPasswordField({
+    this.name,
+    this.hint,
+    this.controller,
+    this.validation,
+    this.errorMessage,
+  });
 
   final String name;
   final String hint;
-  final String type;
   final bool validation;
   final String errorMessage;
   final TextEditingController controller;
 
   @override
+  _IPasswordFieldState createState() => new _IPasswordFieldState();
+}
+
+class _IPasswordFieldState extends State<IPasswordField> {
+  bool _obscureText = true;
+  @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
+      controller: widget.controller,
+      obscureText: _obscureText,
       cursorColor: IColors.dark_purple,
       decoration: InputDecoration(
-        labelText: name,
-        hintText: hint,
+        labelText: widget.name,
+        hintText: widget.hint,
         hintStyle: TextStyle(color: IColors.dark_purple, fontSize: 13),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         labelStyle:
@@ -42,7 +44,18 @@ class ITextField extends StatelessWidget {
         border: UnderlineInputBorder(
           borderSide: BorderSide(color: IColors.dark_purple, width: 2),
         ),
-        errorText: validation ? errorMessage : null,
+        errorText: widget.validation ? widget.errorMessage : null,
+        suffixIcon: new GestureDetector(
+          onTap: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+          child: new Icon(
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+            color: IColors.dark_purple,
+          ),
+        ),
       ),
     );
   }
