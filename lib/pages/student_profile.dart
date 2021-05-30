@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/services/profile_student.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/widgets/loading.dart';
+import 'package:interlab/colors/interlab_colors.dart';
 
 
 class Profile extends StatefulWidget {
@@ -15,42 +17,71 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
 
-  TextEditingController degree = TextEditingController();
-  TextEditingController semester = TextEditingController();
-  TextEditingController university = TextEditingController();
-  TextEditingController bio = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController email = TextEditingController();
-  String _name = 'Cargando...';
-  String Idegree;
-  String Isemester;
-  String Iuniversity;
-  String Ibio;
-  String Iphone;
-  String Iemail;
-  bool loading = true;
 
   ProfileS profile = ProfileS();
+  //variables
+  String firstName ="";
+  String role = "";
+  String lastName = "";
+  String description = "";
+  String email = "";
+  String university ="";
+  String phone = "";
+  String semester = "";
+  String degree = "";
+  //controllers
+  final TextEditingController _firstNameC = TextEditingController();
+  final TextEditingController _lastNameC = TextEditingController();
+  final TextEditingController _descriptionC = TextEditingController();
+  final TextEditingController _emailC = TextEditingController();
+  final TextEditingController _universityC = TextEditingController();
+  final TextEditingController _phoneC = TextEditingController();
+  final TextEditingController _semesterC = TextEditingController();
+  final TextEditingController _degreeC = TextEditingController();
 
-  final _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+
+
+  bool loading = true;
 
   void assignData () {
     loading = false;
-    _name = '${profile.firstName} ${profile.lastName}';
-    degree.text = profile.degree;
-    semester.text = profile.semester;
-    university.text = profile.university;
-    bio.text = profile.description;
-    phone.text = profile.phone;
-    email.text = profile.email;
+    firstName = profile.firstName;
+    role = profile.role;
+    lastName = profile.lastName;
+    description = profile.description;
+    email = profile.email;
+    university = profile.university;
+    phone = profile.phone;
+    semester = profile.semester;
+    degree = profile.degree;
 
+    //controller
+    _firstNameC.text = firstName;
+    _lastNameC.text = lastName;
+    _descriptionC.text = description;
+    _emailC.text = email;
+    _universityC.text = university;
+    _phoneC.text = phone;
+    _semesterC.text = semester;
+    _degreeC.text = degree;
+    setState(() {
 
-    Idegree = degree.text;
-    Isemester = semester.text;
-    Iuniversity = university.text;
-    Ibio = bio.text;
-    Iphone = phone.text;
-    Iemail = email.text;
+    });
+  }
+
+  void editData(){
+    print(_firstNameC.text);
+    profile.firstName=_firstNameC.text;
+    profile.role=_lastNameC.text;
+    profile.lastName=_lastNameC.text;
+    profile.description= _descriptionC.text;
+    profile.email=_emailC.text;
+    profile.university=_universityC.text;
+    profile.phone=_phoneC.text;
+    profile.semester=_semesterC.text;
+    profile.degree=_degreeC.text;
     setState(() {
 
     });
@@ -61,171 +92,17 @@ class _ProfileState extends State<Profile> {
     assignData();
   }
 
-  Widget _buildCarrera() {
-    return TextFormField(
-      controller: degree,
-      decoration: InputDecoration(labelText: 'Soy estudiante de:'),
-      validator: (value) {
-        if (value == null) {
-          return 'Carrera es requerida';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );
-  }
-  Widget _buildCiclo() {
-    return TextFormField(
-      controller: semester,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(labelText: 'En el ciclo:'),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Ciclo es requerida';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );
-  }
-  Widget _buildUniversity() {
-    return TextFormField(
-      controller: university,
-      maxLines: 2,
-      decoration: InputDecoration(labelText: 'En la universidad: '),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Universidad es requerida';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );
-  }
-  Widget _buildBio( ) {
-    return TextFormField(
-      controller: bio,
-      maxLines: 3,
-      decoration: InputDecoration(labelText: 'Bio'),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Bio es requerida';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );
-  }
-  Widget _buildPhone( ) {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      controller: phone,
-      decoration: InputDecoration(labelText: 'Numero de Telefono'),
-      validator: (String value) {
-        if (value.isEmpty && value.length < 8) {
-          return 'Telefono invalido';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );
-  }
-  Widget _buildEmail() {
-    return TextFormField(
-      controller: email,
-      decoration: InputDecoration(labelText: 'Email'),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Email es requerido';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );
+  void updateData() async {
+    editData();
+    await profile.updateData();
+    assignData();
   }
 
-  bool edited(){
-    if(Idegree != degree.text ||
-    Isemester != semester.text ||
-    Iuniversity != university.text ||
-    Ibio != bio.text ||
-    Iphone != phone.text ||
-    Iemail != email.text){
-      return true;
-
-    }
-    else{
-      return false;
-    }
-  }
-  bool vacio(){
-    if('' == degree.text ||
-        '' == semester.text ||
-        '' == university.text ||
-        '' == bio.text ||
-        '' == phone.text ||
-        '' == email.text){
-      return true;
-
-    }
-    else{
-      return false;
-    }
-  }
-
-  void modificarPerfil(){
-    setState(() {
-      Idegree = degree.text;
-      Isemester = semester.text;
-      Iuniversity = university.text;
-      Ibio = bio.text;
-      Iphone = phone.text;
-      Iemail = email.text;
-    });
-    //llamada al papi
-  }
 
   @override
   void initState(){
     // TODO: implement initState
     super.initState();
-
-
-
-
-
-
-    degree.addListener(() {print(degree.text);});
-    semester.addListener(() {print(semester.text);});
-    university.addListener(() {print(university.text);});
-    bio.addListener(() {print(bio.text);});
-    phone.addListener(() {print(phone.text);});
-    email.addListener(() {print(email.text);});
-
     getData();
   }
   @override
@@ -259,7 +136,7 @@ class _ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Container(
-                          ///TODO: CARD Inicio
+                          ///TODO: CARD TITLE
                           decoration: BoxDecoration(
                               gradient: IGradients.lightblue_blue,
                               borderRadius: BorderRadius.all(Radius.circular(15))),
@@ -278,7 +155,7 @@ class _ProfileState extends State<Profile> {
                                             vertical: 0, horizontal: 10),
                                         //color: Colors.lightGreenAccent,
                                         child: Text(
-                                          _name,
+                                          '$firstName $lastName',
                                           style: TextStyle(fontSize: 20),
                                         )),
                                     Container(
@@ -293,35 +170,163 @@ class _ProfileState extends State<Profile> {
                                           ),
                                         ))
                                   ],
-                                )
+                                ),
+                                IconButton(icon: Icon(Icons.edit, color: Colors.grey[800],), onPressed: (){ //TODO: Edit Profile
+                                  return showAnimatedDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      builder: (BuildContext context) {
+                                        return Dialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                                          insetPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 80),
+
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: ListView(
+                                              children: [Column(
+                                                children: <Widget>[
+                                                  Text('Edit Profile', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                                                  Form(
+                                                    key: _formKey,
+                                                    child: Column(
+                                                      children: [
+                                                        TextFormField(
+                                                          controller: _firstNameC,
+                                                          validator: (value){
+                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
+                                                          },
+                                                          decoration: InputDecoration(
+                                                            labelText: 'Nombre'
+                                                          ),
+                                                        ),
+                                                        TextFormField(
+                                                          controller: _lastNameC,
+                                                          validator: (value){
+                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
+                                                          },
+                                                          decoration: InputDecoration(
+                                                              labelText: 'Apellidos'
+                                                          ),
+                                                        ),
+                                                        TextFormField(
+                                                          controller: _degreeC,
+                                                          validator: (value){
+                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
+                                                          },
+                                                          decoration: InputDecoration(
+                                                              labelText: 'Carrera'
+                                                          ),
+                                                        ),
+                                                        TextFormField(
+                                                          controller: _semesterC,
+                                                          validator: (value){
+                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
+                                                          },
+                                                          decoration: InputDecoration(
+                                                              labelText: 'Ciclo'
+                                                          ),
+                                                        ),
+                                                        TextFormField(
+                                                          controller: _universityC,
+                                                          validator: (value){
+                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
+                                                          },
+                                                          decoration: InputDecoration(
+                                                              labelText: 'Universidad'
+                                                          ),
+                                                        ),
+                                                        TextFormField(
+                                                          controller: _emailC,
+                                                          validator: (value){
+                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
+                                                          },
+                                                          decoration: InputDecoration(
+                                                              labelText: 'Email'
+                                                          ),
+                                                        ),
+                                                        TextFormField(
+                                                          keyboardType: TextInputType.phone,
+                                                          controller: _phoneC,
+                                                          validator: (value){
+                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
+                                                          },
+                                                          decoration: InputDecoration(
+                                                              labelText: 'Celular'
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 15,),
+                                                        InkWell(
+                                                          onTap: (){
+                                                            if(_formKey.currentState.validate()){
+                                                              loading = true;
+                                                              setState(() {
+
+                                                              });
+                                                              updateData();
+                                                              Navigator.of(context).pop();
+                                                            }
+                                                          },
+                                                          child: Container(
+                                                            width: 100,
+                                                            height: 35,
+                                                            decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(15),
+                                                              color: IColors.blue
+                                                            ),
+                                                            child: Center(child: Text('Guardar', style: TextStyle(color: Colors.white),)),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),]
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      animationType: DialogTransitionType.slideFromBottom,
+                                      curve: Curves.fastOutSlowIn,
+                                      duration: Duration(milliseconds: 500)
+                                  );
+                                })
                               ],
                             ),
                           ),
                         ),
-                        Form(
-                          //Form de Estudiante
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20.0),
-                            child: Column(
-                              children: [
-                                _buildCarrera(),
-                                _buildCiclo(),
-                                _buildUniversity(),
-                                _buildBio(),
-                                _buildPhone(),
-                                _buildEmail(),
-                                SizedBox(height: 10,),
-                                ElevatedButton(
-                                  style: ButtonStyle(
-
-                                  ),
-                                  onPressed: edited() && !vacio() ? (){
-                                    //llamada al papi modificarPerfil();
-                                    } : null,
-                                  child: Text('Guardar'),)
-                              ],
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _label(' Soy estudiante de: ',degree),
+                              SizedBox(height: 10,),
+                              _label(' En el ciclo: ','$semester° ciclo'),
+                              SizedBox(height: 10,),
+                              _label(' En la universidad: ',university),
+                              SizedBox(height: 10,),
+                              _label(' Con email: ', email),
+                              SizedBox(height: 10,),
+                              _label(' Con teléfono: ', phone),
+                              SizedBox(height: 10,),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5, left: 5),
+                                child: Text('Bio', style: TextStyle(fontWeight: FontWeight.w300),),
+                              ),
+                              Container(
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: IColors.blue, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(description),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ],
@@ -333,6 +338,34 @@ class _ProfileState extends State<Profile> {
           ),
         ));
   }
+}
+
+Widget _label (String title, String data){
+  return Container(
+    height: data.length > 25 ? 80 : 60,
+    decoration: BoxDecoration(
+      border: Border(
+        bottom: BorderSide(width: 2, color: IColors.blue),
+      ),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(title, style: TextStyle(fontWeight: FontWeight.w300),),
+        SizedBox(height: 3,),
+        Row(
+          children: <Widget>[
+            Icon(Icons.keyboard_arrow_down_rounded),
+            SizedBox(width: 10,),
+            Container(
+              height: data.length > 25 ? 50 : 30,
+                width: 250,
+                child: Text(data, style: TextStyle(fontSize: 16),))
+          ],
+        ),
+      ],
+    ),
+  );
 }
 
 
