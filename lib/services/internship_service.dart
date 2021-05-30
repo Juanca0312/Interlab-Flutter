@@ -25,7 +25,8 @@ class InternshipService {
         company: data['content'][i]['company']['name'],
         location: data['content'][i]['location'],
         salary: data['content'][i]['salary'].toString(),
-        description: data['content'][i]['description']));
+        description: data['content'][i]['description'], status: i));
+
       }
 
 

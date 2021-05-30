@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/pages/login.dart';
-import 'package:interlab/pages/register_company.dart';
-import 'package:interlab/pages/register_student.dart';
 import 'package:interlab/pages/student_dashboard.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(fontFamily: 'Poppins'),
-    initialRoute: '/login',
+    initialRoute: '/',
     routes: {
-      '/': (context) => StudentDashboard(),
+      '/': (context) => Login(),
       '/studentDashboard': (context) => StudentDashboard(),
-      '/login': (context) => Login(),
-      '/registerStudent': (context) => RegisterStudent(),
-      '/registerCompany': (context) => RegisterCompany(),
     },
   ));
 }
