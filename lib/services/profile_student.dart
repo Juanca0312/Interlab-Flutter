@@ -47,4 +47,35 @@ class ProfileS{
       firstName = 'could not get name data';
     }
   }
+  Future<void> updateData() async {
+    Map data = {
+      'role': "student",
+      'firstName': "Rafaela",
+      'lastName': "Andrade",
+      'field': "Technology",
+      'phone': "998776554",
+      'email': "biti@hotmail.com",
+      'description': "Estudiante de CC de la UPC, especializado en Data Science",
+      'country': "Peru",
+      'city': "Lima",
+      'university': "Universidad Peruana de Ciencias Aplicadas",
+      'degree': "Computer Science",
+      'semester': 8,
+    };
+    String body = jsonEncode(data);
+    try{
+        await put(
+        Uri.parse('https://interlabapi.herokuapp.com/api/users/1/profiles/1'),
+        // Send authorization headers to the backend.
+        headers: {
+          HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
+        },
+        body: body,
+      );
+
+    }
+    catch(e){
+      print('caught error $e');
+    }
+  }
 }
