@@ -11,8 +11,8 @@ class Internship{
   int status;
   LinearGradient bgGradient;
   var rng = new Random();
-  Internship({this.title, this.company, this.location, this.salary, this.description}){
-    status = rng.nextInt(4);
+  Internship({this.title, this.company, this.location, this.salary, this.description, this.status}){
+    status = status % 4;
     switch (status){
       case 0: bgGradient=IGradients.green_lightblue; break;
       case 1: bgGradient=IGradients.yellow_orange; break;
