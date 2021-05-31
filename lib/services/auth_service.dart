@@ -81,6 +81,7 @@ class AuthService {
         'role': 'company'
       }),
     );
+    print(userResponse.statusCode);
     if (userResponse.statusCode == 200) {
       Map user = jsonDecode(userResponse.body);
       String id = (user['id']).toString();
