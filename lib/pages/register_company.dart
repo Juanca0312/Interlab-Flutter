@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:interlab/pages/company_dashboard.dart';
 import 'package:interlab/pages/login.dart';
 import 'package:interlab/pages/register_student.dart';
+import 'package:interlab/services/auth_service.dart';
 import 'package:interlab/util/navigate.dart';
 import 'package:interlab/widgets/banner.dart';
 import 'package:interlab/widgets/dark_button.dart';
@@ -22,9 +25,40 @@ class RegisterCompany extends StatefulWidget {
 }
 
 class _RegisterCompanyState extends State<RegisterCompany> {
+  AuthService authService = new AuthService();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController retypePasswordController = TextEditingController();
   bool authValidator = false;
+
+  void _register() async {
+    if (passwordController.text == retypePasswordController.text) {
+      Response response = await authService.registerCompany(
+          usernameController.text,
+          passwordController.text,
+          nameController.text);
+      if (response.statusCode == 200) {
+        Navigate.to(context, CompanyDashboard());
+      } else {
+        authValidator = true;
+      }
+    } else {
+      authValidator = true;
+    }
+  }
+
+  void _onChangePassword() {
+    authValidator = false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    retypePasswordController = TextEditingController();
+    passwordController.addListener(_onChangePassword);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,12 +87,14 @@ class _RegisterCompanyState extends State<RegisterCompany> {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
+                          controller: usernameController,
                           name: 'Nombre de usuario',
                           hint: 'company@gmail.com',
                           validation: false)),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
+                          controller: nameController,
                           name: 'Nombres y Apellidos',
                           hint: 'Ángel Velásquez',
                           validation: false)),
@@ -95,7 +131,7 @@ class _RegisterCompanyState extends State<RegisterCompany> {
                   ),
                   IDarkButton(
                     text: 'REGISTRARSE',
-                    event: () => Navigate.to(context, Login()),
+                    event: _register,
                   ),
                 ],
               ),
