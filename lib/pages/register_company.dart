@@ -5,6 +5,7 @@ import 'package:interlab/util/navigate.dart';
 import 'package:interlab/widgets/banner.dart';
 import 'package:interlab/widgets/dark_button.dart';
 import 'package:interlab/widgets/outlined_button.dart';
+import 'package:interlab/widgets/password_field.dart';
 import 'package:interlab/widgets/register_info.dart';
 import 'package:interlab/widgets/text_field.dart';
 import 'package:interlab/widgets/text_link.dart';
@@ -13,7 +14,17 @@ import 'package:url_launcher/url_launcher.dart';
 
 const url = 'https://8rb.github.io/Interlab-Landing-Page/';
 
-class RegisterCompany extends StatelessWidget {
+class RegisterCompany extends StatefulWidget {
+  const RegisterCompany({Key key}) : super(key: key);
+
+  @override
+  _RegisterCompanyState createState() => _RegisterCompanyState();
+}
+
+class _RegisterCompanyState extends State<RegisterCompany> {
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController retypePasswordController = TextEditingController();
+  bool authValidator = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,25 +55,33 @@ class RegisterCompany extends StatelessWidget {
                       child: ITextField(
                           name: 'Nombre de usuario',
                           hint: 'company@gmail.com',
-                          type: 'email')),
+                          validation: false)),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
                           name: 'Nombres y Apellidos',
                           hint: 'Ángel Velásquez',
-                          type: 'text')),
+                          validation: false)),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: ITextField(
-                          name: 'Contraseña',
-                          hint: '••••••••••••••',
-                          type: 'password')),
+                      child: IPasswordField(
+                        controller: passwordController,
+                        name: 'Contraseña',
+                        hint: '••••••••••••••',
+                        validation: authValidator,
+                        errorMessage:
+                            'Nombre de usuario o contraseña incorrectos',
+                      )),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: ITextField(
-                          name: 'Confirme su ontraseña',
-                          hint: '••••••••••••••',
-                          type: 'password')),
+                      child: IPasswordField(
+                        controller: retypePasswordController,
+                        name: 'Confirme su contraseña',
+                        hint: '••••••••••••••',
+                        validation: authValidator,
+                        errorMessage:
+                            'Nombre de usuario o contraseña incorrectos',
+                      )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

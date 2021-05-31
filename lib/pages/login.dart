@@ -28,13 +28,15 @@ class _LoginState extends State<Login> {
   bool authValidator = false;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   void _login() async {
     String tokenResponse = await authService.login(
         usernameController.text, passwordController.text);
-    print('Token: $token');
+
     setState(() {
       token = tokenResponse;
     });
+
     if (token != null) {
       //TODO: validate user type
       Navigate.to(context, StudentDashboard());
@@ -50,7 +52,6 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    // Start listening to changes.
     passwordController.addListener(_onChangePassword);
   }
 
@@ -84,7 +85,6 @@ class _LoginState extends State<Login> {
                         controller: usernameController,
                         name: 'Nombre de usuario',
                         hint: 'student@interlab.com',
-                        type: 'email',
                         validation: false,
                       )),
                   Padding(
