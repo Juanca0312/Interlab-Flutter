@@ -6,7 +6,6 @@ class ITextField extends StatelessWidget {
       {Key key,
       this.name,
       this.hint,
-      this.type,
       this.controller,
       InputDecoration decoration,
       this.validation,
@@ -16,7 +15,6 @@ class ITextField extends StatelessWidget {
 
   final String name;
   final String hint;
-  final String type;
   final bool validation;
   final String errorMessage;
   final TextEditingController controller;
