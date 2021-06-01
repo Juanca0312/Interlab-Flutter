@@ -29,7 +29,11 @@ class _ProfileState extends State<Profile> {
   String phone = "";
   String semester = "";
   String degree = "";
-  //controllers
+  String field = "";
+  String country = "";
+  String city = "";
+
+//controllers
   final TextEditingController _firstNameC = TextEditingController();
   final TextEditingController _lastNameC = TextEditingController();
   final TextEditingController _descriptionC = TextEditingController();
@@ -38,24 +42,32 @@ class _ProfileState extends State<Profile> {
   final TextEditingController _phoneC = TextEditingController();
   final TextEditingController _semesterC = TextEditingController();
   final TextEditingController _degreeC = TextEditingController();
+  final TextEditingController _fieldC = TextEditingController();
+  final TextEditingController _cityC = TextEditingController();
+  final TextEditingController _countryC = TextEditingController();
+
+
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
-
   bool loading = true;
+
 
   void assignData () {
     loading = false;
     firstName = profile.firstName;
-    role = profile.role;
+    role = 'Estudiante';
     lastName = profile.lastName;
-    description = profile.description;
-    email = profile.email;
-    university = profile.university;
-    phone = profile.phone;
-    semester = profile.semester;
-    degree = profile.degree;
+    description = profile.description == null ? '' : profile.description;
+    email = profile.email == null ? '' : profile.email;
+    university = profile.university == null ? '' : profile.university;
+    phone = profile.phone == null ? '' : profile.phone;
+    semester = profile.semester == null ? '' : profile.semester;
+    degree = profile.degree == null ? '' : profile.degree;
+    field = profile.field == null ? '' : profile.field;
+    city = profile.city == null ? '' : profile.city;
+    country = profile.country == null ? '' : profile.country;
+
 
     //controller
     _firstNameC.text = firstName;
@@ -66,13 +78,18 @@ class _ProfileState extends State<Profile> {
     _phoneC.text = phone;
     _semesterC.text = semester;
     _degreeC.text = degree;
+    _fieldC.text = field;
+    _cityC.text = city;
+    _countryC.text = country;
     setState(() {
 
     });
+    if(email == '' || email == null){
+      _dialogEditProfile();
+    }
   }
 
   void editData(){
-    print(_firstNameC.text);
     profile.firstName=_firstNameC.text;
     profile.role=_lastNameC.text;
     profile.lastName=_lastNameC.text;
@@ -82,6 +99,9 @@ class _ProfileState extends State<Profile> {
     profile.phone=_phoneC.text;
     profile.semester=_semesterC.text;
     profile.degree=_degreeC.text;
+    profile.field=_fieldC.text;
+    profile.city=_cityC.text;
+    profile.country=_countryC.text;
     setState(() {
 
     });
@@ -172,124 +192,7 @@ class _ProfileState extends State<Profile> {
                                   ],
                                 ),
                                 IconButton(icon: Icon(Icons.edit, color: Colors.grey[800],), onPressed: (){ //TODO: Edit Profile
-                                  return showAnimatedDialog(
-                                      context: context,
-                                      barrierDismissible: true,
-                                      builder: (BuildContext context) {
-                                        return Dialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                                          insetPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 80),
-
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15.0),
-                                            child: ListView(
-                                              children: [Column(
-                                                children: <Widget>[
-                                                  Text('Edit Profile', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
-                                                  Form(
-                                                    key: _formKey,
-                                                    child: Column(
-                                                      children: [
-                                                        TextFormField(
-                                                          controller: _firstNameC,
-                                                          validator: (value){
-                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
-                                                          },
-                                                          decoration: InputDecoration(
-                                                            labelText: 'Nombre'
-                                                          ),
-                                                        ),
-                                                        TextFormField(
-                                                          controller: _lastNameC,
-                                                          validator: (value){
-                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
-                                                          },
-                                                          decoration: InputDecoration(
-                                                              labelText: 'Apellidos'
-                                                          ),
-                                                        ),
-                                                        TextFormField(
-                                                          controller: _degreeC,
-                                                          validator: (value){
-                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
-                                                          },
-                                                          decoration: InputDecoration(
-                                                              labelText: 'Carrera'
-                                                          ),
-                                                        ),
-                                                        TextFormField(
-                                                          controller: _semesterC,
-                                                          validator: (value){
-                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
-                                                          },
-                                                          decoration: InputDecoration(
-                                                              labelText: 'Ciclo'
-                                                          ),
-                                                        ),
-                                                        TextFormField(
-                                                          controller: _universityC,
-                                                          validator: (value){
-                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
-                                                          },
-                                                          decoration: InputDecoration(
-                                                              labelText: 'Universidad'
-                                                          ),
-                                                        ),
-                                                        TextFormField(
-                                                          controller: _emailC,
-                                                          validator: (value){
-                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
-                                                          },
-                                                          decoration: InputDecoration(
-                                                              labelText: 'Email'
-                                                          ),
-                                                        ),
-                                                        TextFormField(
-                                                          keyboardType: TextInputType.phone,
-                                                          controller: _phoneC,
-                                                          validator: (value){
-                                                            return value.isNotEmpty ? null : 'Campos Inválidos';
-                                                          },
-                                                          decoration: InputDecoration(
-                                                              labelText: 'Celular'
-                                                          ),
-                                                        ),
-                                                        SizedBox(height: 15,),
-                                                        InkWell(
-                                                          onTap: (){
-                                                            if(_formKey.currentState.validate()){
-                                                              loading = true;
-                                                              setState(() {
-
-                                                              });
-                                                              updateData();
-                                                              Navigator.of(context).pop();
-                                                            }
-                                                          },
-                                                          child: Container(
-                                                            width: 100,
-                                                            height: 35,
-                                                            decoration: BoxDecoration(
-                                                              borderRadius: BorderRadius.circular(15),
-                                                              color: IColors.blue
-                                                            ),
-                                                            child: Center(child: Text('Guardar', style: TextStyle(color: Colors.white),)),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),]
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      animationType: DialogTransitionType.slideFromBottom,
-                                      curve: Curves.fastOutSlowIn,
-                                      duration: Duration(milliseconds: 500)
-                                  );
+                                  return _dialogEditProfile();
                                 })
                               ],
                             ),
@@ -303,9 +206,13 @@ class _ProfileState extends State<Profile> {
                             children: [
                               _label(' Soy estudiante de: ',degree),
                               SizedBox(height: 10,),
+                              _label(' Del rubro: ',field),
+                              SizedBox(height: 10,),
                               _label(' En el ciclo: ','$semester° ciclo'),
                               SizedBox(height: 10,),
                               _label(' En la universidad: ',university),
+                              SizedBox(height: 10,),
+                              _labelCC(' En:', city, country),
                               SizedBox(height: 10,),
                               _label(' Con email: ', email),
                               SizedBox(height: 10,),
@@ -338,6 +245,171 @@ class _ProfileState extends State<Profile> {
           ),
         ));
   }
+
+
+  Future<Widget> _dialogEditProfile(){
+    return showAnimatedDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15.0))),
+            insetPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 80),
+
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: ListView(
+                  children: [Column(
+                    children: <Widget>[
+                      Text('Edit Profile', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              controller: _firstNameC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Nombre'
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _lastNameC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Apellidos'
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _degreeC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Carrera'
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _fieldC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Rubro'
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _semesterC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Ciclo'
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _universityC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Universidad'
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _cityC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Ciudad'
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _countryC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Pais'
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _emailC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Email'
+                              ),
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.phone,
+                              controller: _phoneC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Celular'
+                              ),
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: _descriptionC,
+                              validator: (value){
+                                return value.isNotEmpty ? null : 'Campos Inválidos';
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Bio'
+                              ),
+                            ),
+                            SizedBox(height: 15,),
+                            InkWell(
+                              onTap: (){
+                                if(_formKey.currentState.validate()){
+                                  loading = true;
+                                  setState(() {
+
+                                  });
+                                  updateData();
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: IColors.blue
+                                ),
+                                child: Center(child: Text('Guardar', style: TextStyle(color: Colors.white),)),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),]
+              ),
+            ),
+          );
+        },
+        animationType: DialogTransitionType.slideFromBottom,
+        curve: Curves.fastOutSlowIn,
+        duration: Duration(milliseconds: 500)
+    );
+  }
+
+
+
+
+
 }
 
 Widget _label (String title, String data){
@@ -367,8 +439,30 @@ Widget _label (String title, String data){
     ),
   );
 }
-
-
-
-
-
+Widget _labelCC (String title, String city, String country){
+  return Container(
+    height: 60,
+    decoration: BoxDecoration(
+      border: Border(
+        bottom: BorderSide(width: 2, color: IColors.blue),
+      ),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(title, style: TextStyle(fontWeight: FontWeight.w300),),
+        SizedBox(height: 3,),
+        Row(
+          children: <Widget>[
+            Icon(Icons.keyboard_arrow_down_rounded),
+            SizedBox(width: 10,),
+            Container(
+                height:30,
+                width: 250,
+                child: Text('$city, $country', style: TextStyle(fontSize: 16),))
+          ],
+        ),
+      ],
+    ),
+  );
+}
