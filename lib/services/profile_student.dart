@@ -21,7 +21,7 @@ class ProfileS{
   Future<void> getData() async {
     try{
       Response response = await get(
-        Uri.parse('https://interlabapi.herokuapp.com/api/profiles/1'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/users/1/profiles'),
         // Send authorization headers to the backend.
         headers: {
           HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
@@ -39,6 +39,9 @@ class ProfileS{
       phone = data['phone'];
       semester = data['semester'].toString();
       degree = data['degree'];
+      field = data['field'];
+      city = data['city'];
+      country = data['country'];
       //print(data['university']);
 
     }
@@ -50,23 +53,22 @@ class ProfileS{
   Future<void> updateData() async {
 
     final body ={
-      'role': 'student',
-      'firstName': 'Rafaela',
-      'lastName': 'Andrade',
-      'field': 'Technology',
-      'phone': '998776554',
-      'email': 'biti@hotmail.com',
-      'description': 'Estudiante de CC de la UPC, especializado en Data Science',
-      'country': 'Peru',
-      'city': 'Lima',
-      'university': 'Universidad Peruana de Ciencias Aplicadas',
-      'degree': 'Computer Science',
-      'semester': 8,
+      'firstName': firstName,
+      'lastName': lastName,
+      'field': field,
+      'phone': phone,
+      'email': email,
+      'description': description,
+      'country': country,
+      'city': city,
+      "university": university,
+      "degree": degree,
+      "semester": int.parse(semester)
     };
 
     try{
       Response response = await put(
-        Uri.parse('https://interlabapi.herokuapp.com/api/users/1/profiles/1'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/users/1/profiles'),
         // Send authorization headers to the backend.
         headers: <String, String>{
           'Content-Type': 'application/json',
