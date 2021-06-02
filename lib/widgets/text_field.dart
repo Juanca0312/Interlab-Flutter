@@ -8,14 +8,14 @@ class ITextField extends StatelessWidget {
       this.hint,
       this.controller,
       InputDecoration decoration,
-      this.validation,
+      this.showError,
       this.errorMessage,
       Color cursorColor})
       : super(key: key);
 
   final String name;
   final String hint;
-  final bool validation;
+  final bool showError;
   final String errorMessage;
   final TextEditingController controller;
 
@@ -40,7 +40,7 @@ class ITextField extends StatelessWidget {
         border: UnderlineInputBorder(
           borderSide: BorderSide(color: IColors.dark_purple, width: 2),
         ),
-        errorText: validation ? errorMessage : null,
+        errorText: showError ? errorMessage : null,
       ),
     );
   }

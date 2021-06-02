@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:interlab/models/authResponse.dart';
+import 'package:interlab/pages/company_dashboard.dart';
 import 'package:interlab/pages/register_student.dart';
 import 'package:interlab/pages/student_dashboard.dart';
 import 'package:interlab/widgets/banner.dart';
@@ -24,29 +26,39 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   AuthService authService = new AuthService();
-  String token = "";
-  bool authValidator = false;
+  String token = '';
+  bool showError = false;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   void _login() async {
-    String tokenResponse = await authService.login(
+    AuthResponse authResponse = await authService.login(
         usernameController.text, passwordController.text);
 
     setState(() {
-      token = tokenResponse;
+      //TODO : store token and id persistently
+      token = authResponse.token;
     });
 
     if (token != null) {
-      //TODO: validate user type
-      Navigate.to(context, StudentDashboard());
+      if (authResponse.role == 'student') {
+        Navigate.to(context, StudentDashboard());
+      } else {
+        Navigate.to(context, CompanyDashboard());
+      }
     } else {
-      authValidator = true;
+      setShowError(true);
     }
   }
 
+  void setShowError(bool value) {
+    setState(() {
+      showError = value;
+    });
+  }
+
   void _onChangePassword() {
-    authValidator = false;
+    setShowError(false);
   }
 
   @override
@@ -85,7 +97,7 @@ class _LoginState extends State<Login> {
                         controller: usernameController,
                         name: 'Nombre de usuario',
                         hint: 'student@interlab.com',
-                        validation: false,
+                        showError: false,
                       )),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
@@ -93,14 +105,13 @@ class _LoginState extends State<Login> {
                         controller: passwordController,
                         name: 'Contraseña',
                         hint: '••••••••••••••',
-                        validation: authValidator,
+                        showError: showError,
                         errorMessage:
                             'Nombre de usuario o contraseña incorrectos',
                       )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      //TODO: update fields to register student and company
                       ITextLink(
                           text: 'Crear cuenta',
                           event: () => Navigate.to(context, RegisterStudent())),
