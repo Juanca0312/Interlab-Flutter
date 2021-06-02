@@ -6,13 +6,13 @@ class IPasswordField extends StatefulWidget {
     this.name,
     this.hint,
     this.controller,
-    this.validation,
+    this.showError,
     this.errorMessage,
   });
 
   final String name;
   final String hint;
-  final bool validation;
+  final bool showError;
   final String errorMessage;
   final TextEditingController controller;
 
@@ -44,7 +44,7 @@ class _IPasswordFieldState extends State<IPasswordField> {
         border: UnderlineInputBorder(
           borderSide: BorderSide(color: IColors.dark_purple, width: 2),
         ),
-        errorText: widget.validation ? widget.errorMessage : null,
+        errorText: widget.showError ? widget.errorMessage : null,
         suffixIcon: new GestureDetector(
           onTap: () {
             setState(() {
