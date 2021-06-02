@@ -30,7 +30,8 @@ class _RegisterCompanyState extends State<RegisterCompany> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController retypePasswordController = TextEditingController();
-  bool authValidator = false;
+  bool showError = false;
+  String errorMessage = 'Nombre de usuario o contraseña incorrectos';
 
   void _register() async {
     if (passwordController.text == retypePasswordController.text) {
@@ -41,15 +42,28 @@ class _RegisterCompanyState extends State<RegisterCompany> {
       if (response.statusCode == 200) {
         Navigate.to(context, CompanyDashboard());
       } else {
-        authValidator = true;
+        setShowError(true);
       }
     } else {
-      authValidator = true;
+      setShowError(true);
+      setErrorMessage('Las contraseñas no coinciden');
     }
   }
 
+  void setShowError(bool value) {
+    setState(() {
+      showError = value;
+    });
+  }
+
+  void setErrorMessage(String value) {
+    setState(() {
+      errorMessage = value;
+    });
+  }
+
   void _onChangePassword() {
-    authValidator = false;
+    showError = false;
   }
 
   @override
@@ -90,23 +104,22 @@ class _RegisterCompanyState extends State<RegisterCompany> {
                           controller: usernameController,
                           name: 'Nombre de usuario',
                           hint: 'company@gmail.com',
-                          validation: false)),
+                          showError: false)),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: ITextField(
                           controller: nameController,
                           name: 'Nombres y Apellidos',
                           hint: 'Ángel Velásquez',
-                          validation: false)),
+                          showError: false)),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: IPasswordField(
                         controller: passwordController,
                         name: 'Contraseña',
                         hint: '••••••••••••••',
-                        validation: authValidator,
-                        errorMessage:
-                            'Nombre de usuario o contraseña incorrectos',
+                        showError: showError,
+                        errorMessage: errorMessage,
                       )),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
@@ -114,9 +127,8 @@ class _RegisterCompanyState extends State<RegisterCompany> {
                         controller: retypePasswordController,
                         name: 'Confirme su contraseña',
                         hint: '••••••••••••••',
-                        validation: authValidator,
-                        errorMessage:
-                            'Nombre de usuario o contraseña incorrectos',
+                        showError: showError,
+                        errorMessage: errorMessage,
                       )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

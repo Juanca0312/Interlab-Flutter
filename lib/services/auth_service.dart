@@ -1,23 +1,35 @@
 import 'dart:io';
-
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:interlab/models/authResponse.dart';
 
 class AuthService {
-  String token = "";
-
-  Future<String> login(username, password) async {
-    Response response = await post(
+  Future<AuthResponse> login(username, password) async {
+    final authResponse = AuthResponse();
+    Response tokenResponse = await post(
       Uri.parse('https://interlabapi.herokuapp.com/login'),
       body: jsonEncode(<String, String>{
         'username': username,
         'password': password,
       }),
     );
-    Map<String, String> headers = response.headers;
-    //TODO : store token persistently
-    token = headers["authorization"];
-    return token;
+    if (tokenResponse.statusCode == 200) {
+      Map<String, String> headers = tokenResponse.headers;
+      authResponse.token = headers['authorization'];
+      Response userResponse = await get(
+        Uri.parse(
+            'https://interlabapi.herokuapp.com/api/users/username/$username'),
+        headers: {
+          HttpHeaders.authorizationHeader: authResponse.token,
+        },
+      );
+      Map user = jsonDecode(userResponse.body);
+      authResponse.id = user['id'];
+      authResponse.role = user['role'];
+      authResponse.username = user['username'];
+      authResponse.password = user['password'];
+    }
+    return authResponse;
   }
 
   Future<Response> registerStudent(
@@ -48,20 +60,11 @@ class AuthService {
               'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
         },
         body: jsonEncode(<String, Object>{
-          "role": "student",
-          "firstName": names[0],
-          "lastName": names[1],
-          "field": "-",
-          "phone": "-",
-          "email": "-",
-          "description": "-",
-          "country": "-",
-          "city": "-",
-          "university": "-",
-          "degree": "-"
+          'role': 'student',
+          'firstName': names[0],
+          'lastName': names[1],
         }),
       );
-      print(profileResponse.statusCode);
     }
     return userResponse;
   }
@@ -97,17 +100,8 @@ class AuthService {
           "role": "company",
           "firstName": names[0],
           "lastName": names[1],
-          "field": "-",
-          "phone": "-",
-          "email": "-",
-          "description": "-",
-          "country": "-",
-          "city": "-",
-          "university": "-",
-          "degree": "-"
         }),
       );
-      print(profileResponse.statusCode);
     }
     return userResponse;
   }
