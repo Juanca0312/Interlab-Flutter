@@ -167,6 +167,7 @@ class _OffterState extends State<Offter> {
                                 buildSalary(),
                                 SizedBox(height: 10,),
                                 buildDetail(),
+                                SizedBox(height: 10,),
                                 ElevatedButton(
                                   style: ButtonStyle(),
                                   child: Text('Siguiente'),)
