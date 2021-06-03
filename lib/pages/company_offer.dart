@@ -57,14 +57,15 @@ class _OffterState extends State<Offter> {
 
 
 
-  final _formKey = GlobalKey<FormState>();
+
   Widget buildTitle() {
     return TextFormField(
-      controller: title,
-      decoration: InputDecoration(labelText: 'Título de la oferta'),
-      validator: (value) {
-        if (value == null) {
-          return 'Se requiere Titulo';
+      controller: name,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(labelText: 'Titulo de empresa:'),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Nombre es requerido';
         }
         return null;
       },
@@ -73,7 +74,7 @@ class _OffterState extends State<Offter> {
 
         });
       },
-    );
+    );;
 
   }
   Widget builName() {
@@ -112,24 +113,13 @@ class _OffterState extends State<Offter> {
       },
     );
   }
-// Widget buildDetail( ) {
-//   return TextFormField(
-//     controller: bio,
-//     maxLines: 3,
-//     decoration: InputDecoration(labelText: 'Detalles de la oferta:'),
-//     validator: (String value) {
-//       if (value.isEmpty) {
-//         return 'Se requiere Detalles ';
-//       }
-//       return null;
-//     },
-//     onChanged: (item){
-//       setState(() {
+   Widget buildDetail( ) {
+     return TextBox(
+       placeHolder: 'Detalles de la oferta:',
+       keyboardType: TextInputType.multiline,
 
-//       });
-//     },
-//   );
-// }
+     );
+   }
   String dropdownValue = 'UX Designer Intern';
   @override
 
@@ -172,11 +162,11 @@ class _OffterState extends State<Offter> {
                                 vertical: 10, horizontal: 20.0),
                             child: Column(
                               children: [
-                                Arrow(),
+                                buildTitle(),
                                 builName(),
                                 buildSalary(),
-                                TextBox(placeHolder:'Detalles de la oferta:', keyboardType : TextInputType.multiline),
                                 SizedBox(height: 10,),
+                                buildDetail(),
                                 ElevatedButton(
                                   style: ButtonStyle(),
                                   child: Text('Siguiente'),)
