@@ -32,7 +32,7 @@ class _OffterState extends State<Offter> {
       decoration: InputDecoration(
         filled: true,
         fillColor:  Colors.white,
-        labelText: 'Titulo de Empresa',
+        labelText: 'Titulo de la oferta',
         //border: new CustomBorderTextFieldSkin().getSkin(),
       ),
     //... underline: Container(
@@ -62,7 +62,7 @@ class _OffterState extends State<Offter> {
     return TextFormField(
       controller: name,
       keyboardType: TextInputType.number,
-      decoration: InputDecoration(labelText: 'Titulo de empresa:'),
+      decoration: InputDecoration(labelText: 'Titulo de la oferta:'),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Nombre es requerido';
