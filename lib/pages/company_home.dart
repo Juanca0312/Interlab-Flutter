@@ -1,9 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:interlab/widgets/app_bar_sup.dart';
-
-
 
 class CHome extends StatefulWidget {
 
@@ -25,7 +22,6 @@ class _CHomeState extends State<CHome> {
       body:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          NavBarSuperior(),
           Image.asset('assets/'
               'InterlabIcon.png'
             ,width: 30.0,)

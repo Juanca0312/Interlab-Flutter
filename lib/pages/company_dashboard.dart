@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:interlab/pages/company_history.dart';
+import 'package:interlab/pages/company_home.dart';
+import 'package:interlab/pages/company_offer.dart';
+import 'package:interlab/pages/company_profile.dart';
 import 'package:interlab/pages/student_profile.dart';
 import 'package:interlab/pages/student_home.dart';
 import 'package:interlab/widgets/interlab_recruiter_app_bar.dart';
@@ -21,10 +24,10 @@ class _CompanyDashboardState extends State<CompanyDashboard> {
   static double height;
 
   final tabs = [
-    Text('home'),
-    Text('profile'),
+    CHome(),
+    CProfile(),
     History(),
-    Text('search'),
+    Offter(),
   ];
 
 
