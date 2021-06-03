@@ -28,7 +28,7 @@ class ProfileS{
         },
       );
 
-      Map data = jsonDecode(response.body);
+      Map data = jsonDecode(utf8.decode(response.bodyBytes));
 
       firstName = data['firstName'];
       role = data['role'];
