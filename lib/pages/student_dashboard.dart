@@ -24,7 +24,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
     Home(),
     Profile(),
     History(),
-    Offter(),
+    Search(),
   ];
 
 
