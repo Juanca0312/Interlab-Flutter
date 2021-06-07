@@ -12,7 +12,7 @@ class InternshipService {
   Future<void> getData() async {
     try{
       Response response = await get(
-        Uri.parse('https://interlabapi.herokuapp.com/api/internships'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/activeInternships'),
         // Send authorization headers to the backend.
         headers: {
           HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
@@ -25,7 +25,9 @@ class InternshipService {
         company: data['content'][i]['company']['name'],
         location: data['content'][i]['location'],
         salary: data['content'][i]['salary'].toString(),
-        description: data['content'][i]['description'], status: i));
+        description: data['content'][i]['description'], status: i,
+        finishDate: data['content'][i]['finishingDate'],
+        startingDate: data['content'][i]['startingDate']));
 
       }
 
