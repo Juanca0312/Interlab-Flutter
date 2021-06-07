@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interlab/colors/interlab_gradients.dart';
 
 class Offer extends StatefulWidget {
   const Offer({Key key}) : super(key: key);
@@ -26,7 +27,7 @@ class _OfferState extends State<Offer> {
       child: Container(
           child: ClipRRect(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
               child: MediaQuery.removePadding(
                 removeTop: true,
                 context: context,
@@ -66,6 +67,38 @@ class _OfferState extends State<Offer> {
                           decoration:
                               InputDecoration(labelText: 'Salario mensual'),
                         ),
+                        SizedBox(height: 30,),
+                        InkWell(
+                          onTap: (){
+                            print(_titleC.text);
+                          },
+                          child: Center(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 60, vertical: 0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Icon(Icons.check_rounded, color: Colors.white,),
+                                  Text(
+                                    'Crear oferta',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              height: 50,
+                              width: 350,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40),
+                                gradient: IGradients.purple_pink,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20,),
                       ],
                     ),
                   ),
