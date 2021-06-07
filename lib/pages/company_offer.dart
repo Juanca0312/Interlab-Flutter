@@ -1,187 +1,92 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:interlab/widgets/textBox.dart';
 
-
-
-class Offter extends StatefulWidget {
-
-  const Offter();
+class Offer extends StatefulWidget {
+  const Offer({Key key}) : super(key: key);
 
   @override
-  _OffterState createState() => _OffterState();
+  _OfferState createState() => _OfferState();
 }
 
-class _OffterState extends State<Offter> {
-  TextEditingController title = TextEditingController();
-  TextEditingController name = TextEditingController();
-  TextEditingController salary = TextEditingController();
-  TextEditingController bio = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController email = TextEditingController();
+class _OfferState extends State<Offer> {
+  String title;
 
+  final TextEditingController _titleC = new TextEditingController();
+  final TextEditingController _descriptionC = new TextEditingController();
+  final TextEditingController _startingDateC = new TextEditingController();
+  final TextEditingController _finishingDateC = new TextEditingController();
+  final TextEditingController _locationC = new TextEditingController();
+  final TextEditingController _salaryC = new TextEditingController();
 
-  Widget Arrow() {
-    return DropdownButtonFormField<String>(
-
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_drop_down),
-      iconSize: 24,
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      decoration: InputDecoration(
-        filled: true,
-        fillColor:  Colors.white,
-        labelText: 'Titulo de la oferta',
-        //border: new CustomBorderTextFieldSkin().getSkin(),
-      ),
-    //... underline: Container(
-    //...   height: 2,
-    //...   color: Colors.deepPurpleAccent,
-    //... ),
-      //onChanged: (String? newValue) {
-      //  setState(() {
-      //    dropdownValue = newValue!;
-      //  });
-      //},
-      items: <String>['UX Designer Intern', 'Web']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
-  }
-
-
-
-
-
-  Widget buildTitle() {
-    return TextFormField(
-      controller: name,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(labelText: 'Titulo de la oferta:'),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Nombre es requerido';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );;
-
-  }
-  Widget builName() {
-    return TextFormField(
-      controller: name,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(labelText: 'Nombre de la empresa:'),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Nombre es requerido';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );
-  }
-  Widget buildSalary() {
-    return TextFormField(
-      controller: salary,
-      maxLines: 2,
-      decoration: InputDecoration(labelText: 'Salario '),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Agrege Salario';
-        }
-        return null;
-      },
-      onChanged: (item){
-        setState(() {
-
-        });
-      },
-    );
-  }
-   Widget buildDetail( ) {
-     return TextBox(
-       placeHolder: 'Detalles de la oferta:',
-       keyboardType: TextInputType.multiline,
-
-     );
-   }
-  String dropdownValue = 'UX Designer Intern';
-  @override
-
-
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SizedBox.expand(
-          child: Container(
-            //height:  MediaQuery.of(context).size.height * 0.85,
-            //margin: EdgeInsets.fromLTRB(0,0, 0, 10),
-            child: SingleChildScrollView(
-              child: Column(
-                //crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Container(
-                    //TODO: CARD GENERAL
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            spreadRadius: 0.0,
-                            offset:
-                            Offset(2.0, 2.0), // shadow direction: bottom right
-                          )
-                        ],
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    margin: EdgeInsets.fromLTRB(30, 10,  30, 10),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+      child: Container(
+          child: ClipRRect(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              child: MediaQuery.removePadding(
+                removeTop: true,
+                context: context,
+                child: ListView(children: [
+                  Form(
+                    key: _formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Form(
-                          //Form de Estudiante
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20.0),
-                            child: Column(
-                              children: [
-                                buildTitle(),
-                                builName(),
-                                buildSalary(),
-                                SizedBox(height: 10,),
-                                buildDetail(),
-                                SizedBox(height: 10,),
-                                ElevatedButton(
-                                  style: ButtonStyle(),
-                                  child: Text('Siguiente'),)
-                              ],
-                            ),
-                          ),
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          controller: _titleC,
+                          decoration:
+                              InputDecoration(labelText: 'Título de la oferta'),
+                        ),
+                        TextFormField(
+                          controller: _descriptionC,
+                          decoration: InputDecoration(
+                              labelText: 'Descripción de la oferta'),
+                        ),
+                        TextFormField(
+                          controller: _startingDateC,
+                          decoration:
+                              InputDecoration(labelText: 'Fecha de inicio'),
+                        ),
+                        TextFormField(
+                          controller: _finishingDateC,
+                          decoration: InputDecoration(labelText: 'Fecha de fin'),
+                        ),
+                        TextFormField(
+                          controller: _locationC,
+                          decoration:
+                              InputDecoration(labelText: 'Ubicación del trabajo'),
+                        ),
+                        TextFormField(
+                          controller: _salaryC,
+                          decoration:
+                              InputDecoration(labelText: 'Salario mensual'),
                         ),
                       ],
                     ),
                   ),
-                ],
+                ]),
               ),
             ),
+            //To clip the border radius, since Container does not clip inside elements
+            borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
-        ));
+          decoration: BoxDecoration(
+            color: Colors.grey[50],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(5, 5),
+              ),
+            ],
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          )),
+    );
   }
 }
