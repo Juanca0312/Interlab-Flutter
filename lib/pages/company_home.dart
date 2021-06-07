@@ -1,9 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
-
-import 'package:interlab/widgets/app_bar_sup.dart';
-
 
 
 class CHome extends StatefulWidget {
@@ -25,7 +21,6 @@ class _CHomeState extends State<CHome> {
       body: SizedBox.expand(
         child: Container(
           child: Column(
-
 
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
