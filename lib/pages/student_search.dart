@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/services/internship_service.dart';
 import 'package:interlab/models/internship.dart';
+import 'package:interlab/widgets/internship_details.dart';
 import 'package:interlab/widgets/loading.dart';
 
 class Search extends StatefulWidget {
@@ -75,20 +78,24 @@ class _SearchState extends State<Search> {
                             'Salario: S/. ${internships[i].salary}',
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                             ),
                       ),
-                      Container(
-                        child: Text(
-                            internships[i].description
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                            'Lugar: ${internships[i].location}'
-                        ),
-                      )
+                      InkWell(
+                        onTap: (){
+                          showAnimatedDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (BuildContext context) {
+                                return InternshipDetails(internships[i]);
+                              },
+                              animationType: DialogTransitionType.slideFromBottom,
+                              curve: Curves.fastOutSlowIn,
+                              duration: Duration(milliseconds: 500)
+                          );
+                        },
+                          child: Center(child: Text('+ ver más detalles', style: TextStyle(color: IColors.blue, fontWeight: FontWeight.w600),),))
                     ],
                   ),
                 ),
