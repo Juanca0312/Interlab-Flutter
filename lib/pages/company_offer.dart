@@ -26,13 +26,27 @@ class _OfferState extends State<Offer> {
 
   CompanyOfferService service=new CompanyOfferService();
 
+  final ScrollController _scrollController=new ScrollController();
+
   void createData() async {
     CompanyOffer companyOffer=new CompanyOffer(titleC.text, descriptionC.text, startingDateC.text, finishingDateC.text, locationC.text, salaryC.text);
     service.companyOffer=companyOffer;
     await service.createData();
   }
 
-  //TODO: field validations.
+  void resetFields(){
+    titleC.text='';
+    descriptionC.text='';
+    startingDateC.text='';
+    finishingDateC.text='';
+    locationC.text='';
+    salaryC.text='';
+    _scrollToTop();
+  }
+
+  void _scrollToTop(){
+    _scrollController.animateTo(_scrollController.position.minScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +58,14 @@ class _OfferState extends State<Offer> {
               removeTop: true,
               context: context,
               child: RawScrollbar(
+                controller: _scrollController,
                 isAlwaysShown: true,
                 radius: Radius.circular(10),
                 thumbColor: IColors.blue,
                 thickness: 4,
-                child: ListView(children: [
+                child: ListView(
+                  controller: _scrollController,
+                    children: [
                   Form(
                     key: _formKey,
                     child: Padding(
@@ -61,39 +78,50 @@ class _OfferState extends State<Offer> {
                             textController: titleC,
                             label: 'Título de la oferta',
                             hint: 'Ex. UI Design Intern',
+                            errorMessage: 'Ups! Ingrese un título para la oferta',
                           ),
                           ITextFormInput(
                             textController: descriptionC,
                             label: 'Descripción de la oferta',
                             hint: 'Ex. Posición, función...',
+                            errorMessage: 'Ingrese la descripción de la oferta!',
                           ),
                           ITextFormInput(
                             textController: startingDateC,
                             label: 'Fecha de inicio',
-                            hint: 'aaaa/mm/dd',
+                            hint: 'dd/mm/aaaa',
+                            errorMessage: 'Ingrese la fecha de inicio: dd/mm/aaaa',
                           ),
                           ITextFormInput(
                             textController: finishingDateC,
                             label: 'Fecha de fin',
-                            hint: 'aaaa/mm/dd',
+                            hint: 'dd/mm/aaaa',
+                            errorMessage: 'Ingrese la fecha de fin: dd/mm/aaaa',
                           ),
                           ITextFormInput(
                             textController: locationC,
                             label: 'Ubicación del trabajo',
                             hint: 'Ex. Surco, Lima',
+                            errorMessage: 'Ingrese la ubicación del trabajo',
                           ),
                           ITextFormInput(
                             textController: salaryC,
                             label: 'Salario mensual',
-                            //TODO: manage currency or change hint
                             hint: 'Ex. S/ 3000',
+                            errorMessage: 'Ingrese el salario mensual de la oferta',
                           ),
                           SizedBox(
                             height: 10,
                           ),
                           InkWell(
                             onTap: () {
-                              createData();
+                              if(_formKey.currentState.validate()){
+                                createData();
+                                resetFields();
+                              }
+                              else{
+                                _scrollToTop();
+                              }
                             },
                             child: Center(
                               child: Container(
