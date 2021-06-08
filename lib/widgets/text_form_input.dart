@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ITextFormInput extends StatelessWidget {
-  const ITextFormInput({Key key,this.textController, this.label, this.hint}): super(key: key);
+  const ITextFormInput({Key key,this.textController, this.label, this.hint, this.errorMessage}): super(key: key);
   final String label;
   final String hint;
+  final String errorMessage;
   final TextEditingController textController;
 
   @override
@@ -26,6 +27,12 @@ class ITextFormInput extends StatelessWidget {
         TextFormField(
           controller: textController,
           style: TextStyle(fontSize: 18),
+          validator: (value){
+            if(value==null || value.isEmpty){
+              return errorMessage;
+            }
+            return null;
+          },
           decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(15, -2, 15, 5),
               hintText: hint
