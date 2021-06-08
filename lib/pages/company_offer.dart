@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
+import 'package:interlab/widgets/text_form_input.dart';
 
 class Offer extends StatefulWidget {
   const Offer({Key key}) : super(key: key);
@@ -11,12 +13,12 @@ class Offer extends StatefulWidget {
 class _OfferState extends State<Offer> {
   String title;
 
-  final TextEditingController _titleC = new TextEditingController();
-  final TextEditingController _descriptionC = new TextEditingController();
-  final TextEditingController _startingDateC = new TextEditingController();
-  final TextEditingController _finishingDateC = new TextEditingController();
-  final TextEditingController _locationC = new TextEditingController();
-  final TextEditingController _salaryC = new TextEditingController();
+  final TextEditingController titleC = new TextEditingController();
+  final TextEditingController descriptionC = new TextEditingController();
+  final TextEditingController startingDateC = new TextEditingController();
+  final TextEditingController finishingDateC = new TextEditingController();
+  final TextEditingController locationC = new TextEditingController();
+  final TextEditingController salaryC = new TextEditingController();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -35,50 +37,58 @@ class _OfferState extends State<Offer> {
                   Form(
                     key: _formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        TextFormField(
-                          controller: _titleC,
-                          decoration:
-                              InputDecoration(labelText: 'Título de la oferta'),
+                        ITextFormInput(
+                          textController: titleC,
+                          label: 'Título de la oferta',
+                          hint: 'Ex. UI Design Intern',
                         ),
-                        TextFormField(
-                          controller: _descriptionC,
-                          decoration: InputDecoration(
-                              labelText: 'Descripción de la oferta'),
+                        ITextFormInput(
+                          textController: descriptionC,
+                          label: 'Descripción de la oferta',
+                          hint: '',
                         ),
-                        TextFormField(
-                          controller: _startingDateC,
-                          decoration:
-                              InputDecoration(labelText: 'Fecha de inicio'),
+                        ITextFormInput(
+                          textController: startingDateC,
+                          label: 'Fecha de inicio',
+                          hint: 'dd/mm/aaaa',
                         ),
-                        TextFormField(
-                          controller: _finishingDateC,
-                          decoration: InputDecoration(labelText: 'Fecha de fin'),
+                        ITextFormInput(
+                          textController: finishingDateC,
+                          label: 'Fecha de fin',
+                          hint: 'dd/mm/aaaa',
                         ),
-                        TextFormField(
-                          controller: _locationC,
-                          decoration:
-                              InputDecoration(labelText: 'Ubicación del trabajo'),
+                        ITextFormInput(
+                          textController: locationC,
+                          label: 'Ubicación del trabajo',
+                          hint: 'Ex. Surco - Lima',
                         ),
-                        TextFormField(
-                          controller: _salaryC,
-                          decoration:
-                              InputDecoration(labelText: 'Salario mensual'),
+                        ITextFormInput(
+                          textController: salaryC,
+                          label: 'Salario mensual',
+                          hint: 'Ex. S/ 3000',
                         ),
-                        SizedBox(height: 30,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         InkWell(
-                          onTap: (){
-                            print(_titleC.text);
+                          onTap: () {
+                            print(titleC.text);
                           },
                           child: Center(
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 60, vertical: 0),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 60, vertical: 0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(Icons.check_rounded, color: Colors.white,),
+                                  Icon(
+                                    Icons.check_rounded,
+                                    color: Colors.white,
+                                  ),
                                   Text(
                                     'Crear oferta',
                                     style: TextStyle(
@@ -98,7 +108,9 @@ class _OfferState extends State<Offer> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 30,
+                        ),
                       ],
                     ),
                   ),
