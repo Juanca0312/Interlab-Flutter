@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
+import 'package:interlab/models/company_offer.dart';
+import 'package:interlab/services/company_offer_service.dart';
 import 'package:interlab/widgets/text_form_input.dart';
 
 class Offer extends StatefulWidget {
@@ -21,6 +23,16 @@ class _OfferState extends State<Offer> {
   final TextEditingController salaryC = new TextEditingController();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  CompanyOfferService service=new CompanyOfferService();
+
+  void createData() async {
+    CompanyOffer companyOffer=new CompanyOffer(titleC.text, descriptionC.text, startingDateC.text, finishingDateC.text, locationC.text, salaryC.text);
+    service.companyOffer=companyOffer;
+    await service.createData();
+  }
+
+  //TODO: field validations.
 
   @override
   Widget build(BuildContext context) {
@@ -53,26 +65,27 @@ class _OfferState extends State<Offer> {
                           ITextFormInput(
                             textController: descriptionC,
                             label: 'Descripción de la oferta',
-                            hint: '',
+                            hint: 'Ex. Posición, función...',
                           ),
                           ITextFormInput(
                             textController: startingDateC,
                             label: 'Fecha de inicio',
-                            hint: 'dd/mm/aaaa',
+                            hint: 'aaaa/mm/dd',
                           ),
                           ITextFormInput(
                             textController: finishingDateC,
                             label: 'Fecha de fin',
-                            hint: 'dd/mm/aaaa',
+                            hint: 'aaaa/mm/dd',
                           ),
                           ITextFormInput(
                             textController: locationC,
                             label: 'Ubicación del trabajo',
-                            hint: 'Ex. Surco - Lima',
+                            hint: 'Ex. Surco, Lima',
                           ),
                           ITextFormInput(
                             textController: salaryC,
                             label: 'Salario mensual',
+                            //TODO: manage currency or change hint
                             hint: 'Ex. S/ 3000',
                           ),
                           SizedBox(
@@ -80,7 +93,7 @@ class _OfferState extends State<Offer> {
                           ),
                           InkWell(
                             onTap: () {
-                              print(titleC.text);
+                              createData();
                             },
                             child: Center(
                               child: Container(
