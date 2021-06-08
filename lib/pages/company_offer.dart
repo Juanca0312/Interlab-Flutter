@@ -35,6 +35,7 @@ class _OfferState extends State<Offer> {
                 isAlwaysShown: true,
                 radius: Radius.circular(10),
                 thumbColor: IColors.blue,
+                thickness: 4,
                 child: ListView(children: [
                   Form(
                     key: _formKey,
