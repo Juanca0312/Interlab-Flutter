@@ -27,7 +27,7 @@ class _CompanyDashboardState extends State<CompanyDashboard> {
     CHome(),
     CProfile(),
     History(),
-    Offter(),
+    Offer(),
   ];
 
 

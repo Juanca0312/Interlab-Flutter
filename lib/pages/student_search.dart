@@ -154,7 +154,48 @@ class CardNav extends StatelessWidget {
               ],
             ),
             FlatButton(
-              onPressed: (){},
+              onPressed: (){
+                showDialog(context: context,
+                    barrierDismissible: true,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Postular?'),
+                        content: Text('Estas a punto de postular a una pasantía'),
+                        actions: [
+                          InkWell(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: IColors.blue_accent),
+                              ),
+                              height: 30,
+                              width: 80,
+                              child: Center(child: Text('Cancelar', style: TextStyle(color: Colors.grey[800], fontSize: 16),)),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: (){
+                              //function de post Request
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: IColors.blue_accent,
+                                borderRadius: BorderRadius.circular(10)
+                              ),
+                              height: 30,
+                              width: 80,
+                              child: Center(child: Text('Postular', style: TextStyle(color: Colors.white, fontSize: 16),)),
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                );
+              },
               child: Text('Postular', style: TextStyle(
                   color: Colors.black,
                 decoration: TextDecoration.underline
