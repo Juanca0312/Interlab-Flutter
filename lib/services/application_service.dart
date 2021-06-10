@@ -11,7 +11,7 @@ class ApplicationService{
     try {
       Response response = await get(
         //change userId to 2, in order to showcase a user with to applications.
-        Uri.parse('https://interlabapi.herokuapp.com/api/users/1/internships'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/users/2/internships'),
         headers: {
           HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
         },
