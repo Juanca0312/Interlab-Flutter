@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/models/company_offer.dart';
 import 'package:interlab/services/company_offer_service.dart';
+import 'package:interlab/widgets/successful_create_company_offer.dart';
 import 'package:interlab/widgets/text_form_input.dart';
 
 class Offer extends StatefulWidget {
@@ -116,8 +120,27 @@ class _OfferState extends State<Offer> {
                           InkWell(
                             onTap: () {
                               if(_formKey.currentState.validate()){
+                                String tempTitle=titleC.text;
                                 createData();
                                 resetFields();
+                                _scrollToTop();
+                                Timer timer = Timer(Duration(milliseconds: 3000), (){
+                                  Navigator.of(context, rootNavigator: true).pop();
+                                });
+                                showAnimatedDialog(
+                                    context: context,
+                                    barrierDismissible: true,
+                                    builder: (BuildContext context) {
+                                      return SuccessfulCreateCompanyOffer(title: tempTitle,);
+                                    },
+                                    animationType: DialogTransitionType.slideFromBottom,
+                                    curve: Curves.fastOutSlowIn,
+                                    duration: Duration(milliseconds: 500)
+                                ).then((value){
+                                  // dispose the timer in case something else has triggered the dismiss.
+                                  timer?.cancel();
+                                  timer = null;
+                                });
                               }
                               else{
                                 _scrollToTop();
