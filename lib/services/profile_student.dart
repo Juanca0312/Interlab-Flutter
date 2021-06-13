@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:http/http.dart';
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class ProfileS{
   String firstName;
   String lastName;
@@ -17,11 +19,16 @@ class ProfileS{
   String semester;
 
   //Profile();
+  Future<int> _getIdFromSharedPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('id');
+  }
 
   Future<void> getData() async {
+    final userId = await _getIdFromSharedPref();
     try{
       Response response = await get(
-        Uri.parse('https://interlabapi.herokuapp.com/api/users/1/profiles'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/users/$userId/profiles'),
         // Send authorization headers to the backend.
         headers: {
           HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
@@ -52,6 +59,8 @@ class ProfileS{
   }
   Future<void> updateData() async {
 
+    final userId = await _getIdFromSharedPref();
+
     final body ={
       'firstName': firstName,
       'lastName': lastName,
@@ -68,7 +77,7 @@ class ProfileS{
 
     try{
       Response response = await put(
-        Uri.parse('https://interlabapi.herokuapp.com/api/users/1/profiles'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/users/$userId/profiles'),
         // Send authorization headers to the backend.
         headers: <String, String>{
           'Content-Type': 'application/json',
