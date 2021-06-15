@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:interlab/services/profile_student.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/colors/interlab_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Profile extends StatefulWidget {
@@ -19,6 +23,8 @@ class _ProfileState extends State<Profile> {
 
 
   ProfileS profile = ProfileS();
+
+  File profilePhoto;
   //variables
   String firstName ="";
   String role = "";
@@ -52,6 +58,26 @@ class _ProfileState extends State<Profile> {
 
   bool loading = true;
 
+  Future<void> setImageFileSharedPreferences(File image) async {
+    final prefs = await SharedPreferences.getInstance();
+    String path = image.path;
+    await prefs.setString('user_photo', path);
+  }
+
+  Future<String> _getImageFromSharedPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('user_photo');
+  }
+
+  Future<void> _startup() async {
+    final image = await _getImageFromSharedPref();
+    if(image != null){
+      setState(() {
+        profilePhoto = File(image);
+      });
+    }
+
+  }
 
   void assignData () {
     loading = false;
@@ -124,6 +150,7 @@ class _ProfileState extends State<Profile> {
     // TODO: implement initState
     super.initState();
     getData();
+    _startup();
   }
   @override
   Widget build(BuildContext context) {
@@ -166,7 +193,14 @@ class _ProfileState extends State<Profile> {
                             child: Row(
                               //mainAxisAlignment: MainA xisAlignment.spaceBetween,
                               children: [
-                                Image.asset('assets/user.png'),
+                                profilePhoto == null ? CircleAvatar(
+                                  backgroundImage: AssetImage('assets/user_default.jpg'),
+                                  radius: 25,
+                                )
+                                :  CircleAvatar(
+                                  backgroundImage: FileImage(profilePhoto),
+                                  radius: 25,
+                                ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
@@ -191,7 +225,7 @@ class _ProfileState extends State<Profile> {
                                         ))
                                   ],
                                 ),
-                                IconButton(icon: Icon(Icons.edit, color: Colors.grey[800],), onPressed: (){ //TODO: Edit Profile
+                                IconButton(icon: Icon(Icons.edit, color: Colors.grey[800],), onPressed: (){
                                   return _dialogEditProfile();
                                 })
                               ],
@@ -246,6 +280,17 @@ class _ProfileState extends State<Profile> {
         ));
   }
 
+  _imgFromGallery() async {
+    File image = await  ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50
+    );
+    setImageFileSharedPreferences(image);
+
+    setState(() {
+      profilePhoto = image;
+    });
+  }
+
 
   Future<Widget> _dialogEditProfile(){
     return showAnimatedDialog(
@@ -263,6 +308,30 @@ class _ProfileState extends State<Profile> {
                   children: [Column(
                     children: <Widget>[
                       Text('Edit Profile', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                      profilePhoto == null ? CircleAvatar(
+                        backgroundImage: AssetImage('assets/user_default.jpg'),
+                        radius: 35,
+                        child: IconButton(
+                          onPressed: (){
+                            _imgFromGallery();
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.edit),
+                          color: Colors.black,
+                        ),
+                      )
+                          :  CircleAvatar(
+                        backgroundImage: FileImage(profilePhoto),
+                        radius: 35,
+                        child: IconButton(
+                          onPressed: (){
+                            _imgFromGallery();
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.edit),
+                          color: Colors.black,
+                        ),
+                      ),
                       Form(
                         key: _formKey,
                         child: Column(
