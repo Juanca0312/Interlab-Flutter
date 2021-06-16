@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/pages/company_dashboard.dart';
-import 'package:interlab/pages/login.dart';
+import 'package:interlab/pages/init.dart';
 import 'package:interlab/pages/student_dashboard.dart';
 
 void main() {
@@ -11,13 +11,12 @@ void main() {
         fontFamily: 'Poppins',
         inputDecorationTheme: InputDecorationTheme(
           focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: IColors.purple),
+            borderSide: BorderSide(color: IColors.purple),
           ),
         )),
     initialRoute: '/',
     routes: {
-      '/': (context) => Login(),
-
+      '/': (context) => Init(),
       '/companyDashboard': (context) => CompanyDashboard(),
       '/studentDashboard': (context) => StudentDashboard(),
     },

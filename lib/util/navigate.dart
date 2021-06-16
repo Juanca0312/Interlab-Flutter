@@ -8,4 +8,11 @@ class Navigate {
       MaterialPageRoute(builder: (context) => page),
     );
   }
+
+  static void replace(context, page) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
 }

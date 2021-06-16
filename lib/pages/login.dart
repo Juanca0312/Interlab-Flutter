@@ -11,7 +11,6 @@ import 'package:interlab/widgets/register_info.dart';
 import 'package:interlab/widgets/text_field.dart';
 import 'package:interlab/widgets/text_link.dart';
 import 'package:interlab/widgets/top_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:interlab/util/navigate.dart';
 import 'package:interlab/services/auth_service.dart';
@@ -28,28 +27,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   AuthService authService = new AuthService();
   String token = '';
-
-  Future<String> _getTokenFromSharedPref() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
-  }
-
-  Future<String> _getRoleFromSharedPref() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('role');
-  }
-
-  Future<void> _startup() async {
-    final authToken = await _getTokenFromSharedPref();
-    final role = await _getRoleFromSharedPref();
-    if (authToken != null) {
-      if (role == 'student') {
-        Navigate.to(context, StudentDashboard());
-      } else {
-        Navigate.to(context, CompanyDashboard());
-      }
-    }
-  }
 
   bool showError = false;
   TextEditingController usernameController = TextEditingController();
@@ -87,7 +64,6 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    _startup();
     passwordController.addListener(_onChangePassword);
   }
 
