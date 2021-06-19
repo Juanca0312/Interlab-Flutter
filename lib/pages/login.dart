@@ -42,9 +42,9 @@ class _LoginState extends State<Login> {
 
     if (token != null) {
       if (authResponse.role == 'student') {
-        Navigate.to(context, StudentDashboard());
+        Navigate.replace(context, StudentDashboard());
       } else {
-        Navigate.to(context, CompanyDashboard());
+        Navigate.replace(context, CompanyDashboard());
       }
     } else {
       setShowError(true);
