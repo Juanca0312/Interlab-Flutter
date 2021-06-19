@@ -40,7 +40,7 @@ class _RegisterCompanyState extends State<RegisterCompany> {
           passwordController.text,
           nameController.text);
       if (response.statusCode == 200) {
-        Navigate.to(context, CompanyDashboard());
+        Navigate.replace(context, CompanyDashboard());
       } else {
         setShowError(true);
       }

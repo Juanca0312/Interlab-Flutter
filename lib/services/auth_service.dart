@@ -13,6 +13,11 @@ class AuthService {
     await prefs.setString('role', role);
   }
 
+  void logout() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.clear();
+  }
+
   Future<AuthResponse> login(username, password) async {
     final authResponse = AuthResponse();
     Response tokenResponse = await post(
