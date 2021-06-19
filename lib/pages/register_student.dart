@@ -40,7 +40,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
           passwordController.text,
           nameController.text);
       if (response.statusCode == 200) {
-        Navigate.to(context, StudentDashboard());
+        Navigate.replace(context, StudentDashboard());
       } else {
         setShowError(true);
       }

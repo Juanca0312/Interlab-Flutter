@@ -15,4 +15,9 @@ class Navigate {
       MaterialPageRoute(builder: (context) => page),
     );
   }
+
+  static void removeUntil(context) {
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/', (Route<dynamic> route) => false);
+  }
 }
