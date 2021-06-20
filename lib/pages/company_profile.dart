@@ -1,4 +1,4 @@
-import 'dart:io';
+ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
@@ -93,6 +93,7 @@ class _CProfile extends State<CProfile> {
     _sectorC.text = sector;
     _descriptionC.text = description;
     _emailC.text = email;
+    _phoneC.text = phone;
     _addressC.text = address;
     _cityC.text = city;
     _countryC.text = country;
@@ -185,44 +186,49 @@ class _CProfile extends State<CProfile> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 10.0),
                             child: Row(
-                              //mainAxisAlignment: MainA xisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                profilePhoto == null
-                                    ? CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      'assets/user_default.jpg'),
-                                  radius: 25,
-                                )
-                                    : CircleAvatar(
-                                  backgroundImage:
-                                  FileImage(profilePhoto),
-                                  radius: 25,
-                                ),
-                                Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: 0, horizontal: 10),
-                                        //color: Colors.lightGreenAccent,
-                                        child: Text(
-                                          '$nameC ',
-                                          style: TextStyle(fontSize: 20),
-                                        )),
-                                    Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: 0, horizontal: 10),
-                                        //color: Colors.pink,
-                                        child: Text(
-                                          'Reclutador',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ))
+                                Row(
+                                  children: [
+                                    profilePhoto == null
+                                        ? CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                          'assets/user_default.jpg'),
+                                      radius: 25,
+                                    )
+                                        : CircleAvatar(
+                                      backgroundImage:
+                                      FileImage(profilePhoto),
+                                      radius: 25,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 0, horizontal: 10),
+                                            //color: Colors.lightGreenAccent,
+                                            child: Text(
+                                              '$nameC ',
+                                              style: TextStyle(fontSize: 20),
+                                            )),
+                                        Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 0, horizontal: 10),
+                                            //color: Colors.pink,
+                                            child: Text(
+                                              'Reclutador',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ))
+                                      ],
+                                    ),
                                   ],
                                 ),
+
                                 IconButton(
                                     icon: Icon(
                                       Icons.edit,
@@ -290,6 +296,7 @@ class _CProfile extends State<CProfile> {
                               ),
                               Container(
                                 height: 90,
+                                width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: IColors.blue, width: 2),
@@ -444,7 +451,9 @@ class _CProfile extends State<CProfile> {
                             },
                             decoration: InputDecoration(labelText: 'Pais: '),
                           ),
-
+                          SizedBox(
+                            height: 10,
+                          ),
                           InkWell(
                             onTap: () {
                               if (_formKey.currentState.validate()) {
@@ -457,6 +466,7 @@ class _CProfile extends State<CProfile> {
                             child: Container(
                               width: 100,
                               height: 35,
+                              padding: EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: IColors.blue),
