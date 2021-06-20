@@ -4,11 +4,7 @@ import 'package:interlab/pages/company_history.dart';
 import 'package:interlab/pages/company_home.dart';
 import 'package:interlab/pages/company_offer.dart';
 import 'package:interlab/pages/company_profile.dart';
-import 'package:interlab/pages/student_profile.dart';
-import 'package:interlab/pages/student_home.dart';
 import 'package:interlab/widgets/interlab_recruiter_app_bar.dart';
-import 'package:interlab/widgets/interlab_student_app_bar.dart';
-import 'package:interlab/pages/student_search.dart';
 
 
 class CompanyDashboard extends StatefulWidget {
@@ -24,7 +20,7 @@ class _CompanyDashboardState extends State<CompanyDashboard> {
   static double height;
 
   final tabs = [
-    CHome(),
+    CompanyHome(),
     CProfile(),
     History(),
     Offer(),
