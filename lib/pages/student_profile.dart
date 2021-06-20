@@ -236,7 +236,7 @@ class _ProfileState extends State<Profile> {
                                         }),
                                     IconButton(
                                         icon: Icon(
-                                          Icons.logout_rounded,
+                                          Icons.logout,
                                           color: Colors.grey[800],
                                         ),
                                         onPressed: () {
