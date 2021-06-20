@@ -17,7 +17,7 @@ class ProfileC {
   Future<void> getData() async {
     try {
       Response response = await get(
-        Uri.parse('https://interlabapi.herokuapp.com/api/company/1'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/companies/1'),
         // Send authorization headers to the backend.
         headers: {
           HttpHeaders
@@ -36,8 +36,6 @@ class ProfileC {
       country = data['country'];
       city = data['city'];
 
-
-
     }
     catch (e) {
       print('caught error $e');
@@ -47,18 +45,19 @@ class ProfileC {
   Future<void> updateData() async {
 
     final body ={
-      'Name': nameC,
-      'Description': description,
-      'Sector': sector,
+      'name': nameC,
+      'description': description,
+      'sector': sector,
       'email': email,
-      'Address': address,
+      'phone':phone,
+      'address': address,
       'country': country,
       'city': city,
     };
 
     try{
       Response response = await put(
-        Uri.parse('https://interlabapi.herokuapp.com/api/company/1'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/companies/1'),
         // Send authorization headers to the backend.
         headers: <String, String>{
           'Content-Type': 'application/json',
