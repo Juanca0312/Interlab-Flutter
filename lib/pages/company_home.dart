@@ -1,255 +1,144 @@
 import 'package:flutter/material.dart';
-import 'package:interlab/colors/interlab_gradients.dart';
-
-
-class CHome extends StatefulWidget {
-
-
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:interlab/models/application.dart';
+import 'package:basic_utils/basic_utils.dart';
+import 'package:interlab/pages/company_offer_details.dart';
+import 'package:interlab/pages/student_application_details.dart';
+import 'package:interlab/services/offer_service.dart';
+import 'package:interlab/widgets/loading.dart';
+import 'package:interlab/widgets/company_home_empty.dart';
+class CompanyHome extends StatefulWidget {
+  const CompanyHome();
 
   @override
-  _CHomeState  createState() => _CHomeState();
+  _CompanyHomeState createState() => _CompanyHomeState();
 }
 
-class _CHomeState extends State<CHome> {
+class _CompanyHomeState extends State<CompanyHome> {
+  OfferService offerService=new OfferService();
+  List<Application> offers=[];
+  bool loading=true;
 
+  void getData() async {
+    await offerService.getData();
+    assignData();
+  }
+  void assignData(){
+    loading=false;
+    setState(() {
+      offers=offerService.offerList;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: SizedBox.expand(
-        child: Container(
-          child: Column(
-
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-
-              Container(
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 2.0,
-                        spreadRadius: 0.0,
-                        offset:
-                        Offset(2.0, 2.0), // shadow direction: bottom right
-                      )
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
-                margin: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                child: Column(
-
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: IGradients.lightblue_blue,
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text('Diseñador Web:'),
-                              Text('Mas Info'),
-
-
-                            ],
-                          ),
-
-
-                        ),
-
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Text('Salario de 5000 a 6000 dolares / mes.'),
-                          Text(
-                              'Descripcion: Lore Ipsum is a simply dummy text of the printing and typesetting industry.'
-                                  ' Lorem Ipsum has been the industry'),
-                          Text('Empresa : Diseño Web (1 año'),
-                          Text('Educacion: 4to año de universidad')
-                        ],
-                      )
-
-
-                    ]
-
-                ),
-              )
-            ],
-
-
-          ),
-
-
-        ),
-
-
-
-
-      ),
-
-
+    return loading ? Loading() :
+    offers.isEmpty ? CompanyHomeEmpty() : ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: offers.length,
+        itemBuilder: (BuildContext context, int i) {
+          return _buildRow(offers[i]);
+        }
     );
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: SizedBox.expand(
-        child: Container(
-          child: Column(
+  }
 
-
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-
-              Container(
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 2.0,
-                        spreadRadius: 0.0,
-                        offset:
-                        Offset(2.0, 2.0), // shadow direction: bottom right
-                      )
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
-                margin: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                child: Column(
-
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: IGradients.lightblue_blue,
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text('Diseñador Web:'),
-                              Text('Mas Info'),
-
-
-                            ],
-                          ),
-
-
-                        ),
-
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Text('Salario de 5000 a 6000 dolares / mes.'),
-                          Text(
-                              'Descripcion: Lore Ipsum is a simply dummy text of the printing and typesetting industry.'
-                                  ' Lorem Ipsum has been the industry'),
-                          Text('Empresa : Diseño Web (1 año'),
-                          Text('Educacion: 4to año de universidad')
-                        ],
-                      )
-
-
-                    ]
-
-                ),
-              )
-            ],
-
-
+  Widget _buildRow(Application offer){
+    return GestureDetector(
+      onTap: () =>
+          showAnimatedDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (BuildContext context) {
+                return CompanyOfferDetails(offer);
+              },
+              animationType: DialogTransitionType.slideFromBottom,
+              curve: Curves.fastOutSlowIn,
+              duration: Duration(milliseconds: 500)
           ),
-
-
-        ),
-
-
-
-
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 21),
+        child: offerWidget(offer),
       ),
-
-
     );
-
-    Widget Lista2() {
-      return Row(
-        children: <Widget>[
-          Text('Diseñador Web'),
-          Text('Mas info'),
-
-        ],
-      );
-    }
-
-
-    Widget Lista3() {
-      return Row(
-        children: <Widget>[
-          Text('Diseñador Web'),
-          Text('Mas info'),
-
-        ],
-      );
-    }
-    Widget Descripcion() {
-      return Column(
-
-        crossAxisAlignment: CrossAxisAlignment.start,
+  }
+  Widget offerWidget(Application offer){
+    return Container(
+      padding: EdgeInsets.only(left: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Salario: 5000 dolares a 6000 dolares /mes ', style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Colors.black38,
-          ),),
-          Text(
-            'Lore Ipsum is a simply dummy text of the printing and typesetting industry.'
-                ' Lorem Ipsum has been the industry', style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Colors.black38,
-          ),),
-          Text('Empresa: Interlab', style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Colors.black38,
-          ),),
-          Text('Educacion: UPC', style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Colors.black38,
-          ),)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                offer.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
+                ),
+              ),
+              Text(
+                '${offer.company} - ${offer.location}',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black54,
+                ),
+              ),
+            ],
+          ),
+          Container(
+            width: 120,
+            height: 60,
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.only(right: 17),
+            child: Text(
+              StringUtils.capitalize(offer.status),
+              style: TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.w700,
+                fontStyle: FontStyle.italic,
+                color: Colors.white,
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: Colors.grey[900],
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+              ),
+            ),
+          ),
         ],
-      );
-    }
-    Widget Descripcion2() {
-      return Column(
-
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text('Salario: 5000 dolares a 6000 dolares /mes ', style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Colors.black38,
-          ),),
-          Text('Detalle de trabajador ', style: TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w400,
-            color: Colors.lightBlueAccent,
-          ),)
-        ],
-      );
-    }
+      ),
+      decoration: BoxDecoration(
+          gradient: offer.bgGradient,
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(.3),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(5, 5),
+            ),
+          ]
+      ),
+    );
   }
 }
-
