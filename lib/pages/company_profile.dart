@@ -73,6 +73,7 @@ class _CProfile extends State<CProfile> {
     }
   }
 
+
   void assignData() {
     loading = false;
     nameC = profile.nameC;
@@ -227,24 +228,31 @@ class _CProfile extends State<CProfile> {
                                       ],
                                     ),
                                   ],
+
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.edit,
+                                          color: Colors.grey[800],
+                                        ),
+                                        onPressed: () {
+                                          return _dialogEditProfile();
+                                        }),
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.logout,
+                                          color: Colors.grey[800],
+                                        ),
+                                        onPressed: () {
+                                          return onPressLogout();
+                                        }),
+
+                                  ],
                                 ),
 
-                                IconButton(
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color: Colors.grey[800],
-                                    ),
-                                    onPressed: () {
-                                      return _dialogEditProfile();
-                                    }),
-                                /*IconButton(
-                                    icon: Icon(
-                                      Icons.logout_rounded,
-                                      color: Colors.grey[800],
-                                    ),
-                                    onPressed: () {
-                                      return onPressLogout();
-                                    }),*/
+
                               ],
                             ),
                           ),
