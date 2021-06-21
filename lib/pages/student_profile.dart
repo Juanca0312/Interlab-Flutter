@@ -188,60 +188,69 @@ class _ProfileState extends State<Profile> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10.0),
                                 child: Row(
-                                  //mainAxisAlignment: MainA xisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    profilePhoto == null
-                                        ? CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                'assets/user_default.jpg'),
-                                            radius: 25,
-                                          )
-                                        : CircleAvatar(
-                                            backgroundImage:
-                                                FileImage(profilePhoto),
-                                            radius: 25,
-                                          ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Container(
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 0, horizontal: 10),
-                                            //color: Colors.lightGreenAccent,
-                                            child: Text(
-                                              '$firstName $lastName',
-                                              style: TextStyle(fontSize: 20),
-                                            )),
-                                        Container(
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 0, horizontal: 10),
-                                            //color: Colors.pink,
-                                            child: Text(
-                                              'Estudiante',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ))
+                                    Row(
+                                      children: [
+                                        profilePhoto == null
+                                            ? CircleAvatar(
+                                          backgroundImage: AssetImage(
+                                              'assets/user_default.jpg'),
+                                          radius: 23,
+                                        )
+                                            : CircleAvatar(
+                                          backgroundImage:
+                                          FileImage(profilePhoto),
+                                          radius: 25,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 0, horizontal: 10),
+                                                //color: Colors.lightGreenAccent,
+                                                child: Text(
+                                                  '$firstName $lastName',
+                                                  style: TextStyle(fontSize: 20),
+                                                )),
+                                            Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 0, horizontal: 10),
+                                                //color: Colors.pink,
+                                                child: Text(
+                                                  'Estudiante',
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                ))
+                                          ],
+                                        ),
                                       ],
                                     ),
-                                    IconButton(
-                                        icon: Icon(
-                                          Icons.edit,
-                                          color: Colors.grey[800],
-                                        ),
-                                        onPressed: () {
-                                          return _dialogEditProfile();
-                                        }),
-                                    IconButton(
-                                        icon: Icon(
-                                          Icons.logout,
-                                          color: Colors.grey[800],
-                                        ),
-                                        onPressed: () {
-                                          return onPressLogout();
-                                        }),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                            icon: Icon(
+                                              Icons.edit,
+                                              color: Colors.grey[800],
+                                            ),
+                                            onPressed: () {
+                                              return _dialogEditProfile();
+                                            }),
+                                        IconButton(
+                                            icon: Icon(
+                                              Icons.logout,
+                                              color: Colors.grey[800],
+                                            ),
+                                            onPressed: () {
+                                              return onPressLogout();
+                                            }),
+                                      ],
+                                    ),
+
                                   ],
                                 ),
                               ),
