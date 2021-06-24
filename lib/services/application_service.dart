@@ -13,7 +13,6 @@ class ApplicationService{
     final prefs = await SharedPreferences.getInstance();
     final userId = prefs.getInt('id');
     final authToken = prefs.getString('authToken');
-    print(userId);
     try {
       Response response = await get(
         //change userId to 2, in order to showcase a user with to applications.
