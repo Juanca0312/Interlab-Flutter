@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 
 class Application {
