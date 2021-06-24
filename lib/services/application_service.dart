@@ -12,13 +12,14 @@ class ApplicationService{
   Future<void> getData() async {
     final prefs = await SharedPreferences.getInstance();
     final userId = prefs.getInt('id');
+    final authToken = prefs.getString('authToken');
     print(userId);
     try {
       Response response = await get(
         //change userId to 2, in order to showcase a user with to applications.
         Uri.parse('https://interlabapi.herokuapp.com/api/users/$userId/requests'),
         headers: {
-          HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
+          HttpHeaders.authorizationHeader: authToken,
         },
       );
       Map data = jsonDecode(utf8.decode(response.bodyBytes));
