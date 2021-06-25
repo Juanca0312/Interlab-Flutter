@@ -81,7 +81,7 @@ class _CompanyDashboardState extends State<CompanyDashboard> {
 
 
           DotNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.add_circle_outline_rounded),
               selectedColor: Colors.grey[900],
               unselectedColor: Colors.grey[500]
 
