@@ -26,6 +26,7 @@ class InternshipHistoryService {
       for (var i = 0; i < data['numberOfElements']; i++) {
         applicationList.add(
           new Application(
+              data['content'][i]['id'],
               data['content'][i]['jobTitle'],
               data['content'][i]['c_name'],
               data['content'][i]['c_email'],

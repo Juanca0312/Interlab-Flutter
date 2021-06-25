@@ -42,7 +42,7 @@ class InternshipService {
     final prefs = await SharedPreferences.getInstance();
     final authToken = prefs.getString('authToken');
     final userId = prefs.getInt('id');
-    final body = {'state': 'Pending'};
+    final body = {'state': 'pending'};
     print(
         'https://interlabapi.herokuapp.com/api/users/$userId/internships/$internshipId/request');
     try {
