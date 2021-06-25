@@ -119,6 +119,7 @@ class _OfferState extends State<Offer> {
                             textController: salaryC,
                             label: 'Salario mensual',
                             hint: 'Ex. S/ 3000',
+                            numeric: true,
                             errorMessage: 'Ingrese el salario mensual de la oferta',
                           ),
                           SizedBox(
