@@ -3,6 +3,7 @@ import 'package:interlab/colors/interlab_gradients.dart';
 import 'dart:math';
 
 class Internship{
+  int id;
   String title;
   String company;
   String location;
@@ -13,7 +14,7 @@ class Internship{
   int status;
   LinearGradient bgGradient;
   var rng = new Random();
-  Internship({this.title, this.company, this.location, this.salary, this.description, this.status, this.finishDate, this.startingDate}){
+  Internship({this.id, this.title, this.company, this.location, this.salary, this.description, this.status, this.finishDate, this.startingDate}){
     status = status % 4;
     switch (status){
       case 0: bgGradient=IGradients.green_lightblue; break;
