@@ -21,6 +21,8 @@ class Application {
       case 'rejected': bgGradient=IGradients.yellow_orange; break;
       case 'Pending':
       case 'pending': bgGradient=IGradients.purple_pink; break;
+      case 'Ended':
+      case 'ended': bgGradient=IGradients.lightblue_blue; break;
     }
   }
 }
