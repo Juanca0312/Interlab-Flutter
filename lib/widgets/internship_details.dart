@@ -62,22 +62,35 @@ class _InternshipDetailsState extends State<InternshipDetails> {
                 gradient: widget.internship.bgGradient,
                 borderRadius: BorderRadius.all(
                   Radius.circular(15),
-                )
-            ),
+                )),
           ),
           Expanded(
             child: Column(
               children: [
-                SizedBox(height: 15,),
-                TitleAndContentWithIcon("Descripción", widget.internship.description, Icons.description, IColors.blue),
-                TitleAndContentWithIcon("Salario", 'S/ ${widget.internship.salary}', Icons.payments, IColors.pink),
-                TitleAndContentWithIcon("Fecha de Contrato", '${widget.internship.startingDate} - ${widget.internship.finishDate}', Icons.payments, IColors.orange),
+                SizedBox(
+                  height: 15,
+                ),
+                TitleAndContentWithIcon(
+                    "Descripción",
+                    widget.internship.description,
+                    Icons.description,
+                    IColors.blue),
+                TitleAndContentWithIcon(
+                    "Salario",
+                    'S/ ${widget.internship.salary}',
+                    Icons.payments,
+                    IColors.pink),
+                TitleAndContentWithIcon(
+                    "Fecha de Contrato",
+                    '${widget.internship.startingDate} - ${widget.internship.finishDate}',
+                    Icons.payments,
+                    IColors.orange),
                 Expanded(
                     child: Container(
                         padding: EdgeInsets.symmetric(vertical: 10),
-                        child: UnDraw(illustration: UnDrawIllustration.feeling_proud, color: IColors.lightblue)
-                    )
-                ),
+                        child: UnDraw(
+                            illustration: UnDrawIllustration.feeling_proud,
+                            color: IColors.lightblue))),
               ],
             ),
           )

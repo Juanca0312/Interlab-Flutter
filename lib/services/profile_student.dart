@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:http/http.dart';
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileS{
@@ -49,8 +48,6 @@ class ProfileS{
       field = data['field'];
       city = data['city'];
       country = data['country'];
-      //print(data['university']);
-
     }
     catch(e){
       print('caught error $e');

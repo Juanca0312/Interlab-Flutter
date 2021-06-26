@@ -2,7 +2,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class InterlabStudentAppBar extends StatefulWidget implements PreferredSizeWidget  {
+class InterlabStudentAppBar extends StatefulWidget
+    implements PreferredSizeWidget {
   final int index;
   final double height;
 
@@ -48,31 +49,27 @@ class _InterlabStudentAppBarState extends State<InterlabStudentAppBar> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                    '${titles[widget.index]}',
+                Text('${titles[widget.index]}',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
-                    )
-                ),
+                    )),
                 Text(
-                    '${subtitles[widget.index]}',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300,
-                      decoration: TextDecoration.underline,
-                      color: Colors.black87,
-                    ),
+                  '${subtitles[widget.index]}',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w300,
+                    decoration: TextDecoration.underline,
+                    color: Colors.black87,
+                  ),
                 ),
               ],
             ),
             SizedBox(
               width: 50,
               height: 50,
-              child: Image.asset(
-                  'assets/InterlabIcon.png'
-              ),
+              child: Image.asset('assets/InterlabIcon.png'),
             )
           ],
         ),

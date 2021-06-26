@@ -11,7 +11,6 @@ class StudentHistoryEmpty extends StatefulWidget {
 }
 
 class _StudentHistoryEmptyState extends State<StudentHistoryEmpty> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,59 +18,49 @@ class _StudentHistoryEmptyState extends State<StudentHistoryEmpty> {
       child: Container(
         padding: EdgeInsets.all(8.0),
         child: Center(
-          child: Column(
-            children: [
-              Expanded(
+            child: Column(
+          children: [
+            Expanded(
                 flex: 15,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                  child: UnDraw(illustration: UnDrawIllustration.fitting_piece, color: IColors.lightblue),
-                )
-              ),
-              Expanded(
+                  child: UnDraw(
+                      illustration: UnDrawIllustration.fitting_piece,
+                      color: IColors.lightblue),
+                )),
+            Expanded(
                 flex: 4,
                 child: Center(
-                  child: Text(
-                    'No hay aplicaciones\nhistóricas!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20
-                    ),
-                  )
-                )
-              ),
-              Expanded(
+                    child: Text(
+                  'No hay aplicaciones\nhistóricas!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                ))),
+            Expanded(
                 flex: 5,
                 child: Center(
-                  child: Text(
-                    'Parece que no tienes aplicaciones\nen tu historial, empieza buscando\nuna pasantía a tu medida.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
+                    child: Text(
+                  'Parece que no tienes aplicaciones\nen tu historial, empieza buscando\nuna pasantía a tu medida.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
                       color: Colors.grey[700],
                       fontWeight: FontWeight.w300,
-                      fontSize: 13
-                    ),
-                  )
-                )
-              ),
-            ],
-          )
-        ),
+                      fontSize: 13),
+                ))),
+          ],
+        )),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(.3),
-              spreadRadius: 3,
-              blurRadius: 8,
-              offset: Offset(5, 5),
-            ),
-          ]
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(.3),
+                spreadRadius: 3,
+                blurRadius: 8,
+                offset: Offset(5, 5),
+              ),
+            ]),
       ),
     );
   }
 }
-

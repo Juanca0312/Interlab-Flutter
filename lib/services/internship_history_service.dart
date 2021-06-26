@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:basic_utils/basic_utils.dart';
 import 'package:http/http.dart';
 import 'package:interlab/models/application.dart';
@@ -16,7 +15,7 @@ class InternshipHistoryService {
       Response response = await get(
         //change userId to 2, in order to showcase a user with to applications.
         Uri.parse(
-            'https://interlabapi.herokuapp.com/api/users/$userId/endedRequest'),
+            'https://interlabapi.herokuapp.com/api/users/$userId/requests'),
         headers: {
           HttpHeaders.authorizationHeader:
               'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
