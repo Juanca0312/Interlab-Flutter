@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:basic_utils/basic_utils.dart';
 import 'package:http/http.dart';
 import 'package:interlab/models/application.dart';
@@ -44,7 +43,6 @@ class OfferService {
       print('caught error $e');
     }
   }
-
 
   Future<void> getActiveInternships() async {
     try {

@@ -15,7 +15,9 @@ class SuccessfulCreateCompanyOffer extends StatelessWidget {
       insetPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 100),
       child: Column(
         children: [
-          SizedBox(height: 60,),
+          SizedBox(
+            height: 60,
+          ),
           Expanded(
               flex: 15,
               child: Padding(
@@ -24,7 +26,9 @@ class SuccessfulCreateCompanyOffer extends StatelessWidget {
                     illustration: UnDrawIllustration.order_confirmed,
                     color: IColors.lightblue),
               )),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Expanded(
               flex: 3,
               child: Center(
@@ -58,7 +62,9 @@ class SuccessfulCreateCompanyOffer extends StatelessWidget {
                     fontWeight: FontWeight.w300,
                     fontSize: 15),
               ))),
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
         ],
       ),
     );
