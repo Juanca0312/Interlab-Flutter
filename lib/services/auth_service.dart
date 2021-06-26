@@ -13,6 +13,15 @@ class AuthService {
     await prefs.setString('role', role);
   }
 
+  Future<void> setCredentialsSharedPreferencesCompany(
+      String token, int id, int companyId, String role) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('authToken', token);
+    await prefs.setInt('id', id);
+    await prefs.setInt('companyId', companyId);
+    await prefs.setString('role', role);
+  }
+
   void logout() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.clear();
@@ -42,9 +51,23 @@ class AuthService {
       authResponse.role = user['role'];
       authResponse.username = user['username'];
       authResponse.password = user['password'];
-
-      setCredentialsSharedPreferences(
-          authResponse.token, authResponse.id, authResponse.role);
+      if (authResponse.role == 'company') {
+        Response companyResponse = await get(
+          Uri.parse(
+              'https://interlabapi.herokuapp.com/api/users/${authResponse.id}/companies'),
+          headers: {
+            HttpHeaders.authorizationHeader: authResponse.token,
+          },
+        );
+        Map company = jsonDecode(companyResponse.body);
+        int companyId = int.parse((company['content'][0]['id']).toString());
+        print('LOS IDS ${authResponse.id}, $companyId');
+        setCredentialsSharedPreferencesCompany(
+            authResponse.token, authResponse.id, companyId, authResponse.role);
+      } else {
+        setCredentialsSharedPreferences(
+            authResponse.token, authResponse.id, authResponse.role);
+      }
     }
     return authResponse;
   }
@@ -124,7 +147,6 @@ class AuthService {
       );
       Map<String, String> headers = tokenResponse.headers;
       String token = headers['authorization'];
-      setCredentialsSharedPreferences(token, id, 'company');
       Response profileResponse = await post(
         Uri.parse('https://interlabapi.herokuapp.com/api/users/$id/profiles'),
         headers: {
@@ -137,6 +159,44 @@ class AuthService {
           'lastName': names[1],
         }),
       );
+      print(profileResponse.statusCode);
+      final companyName = "$username's company";
+      Response companyResponse = await post(
+        Uri.parse('https://interlabapi.herokuapp.com/api/companies'),
+        headers: {
+          'Content-Type': 'application/json',
+          HttpHeaders.authorizationHeader:
+              'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
+        },
+        body: jsonEncode(<String, Object>{
+          "name": companyName,
+          "description": "-",
+          "sector": "-",
+          "email": "company@company.com",
+          "phone": "+51 999 999 999",
+          "address": "-",
+          "country": "US",
+          "city": "Cupertino, CA"
+        }),
+      );
+      print(companyResponse.statusCode);
+      Map company = jsonDecode(companyResponse.body);
+      int companyId = int.parse((company['id']).toString());
+      setCredentialsSharedPreferencesCompany(token, id, companyId, 'company');
+      if (companyResponse.statusCode == 200) {
+        Response assignResponse = await post(
+          Uri.parse(
+              'https://interlabapi.herokuapp.com/api/users/$id/companies/$companyId'),
+          headers: {
+            'Content-Type': 'application/json',
+            HttpHeaders.authorizationHeader:
+                'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
+          },
+        );
+        print(
+          "SE ASIGNÓ CORRECTAMENTE EL USER Y EL COMPANY. CODE: ${assignResponse.statusCode}",
+        );
+      }
     }
     return userResponse;
   }
