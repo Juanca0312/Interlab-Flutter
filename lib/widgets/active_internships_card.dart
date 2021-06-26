@@ -4,12 +4,9 @@ import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/models/application.dart';
 import 'package:interlab/models/student.dart';
 import 'package:interlab/services/students_service.dart';
-import 'package:interlab/widgets/title_and_content_with_icon.dart';
-import 'package:ms_undraw/ms_undraw.dart';
 
 class RequestsStudentsCard extends StatefulWidget {
   final Application offer;
-
   const RequestsStudentsCard(this.offer);
 
   @override
