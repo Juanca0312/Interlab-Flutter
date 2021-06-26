@@ -10,7 +10,6 @@ class CompanyHomeEmpty extends StatefulWidget {
 }
 
 class _CompanyHomeEmptyState extends State<CompanyHomeEmpty> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,44 +18,36 @@ class _CompanyHomeEmptyState extends State<CompanyHomeEmpty> {
         padding: EdgeInsets.all(8.0),
         child: Center(
             child: Column(
-              children: [
-                Expanded(
-                    flex: 15,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                      child: UnDraw(illustration: UnDrawIllustration.mobile_life, color: IColors.lightblue),
-                    )
-                ),
-                Expanded(
-                    flex: 4,
-                    child: Center(
-                        child: Text(
-                          'No hay ofertas\nrecientes!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20
-                          ),
-                        )
-                    )
-                ),
-                Expanded(
-                    flex: 5,
-                    child: Center(
-                        child: Text(
-                          'Parece que no has creado\nninguna oferta, crea una oferta\npara tu empresa ahora.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.grey[700],
-                              fontWeight: FontWeight.w300,
-                              fontSize: 13
-                          ),
-                        )
-                    )
-                ),
-              ],
-            )
-        ),
+          children: [
+            Expanded(
+                flex: 15,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                  child: UnDraw(
+                      illustration: UnDrawIllustration.mobile_life,
+                      color: IColors.lightblue),
+                )),
+            Expanded(
+                flex: 4,
+                child: Center(
+                    child: Text(
+                  'No hay ofertas\nrecientes!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                ))),
+            Expanded(
+                flex: 5,
+                child: Center(
+                    child: Text(
+                  'Parece que no has creado\nninguna oferta, crea una oferta\npara tu empresa ahora.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.grey[700],
+                      fontWeight: FontWeight.w300,
+                      fontSize: 13),
+                ))),
+          ],
+        )),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -67,10 +58,8 @@ class _CompanyHomeEmptyState extends State<CompanyHomeEmpty> {
                 blurRadius: 8,
                 offset: Offset(5, 5),
               ),
-            ]
-        ),
+            ]),
       ),
     );
   }
 }
-

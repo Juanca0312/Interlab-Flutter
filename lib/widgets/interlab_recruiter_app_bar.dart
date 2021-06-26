@@ -2,26 +2,23 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class InterlabRecruiterAppBar extends StatefulWidget implements PreferredSizeWidget  {
+class InterlabRecruiterAppBar extends StatefulWidget
+    implements PreferredSizeWidget {
   final int index;
   final double height;
 
   const InterlabRecruiterAppBar({this.index, this.height});
 
   @override
-  _InterlabRecruiterAppBarState createState() => _InterlabRecruiterAppBarState();
+  _InterlabRecruiterAppBarState createState() =>
+      _InterlabRecruiterAppBarState();
 
   @override
   Size get preferredSize => new Size.fromHeight(height);
 }
 
 class _InterlabRecruiterAppBarState extends State<InterlabRecruiterAppBar> {
-  List<String> titles = [
-    'Home',
-    'My Profile',
-    'Offer History',
-    'Create Offer'
-  ];
+  List<String> titles = ['Home', 'My Profile', 'Offer History', 'Create Offer'];
   List<String> subtitles = [
     'Tus publicaciones activas.',
     'Personaliza como te ven los aplicantes.',
@@ -48,31 +45,27 @@ class _InterlabRecruiterAppBarState extends State<InterlabRecruiterAppBar> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                    '${titles[widget.index]}',
+                Text('${titles[widget.index]}',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
-                    )
-                ),
+                    )),
                 Text(
-                    '${subtitles[widget.index]}',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300,
-                      decoration: TextDecoration.underline,
-                      color: Colors.black87,
-                    ),
+                  '${subtitles[widget.index]}',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w300,
+                    decoration: TextDecoration.underline,
+                    color: Colors.black87,
+                  ),
                 ),
               ],
             ),
             SizedBox(
               width: 50,
               height: 50,
-              child: Image.asset(
-                  'assets/InterlabIcon.png'
-              ),
+              child: Image.asset('assets/InterlabIcon.png'),
             )
           ],
         ),
