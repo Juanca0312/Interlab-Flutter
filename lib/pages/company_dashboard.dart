@@ -6,7 +6,6 @@ import 'package:interlab/pages/company_offer.dart';
 import 'package:interlab/pages/company_profile.dart';
 import 'package:interlab/widgets/interlab_recruiter_app_bar.dart';
 
-
 class CompanyDashboard extends StatefulWidget {
   const CompanyDashboard({Key key}) : super(key: key);
 
@@ -15,7 +14,6 @@ class CompanyDashboard extends StatefulWidget {
 }
 
 class _CompanyDashboardState extends State<CompanyDashboard> {
-
   static int _currentIndex = 0;
   static double height;
 
@@ -26,29 +24,33 @@ class _CompanyDashboardState extends State<CompanyDashboard> {
     Offer(),
   ];
 
+  void initState() {
+    super.initState();
+    setState(() {
+      _currentIndex = 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery
-        .of(context)
-        .size
-        .height * 0.15;
+    height = MediaQuery.of(context).size.height * 0.15;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: InterlabRecruiterAppBar(index: _currentIndex, height: height,),
+      appBar: InterlabRecruiterAppBar(
+        index: _currentIndex,
+        height: height,
+      ),
       body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/background.png'),
-                fit: BoxFit.cover,
-              )
-          ),
+            image: AssetImage('assets/background.png'),
+            fit: BoxFit.cover,
+          )),
           child: Padding(
-            padding: EdgeInsets.only(top: height*1.2),
+            padding: EdgeInsets.only(top: height * 1.2),
             child: Center(child: tabs[_currentIndex]),
-          )
-      ),
+          )),
       bottomNavigationBar: DotNavigationBar(
         margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
         currentIndex: _currentIndex,
@@ -58,38 +60,24 @@ class _CompanyDashboardState extends State<CompanyDashboard> {
           });
         },
         items: [
-
           DotNavigationBarItem(
               icon: Icon(Icons.home),
               selectedColor: Colors.grey[900],
-              unselectedColor: Colors.grey[500]
-          ),
-
-
+              unselectedColor: Colors.grey[500]),
           DotNavigationBarItem(
               icon: Icon(Icons.person),
               selectedColor: Colors.grey[900],
-              unselectedColor: Colors.grey[500]
-          ),
-
-
+              unselectedColor: Colors.grey[500]),
           DotNavigationBarItem(
               icon: Icon(Icons.access_time),
               selectedColor: Colors.grey[900],
-              unselectedColor: Colors.grey[500]
-          ),
-
-
+              unselectedColor: Colors.grey[500]),
           DotNavigationBarItem(
               icon: Icon(Icons.search),
               selectedColor: Colors.grey[900],
-              unselectedColor: Colors.grey[500]
-
-          ),
+              unselectedColor: Colors.grey[500]),
         ],
       ),
     );
   }
 }
-
-
