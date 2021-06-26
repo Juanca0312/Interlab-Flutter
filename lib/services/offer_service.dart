@@ -48,11 +48,14 @@ class OfferService {
 
   Future<void> getActiveInternships() async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      final companyId = prefs.getInt('companyId');
+      final token = prefs.getString('authToken');
       Response response = await get(
         //change userId to 2, in order to showcase a user with to applications.
-        Uri.parse('https://interlabapi.herokuapp.com/api/companies/1/activeInternships'),
+        Uri.parse('https://interlabapi.herokuapp.com/api/companies/$companyId/activeInternships'),
         headers: {
-          HttpHeaders.authorizationHeader: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaXRpIn0.Zq4fRNnpFFzaC0nuNopJuU3EHciKTk4H2XsQU8wY6wZVqnw_Xdfl4sDjjSks4lAarh1mf06bwS8wOb06LzFGuw',
+          HttpHeaders.authorizationHeader: token,
         },
       );
       Map data = jsonDecode(utf8.decode(response.bodyBytes));
