@@ -38,7 +38,7 @@ class InternshipService {
     }
   }
 
-  Future<void> postRequest(int internshipId) async {
+  Future<bool> postRequest(int internshipId) async {
     final prefs = await SharedPreferences.getInstance();
     final authToken = prefs.getString('authToken');
     final userId = prefs.getInt('id');
@@ -54,7 +54,10 @@ class InternshipService {
             'Authorization': '$authToken'
           },
           body: jsonEncode(body));
-      print(response.statusCode);
+      if(response.statusCode != 200){
+        return false;
+      }
+      return true;
     } catch (e) {
       print('caught error $e');
     }
