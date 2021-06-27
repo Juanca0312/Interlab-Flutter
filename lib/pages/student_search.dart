@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
@@ -118,7 +120,7 @@ class _SearchState extends State<Search> {
   }
 }
 
-class CardNav extends StatelessWidget {
+class CardNav extends StatefulWidget {
   final i;
 
   const CardNav(
@@ -129,11 +131,44 @@ class CardNav extends StatelessWidget {
   final InternshipService internshipService;
 
   @override
+  _CardNavState createState() => _CardNavState();
+}
+
+class _CardNavState extends State<CardNav> {
+
+
+
+  @override
   Widget build(BuildContext context) {
+
+    void postRequest()async{
+      bool response = await widget.internshipService.postRequest(widget.internships[widget.i].id);
+      Navigator.of(context).pop();
+      if(!response){
+        Timer timer = Timer(Duration(milliseconds: 3000), (){
+          Navigator.of(context, rootNavigator: true).pop();
+        });
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Center(child: Text('Ya aplicaste a esta Pasantía', textAlign: TextAlign.center,)),
+            );
+          },
+        ).then((value){
+          // dispose the timer in case something else has triggered the dismiss.
+          timer?.cancel();
+          timer = null;
+        });
+
+      }
+    }
+
     return Container(
       ///TODO: CARD Inicio
       decoration: BoxDecoration(
-          gradient: internships[i].bgGradient,
+          gradient: widget.internships[widget.i].bgGradient,
           borderRadius: BorderRadius.all(Radius.circular(15))),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10.0),
@@ -147,14 +182,14 @@ class CardNav extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     //color: Colors.lightGreenAccent,
                     child: Text(
-                      internships[i].title,
+                      widget.internships[widget.i].title,
                       style: TextStyle(fontSize: 16),
                     )),
                 Container(
                     margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     //color: Colors.pink,
                     child: Text(
-                      internships[i].company,
+                      widget.internships[widget.i].company,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w300,
@@ -192,10 +227,7 @@ class CardNav extends StatelessWidget {
                           ),
                         ),
                         InkWell(
-                          onTap: () {
-                            internshipService.postRequest(internships[i].id);
-                            Navigator.pop(context);
-                          },
+                          onTap: postRequest,
                           child: Container(
                             decoration: BoxDecoration(
                                 color: IColors.blue_accent,
