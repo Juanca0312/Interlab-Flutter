@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
+import 'package:interlab/models/history_company.dart';
+import 'package:interlab/services/history_company_service.dart';
+import 'package:interlab/widgets/loading.dart';
+import 'package:interlab/widgets/student_history_empty.dart';
 import 'package:ms_undraw/illustrations.g.dart';
 import 'package:ms_undraw/ms_undraw.dart';
-import 'package:interlab/models/offer_history.dart';
+
 
 class History extends StatefulWidget {
   const History();
@@ -13,16 +17,44 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  List<Offer> mockApplications=[
-    new Offer('Junnior HUrtado', '20-01-2020'),
-    new Offer('Jeremy Salazar', '20-01-2020'),
-    new Offer('Alberto Humo', '20-01-2020'),
-    new Offer('Alberto Hum', '20-01-2020'),
-    new Offer('Jeremy Bazán', '20-01-2020'),
-    new Offer('Jeremy Salazar', '20-01-2021'),
-    new Offer('Jeremy Salazar', '20-01-2020')
-  ];
-  //bool loading=true;
+
+  // List<Offer> mockApplications=[
+  //   new Offer('Junnior HUrtado', '20-01-2020'),
+  //   new Offer('Jeremy Salazar', '20-01-2020'),
+  //   new Offer('Alberto Humo', '20-01-2020'),
+  //   new Offer('Alberto Hum', '20-01-2020'),
+  //   new Offer('Jeremy Bazán', '20-01-2020'),
+  //   new Offer('Jeremy Salazar', '20-01-2021'),
+  //   new Offer('Jeremy Salazar', '20-01-2020')
+  // ];
+  // bool loading=true;
+  HistoryCompanyService historyCompanyService=new HistoryCompanyService();
+  List<HistoryCompany> historyCompany=[];
+  bool loading=true;
+
+  void getData() async {
+    await historyCompanyService.getData();
+    assignData();
+  }
+  void assignData(){
+    loading=false;
+    setState(() {
+      historyCompany=historyCompanyService.historyCompanyList;
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,12 +73,12 @@ class _HistoryState extends State<History> {
                     child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        itemCount: mockApplications.length+1,
+                        itemCount: historyCompany.length+1,
                         itemBuilder: (BuildContext context, int i){
-                          if (i==mockApplications.length){
+                          if (i==historyCompany.length){
                             return _buildIllustration();
                           }
-                          return _buildRow(mockApplications[i], i);
+                          return _buildRow(historyCompany[i], i);
                         }
                     ),
                   ),
@@ -73,8 +105,8 @@ class _HistoryState extends State<History> {
       ),
     );
   }
-  Widget _buildRow(Offer offer, int i){
-    return offerWidget(offer, i);
+  Widget _buildRow(HistoryCompany historyCompany, int i){
+    return historyCompanyWidget(historyCompany, i);
   }
   Widget _buildIllustration(){
     return Padding(
@@ -82,7 +114,7 @@ class _HistoryState extends State<History> {
       child: UnDraw(illustration: UnDrawIllustration.back_home, color: IColors.lightblue, height: 100,),
     );
   }
-  Widget offerWidget(Offer  offer, int i){
+  Widget historyCompanyWidget(HistoryCompany  historyCompany, int i){
     return Container(
       color: Colors.grey[50+250*(i%2)],
       child: Padding(
@@ -91,7 +123,7 @@ class _HistoryState extends State<History> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              offer.name,
+              historyCompany.firstName,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
@@ -99,7 +131,7 @@ class _HistoryState extends State<History> {
               ),
             ),
             Text(
-              offer.date,
+              historyCompany.finishingDate,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w300,
@@ -145,5 +177,3 @@ class _HistoryState extends State<History> {
     );
   }
 }
-
-
