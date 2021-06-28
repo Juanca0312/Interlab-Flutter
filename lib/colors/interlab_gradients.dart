@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:interlab/colors/interlab_colors.dart';
 
 class IGradients{

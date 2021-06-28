@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
-import 'package:interlab/widgets/loading.dart';
-import 'package:interlab/widgets/student_history_empty.dart';
 import 'package:ms_undraw/illustrations.g.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 import 'package:interlab/models/offer_history.dart';
@@ -15,7 +13,6 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-
   List<Offer> mockApplications=[
     new Offer('Junnior HUrtado', '20-01-2020'),
     new Offer('Jeremy Salazar', '20-01-2020'),
@@ -25,10 +22,7 @@ class _HistoryState extends State<History> {
     new Offer('Jeremy Salazar', '20-01-2021'),
     new Offer('Jeremy Salazar', '20-01-2020')
   ];
-
   //bool loading=true;
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(

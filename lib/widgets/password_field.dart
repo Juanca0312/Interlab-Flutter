@@ -22,6 +22,7 @@ class IPasswordField extends StatefulWidget {
 
 class _IPasswordFieldState extends State<IPasswordField> {
   bool _obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return TextField(
