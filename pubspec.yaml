@@ -38,6 +38,7 @@ dependencies:
   ms_undraw: ^3.0.0+0
   flutter_animated_dialog: ^2.0.0
   image_picker: ^0.6.3+4
+  share: ^2.0.4
 
 dev_dependencies:
   flutter_test:

@@ -37,7 +37,15 @@ class ProfileC {
       address = data['address'];
       country = data['country'];
       city = data['city'];
+
+
+
+
+    }
+    catch (e) {
+
     } catch (e) {
+
       print('caught error $e');
       nameC = 'could not get name data';
     }
@@ -47,10 +55,11 @@ class ProfileC {
     final body = {
       'name': nameC,
       'description': description,
-      'sector': sector,
+      'Sector': sector,
       'email': email,
       'phone': phone,
       'address': address,
+      'phone': phone,
       'country': country,
       'city': city,
     };
