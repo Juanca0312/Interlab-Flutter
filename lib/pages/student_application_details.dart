@@ -156,8 +156,8 @@ class _StudentApplicationDetailsState extends State<StudentApplicationDetails> {
   void share(BuildContext context, Application application)
   {
     final  RenderBox box = context.findRenderObject();
-    final String text = "${application.description} ";
-    Share.share(text,subject: application.description,
+    final String text = "Mira mi nueva práctica profesional de ${application.title} en ${application.company} encontrado en Interlab. Ingresa a https://8rb.github.io/Interlab-Landing-Page/ para buscar pasantias.";
+    Share.share(text,subject: "Interlab Moviles",
         sharePositionOrigin: box.localToGlobal(Offset.zero)& box.size);
 
 
