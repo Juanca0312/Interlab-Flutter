@@ -36,6 +36,8 @@ class ProfileC {
       country = data['country'];
       city = data['city'];
 
+
+
     }
     catch (e) {
       print('caught error $e');
@@ -47,10 +49,10 @@ class ProfileC {
     final body ={
       'name': nameC,
       'description': description,
-      'sector': sector,
+      'Sector': sector,
       'email': email,
-      'phone':phone,
       'address': address,
+      'phone': phone,
       'country': country,
       'city': city,
     };

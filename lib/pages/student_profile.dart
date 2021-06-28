@@ -234,14 +234,14 @@ class _ProfileState extends State<Profile> {
                                         onPressed: () {
                                           return _dialogEditProfile();
                                         }),
-                                    IconButton(
+                                    /*IconButton(
                                         icon: Icon(
                                           Icons.logout,
                                           color: Colors.grey[800],
                                         ),
                                         onPressed: () {
                                           return onPressLogout();
-                                        }),
+                                        }),*/
                                   ],
                                 ),
                               ),
