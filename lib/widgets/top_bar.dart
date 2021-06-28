@@ -3,7 +3,6 @@ import 'package:interlab/colors/interlab_colors.dart';
 
 class ITopBar extends StatelessWidget {
   ITopBar({Key key, this.text}) : super(key: key);
-
   final String text;
 
   @override

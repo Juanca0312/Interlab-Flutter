@@ -101,13 +101,20 @@ class _LoginState extends State<Login> {
                       )),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: IPasswordField(
-                        controller: passwordController,
-                        name: 'Contraseña',
-                        hint: '••••••••••••••',
-                        showError: showError,
-                        errorMessage:
-                            'Nombre de usuario o contraseña incorrectos',
+                      child: Focus(
+                        onFocusChange: (hasFocus) {
+                          if(!hasFocus) {
+                            _login();
+                          }
+                        },
+                        child: IPasswordField(
+                          controller: passwordController,
+                          name: 'Contraseña',
+                          hint: '••••••••••••••',
+                          showError: showError,
+                          errorMessage:
+                              'Nombre de usuario o contraseña incorrectos',
+                        ),
                       )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

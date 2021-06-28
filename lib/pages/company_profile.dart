@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
@@ -11,14 +12,9 @@ import 'package:interlab/colors/interlab_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:interlab/services/auth_service.dart';
 
-
-
 class CProfile extends StatefulWidget {
-
-
-
   @override
-  _CProfile  createState() => _CProfile();
+  _CProfile createState() => _CProfile();
 }
 
 class _CProfile extends State<CProfile> {
@@ -26,6 +22,7 @@ class _CProfile extends State<CProfile> {
 
   File profilePhoto;
   //variables
+  String displayName = "";
   String nameC = "";
   String role = "";
   String sector = "";
@@ -35,8 +32,6 @@ class _CProfile extends State<CProfile> {
   String address = "";
   String country = "";
   String city = "";
-
-
 
 //controllers
   final TextEditingController _nameC = TextEditingController();
@@ -76,6 +71,7 @@ class _CProfile extends State<CProfile> {
   void assignData() {
     loading = false;
     nameC = profile.nameC;
+    displayName = StringUtils.truncate(profile.nameC, 10);
     role = 'Recruiter';
     sector = profile.sector;
     description = profile.description == null ? '' : profile.description;
@@ -84,8 +80,6 @@ class _CProfile extends State<CProfile> {
     address = profile.address = profile.address;
     city = profile.city = profile.city;
     country = profile.country = profile.country;
-
-
 
     //controller
     _nameC.text = nameC;
@@ -97,7 +91,6 @@ class _CProfile extends State<CProfile> {
     _addressC.text = address;
     _cityC.text = city;
     _countryC.text = country;
-
 
     setState(() {});
     if (email == '' || email == null) {
@@ -134,190 +127,198 @@ class _CProfile extends State<CProfile> {
     authService.logout();
     Navigate.removeUntil(context);
   }
-  @override
 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getData();
     _startup();
   }
-  @override
 
+  @override
   Widget build(BuildContext context) {
     return loading
         ? Loading()
         : Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SizedBox.expand(
-          child: Container(
-            //height:  MediaQuery.of(context).size.height * 0.85,
-            //margin: EdgeInsets.fromLTRB(0,0, 0, 10),
-            child: SingleChildScrollView(
-              child: Column(
-                //crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Container(
-                    //TODO: CARD GENERAL
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            spreadRadius: 0.0,
-                            offset: Offset(
-                                2.0, 2.0), // shadow direction: bottom right
-                          )
-                        ],
-                        color: Colors.white,
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(15))),
-                    margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          ///TODO: CARD TITLE
-                          decoration: BoxDecoration(
-                              gradient: IGradients.lightblue_blue,
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(15))),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
+            backgroundColor: Colors.transparent,
+            body: SizedBox.expand(
+              child: Container(
+                //height:  MediaQuery.of(context).size.height * 0.85,
+                //margin: EdgeInsets.fromLTRB(0,0, 0, 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    //crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Container(
+                        //TODO: CARD GENERAL
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 2.0,
+                                spreadRadius: 0.0,
+                                offset: Offset(
+                                    2.0, 2.0), // shadow direction: bottom right
+                              )
+                            ],
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Container(
+                              ///TODO: CARD TITLE
+                              decoration: BoxDecoration(
+                                  gradient: IGradients.lightblue_blue,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15))),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    profilePhoto == null
-                                        ? CircleAvatar(
-                                      backgroundImage: AssetImage(
-                                          'assets/user_default.jpg'),
-                                      radius: 25,
-                                    )
-                                        : CircleAvatar(
-                                      backgroundImage:
-                                      FileImage(profilePhoto),
-                                      radius: 25,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Container(
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 0, horizontal: 10),
-                                            //color: Colors.lightGreenAccent,
-                                            child: Text(
-                                              '$nameC ',
-                                              style: TextStyle(fontSize: 20),
-                                            )),
-                                        Container(
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 0, horizontal: 10),
-                                            //color: Colors.pink,
-                                            child: Text(
-                                              'Reclutador',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w300,
+                                    Row(
+                                      children: [
+                                        profilePhoto == null
+                                            ? CircleAvatar(
+                                                backgroundImage: AssetImage(
+                                                    'assets/user_default.jpg'),
+                                                radius: 25,
+                                              )
+                                            : CircleAvatar(
+                                                backgroundImage:
+                                                    FileImage(profilePhoto),
+                                                radius: 25,
                                               ),
-                                            ))
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 0,
+                                                    horizontal: 10),
+                                                //color: Colors.lightGreenAccent,
+                                                child: Text(
+                                                  '${StringUtils.truncate(nameC, 10)}',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                )),
+                                            Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 0,
+                                                    horizontal: 10),
+                                                //color: Colors.pink,
+                                                child: Text(
+                                                  'Reclutador',
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                ))
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                            icon: Icon(
+                                              Icons.edit,
+                                              color: Colors.grey[800],
+                                            ),
+                                            onPressed: () {
+                                              return _dialogEditProfile();
+                                            }),
+                                        IconButton(
+                                            icon: Icon(
+                                              Icons.logout,
+                                              color: Colors.grey[800],
+                                            ),
+                                            onPressed: () {
+                                              return onPressLogout();
+                                            }),
                                       ],
                                     ),
                                   ],
                                 ),
-
-                                IconButton(
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color: Colors.grey[800],
-                                    ),
-                                    onPressed: () {
-                                      return _dialogEditProfile();
-                                    }),
-                                /*IconButton(
-                                    icon: Icon(
-                                      Icons.logout_rounded,
-                                      color: Colors.grey[800],
-                                    ),
-                                    onPressed: () {
-                                      return onPressLogout();
-                                    }),*/
-                              ],
+                              ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _label(' Soy recruiter de la empresa: ',
+                                      '$nameC'),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  _label('Description: ', '$description'),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  _label(' Del rubro: ', '$sector'),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  _label(' Email: ', '$email'),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  _label(' Numero: ', '$phone'),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  _label(' Address: ', '$address'),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  _labelCC(' En:', '$city', '$country'),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 5, left: 5),
+                                    child: Text(
+                                      'Bio',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 90,
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: IColors.blue, width: 2),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(description),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _label(' Soy recruiter de la empresa: ', '$nameC'),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              _label('Description: ','$description'),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              _label(' Del rubro: ','$sector'),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              _label(' Email: ', '$email'),
-                              SizedBox(
-                                height: 10,
-                              ),
-
-                              _label(' Numero: ','$phone' ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              _label(' Address: ', '$address'),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              _labelCC(' En:', '$city', '$country'),
-                              SizedBox(
-                                height: 10,
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    bottom: 5, left: 5),
-                                child: Text(
-                                  'Bio',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                              Container(
-                                height: 90,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: IColors.blue, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(description),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ));
+            ));
   }
 
   _imgFromGallery() async {
@@ -347,34 +348,34 @@ class _CProfile extends State<CProfile> {
                     Text(
                       'Edit Profile',
                       style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     profilePhoto == null
                         ? CircleAvatar(
-                      backgroundImage:
-                      AssetImage('assets/user_default.jpg'),
-                      radius: 35,
-                      child: IconButton(
-                        onPressed: () {
-                          _imgFromGallery();
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.edit),
-                        color: Colors.black,
-                      ),
-                    )
+                            backgroundImage:
+                                AssetImage('assets/user_default.jpg'),
+                            radius: 35,
+                            child: IconButton(
+                              onPressed: () {
+                                _imgFromGallery();
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(Icons.edit),
+                              color: Colors.black,
+                            ),
+                          )
                         : CircleAvatar(
-                      backgroundImage: FileImage(profilePhoto),
-                      radius: 35,
-                      child: IconButton(
-                        onPressed: () {
-                          _imgFromGallery();
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.edit),
-                        color: Colors.black,
-                      ),
-                    ),
+                            backgroundImage: FileImage(profilePhoto),
+                            radius: 35,
+                            child: IconButton(
+                              onPressed: () {
+                                _imgFromGallery();
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(Icons.edit),
+                              color: Colors.black,
+                            ),
+                          ),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -386,7 +387,7 @@ class _CProfile extends State<CProfile> {
                                   ? null
                                   : 'Campos Inválidos';
                             },
-                              decoration: InputDecoration(labelText: 'Empresa'),
+                            decoration: InputDecoration(labelText: 'Empresa'),
                           ),
                           TextFormField(
                             controller: _descriptionC,
@@ -395,7 +396,8 @@ class _CProfile extends State<CProfile> {
                                   ? null
                                   : 'Campos Inválidos';
                             },
-                            decoration: InputDecoration(labelText: 'Description'),
+                            decoration:
+                                InputDecoration(labelText: 'Description'),
                           ),
                           TextFormField(
                             controller: _sectorC,
@@ -404,7 +406,8 @@ class _CProfile extends State<CProfile> {
                                   ? null
                                   : 'Campos Inválidos';
                             },
-                            decoration: InputDecoration(labelText: 'Sector de la Empresa: '),
+                            decoration: InputDecoration(
+                                labelText: 'Sector de la Empresa: '),
                           ),
                           TextFormField(
                             controller: _emailC,
@@ -431,7 +434,8 @@ class _CProfile extends State<CProfile> {
                                   ? null
                                   : 'Campos Inválidos';
                             },
-                            decoration: InputDecoration(labelText: 'Dirección de la Empresa: '),
+                            decoration: InputDecoration(
+                                labelText: 'Dirección de la Empresa: '),
                           ),
                           TextFormField(
                             controller: _cityC,
@@ -472,9 +476,9 @@ class _CProfile extends State<CProfile> {
                                   color: IColors.blue),
                               child: Center(
                                   child: Text(
-                                    'Guardar',
-                                    style: TextStyle(color: Colors.white),
-                                  )),
+                                'Guardar',
+                                style: TextStyle(color: Colors.white),
+                              )),
                             ),
                           )
                         ],

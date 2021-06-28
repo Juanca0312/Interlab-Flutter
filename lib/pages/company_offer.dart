@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/colors/interlab_colors.dart';
@@ -33,7 +33,7 @@ class _OfferState extends State<Offer> {
   final ScrollController _scrollController=new ScrollController();
 
   void createData() async {
-    CompanyOffer companyOffer=new CompanyOffer(titleC.text, descriptionC.text, startingDateC.text, finishingDateC.text, locationC.text, salaryC.text);
+    CompanyOffer companyOffer=new CompanyOffer(titleC.text, descriptionC.text, startingDateC.text, finishingDateC.text, locationC.text, StringUtils.removeExp(salaryC.text, 'S/ '));
     service.companyOffer=companyOffer;
     await service.createData();
   }
@@ -44,8 +44,14 @@ class _OfferState extends State<Offer> {
     startingDateC.text='';
     finishingDateC.text='';
     locationC.text='';
-    salaryC.text='';
+    salaryC.text='S/ ';
     _scrollToTop();
+  }
+
+  @override
+  void initState() {
+    salaryC.text='S/ ';
+    super.initState();
   }
 
   void _scrollToTop(){
@@ -112,6 +118,7 @@ class _OfferState extends State<Offer> {
                             textController: salaryC,
                             label: 'Salario mensual',
                             hint: 'Ex. S/ 3000',
+                            numeric: true,
                             errorMessage: 'Ingrese el salario mensual de la oferta',
                           ),
                           SizedBox(

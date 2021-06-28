@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/models/application.dart';
 import 'package:basic_utils/basic_utils.dart';
-import 'package:interlab/pages/company_offer_details.dart';
-import 'package:interlab/pages/student_application_details.dart';
 import 'package:interlab/services/offer_service.dart';
+import 'package:interlab/widgets/active_internships_card.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/company_home_empty.dart';
 class CompanyHome extends StatefulWidget {
@@ -20,7 +19,7 @@ class _CompanyHomeState extends State<CompanyHome> {
   bool loading=true;
 
   void getData() async {
-    await offerService.getData();
+    await offerService.getActiveInternships();
     assignData();
   }
   void assignData(){
@@ -62,7 +61,7 @@ class _CompanyHomeState extends State<CompanyHome> {
               context: context,
               barrierDismissible: true,
               builder: (BuildContext context) {
-                return CompanyOfferDetails(offer);
+                return RequestsStudentsCard(offer);
               },
               animationType: DialogTransitionType.slideFromBottom,
               curve: Curves.fastOutSlowIn,
