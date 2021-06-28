@@ -203,10 +203,6 @@ class _ProfileState extends State<Profile> {
                                           FileImage(profilePhoto),
                                           radius: 25,
                                         ),
-
-                                        onPressed: () {
-                                          return _dialogEditProfile();
-                                        }),
                                     /*IconButton(
                                         icon: Icon(
                                           Icons.logout,
