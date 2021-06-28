@@ -6,6 +6,7 @@ import 'package:interlab/pages/student_application_details.dart';
 import 'package:interlab/services/application_service.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_home_empty.dart';
+import 'package:share/share.dart';
 class Home extends StatefulWidget {
   const Home();
 
@@ -139,5 +140,14 @@ class _HomeState extends State<Home> {
         ]
       ),
     );
+  }
+  void share(BuildContext context, Application application)
+  {
+    final  RenderBox box = context.findRenderObject();
+    final String text = "${application.description} ";
+    Share.share(text,subject: application.description,
+    sharePositionOrigin: box.localToGlobal(Offset.zero)& box.size);
+
+
   }
 }

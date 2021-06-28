@@ -4,6 +4,7 @@ import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/models/application.dart';
 import 'package:interlab/widgets/title_and_content_with_icon.dart';
 import 'package:ms_undraw/ms_undraw.dart';
+import 'package:share/share.dart';
 
 class StudentApplicationDetails extends StatefulWidget {
   final Application application;
@@ -14,6 +15,10 @@ class StudentApplicationDetails extends StatefulWidget {
 }
 
 class _StudentApplicationDetailsState extends State<StudentApplicationDetails> {
+  Application get application => widget.application;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -136,9 +141,25 @@ class _StudentApplicationDetailsState extends State<StudentApplicationDetails> {
                 ),
               ],
             ),
-          )
+          ),
+          IconButton(
+              icon: const Icon(Icons.share),
+              onPressed: () => share(context, application),
+
+        ),
+
+
         ],
       ),
     );
+  }
+  void share(BuildContext context, Application application)
+  {
+    final  RenderBox box = context.findRenderObject();
+    final String text = "${application.description} ";
+    Share.share(text,subject: application.description,
+        sharePositionOrigin: box.localToGlobal(Offset.zero)& box.size);
+
+
   }
 }
