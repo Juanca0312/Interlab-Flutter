@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/colors/interlab_gradients.dart';
 import 'package:interlab/models/history_company.dart';
+import 'package:interlab/pages/company_offer_details.dart';
 import 'package:interlab/services/history_company_service.dart';
 import 'package:interlab/widgets/loading.dart';
 import 'package:interlab/widgets/student_history_empty.dart';
@@ -106,7 +108,17 @@ class _HistoryState extends State<History> {
     );
   }
   Widget _buildRow(HistoryCompany historyCompany, int i){
-    return historyCompanyWidget(historyCompany, i);
+    return GestureDetector(
+        onTap: () => showAnimatedDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              return CompanyOfferDetails(historyCompany);
+            },
+            animationType: DialogTransitionType.slideFromBottom,
+            curve: Curves.fastOutSlowIn,
+            duration: Duration(milliseconds: 500)),
+        child: historyCompanyWidget(historyCompany, i));
   }
   Widget _buildIllustration(){
     return Padding(

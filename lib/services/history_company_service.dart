@@ -25,6 +25,16 @@ class HistoryCompanyService{
             data['content'][i]['lastName'],
             StringUtils.truncate(data['content'][i]['finishingDate'], 10,
                 symbol: ''),
+            StringUtils.truncate(data['content'][i]['startingDate'], 10,
+                symbol: ''),
+            data['content'][i]['state'],
+            data['content'][i]['salary'].toString(),
+            data['content'][i]['i_description'],
+            data['content'][i]['jobTitle'],
+            data['content'][i]['email'],
+            data['content'][i]['phone'],
+            data['content'][i]['city'],
+
           ),
         );
       }

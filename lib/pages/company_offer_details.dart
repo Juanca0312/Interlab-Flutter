@@ -2,11 +2,12 @@ import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/models/application.dart';
+import 'package:interlab/models/history_company.dart';
 import 'package:interlab/widgets/title_and_content_with_icon.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 
 class CompanyOfferDetails extends StatefulWidget {
-  final Application offer;
+  final HistoryCompany offer;
   const CompanyOfferDetails(this.offer);
 
   @override
@@ -35,7 +36,7 @@ class _CompanyOfferDetailsState extends State<CompanyOfferDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.offer.title,
+                          widget.offer.jobTitle,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 18,
@@ -44,7 +45,7 @@ class _CompanyOfferDetailsState extends State<CompanyOfferDetails> {
                           ),
                         ),
                         Text(
-                          '${widget.offer.company} - ${widget.offer.location}',
+                          '${widget.offer.firstName} - ${widget.offer.city}',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 13,
@@ -53,7 +54,7 @@ class _CompanyOfferDetailsState extends State<CompanyOfferDetails> {
                           ),
                         ),
                         Text(
-                          '${widget.offer.companyEmail} - ${widget.offer.companyPhone}',
+                          '${widget.offer.email} - ${widget.offer.phone}',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 11,
@@ -126,7 +127,7 @@ class _CompanyOfferDetailsState extends State<CompanyOfferDetails> {
             child: Column(
               children: [
                 SizedBox(height: 15,),
-                TitleAndContentWithIcon("Descripción", widget.offer.description, Icons.description, IColors.blue),
+                TitleAndContentWithIcon("Descripción", widget.offer.i_description, Icons.description, IColors.blue),
                 TitleAndContentWithIcon("Salario", 'S/ ${widget.offer.salary}', Icons.payments, IColors.pink),
                 Expanded(
                     child: Container(
