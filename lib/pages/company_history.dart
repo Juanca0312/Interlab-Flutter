@@ -135,7 +135,7 @@ class _HistoryState extends State<History> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              historyCompany.firstName,
+              '${historyCompany.firstName} ${historyCompany.lastName}',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
