@@ -22,7 +22,7 @@ environment:
 
 dependencies:
   url_launcher: ^6.0.4
-  progress_indicator_button: ^0.0.3
+
   shared_preferences: ^2.0.6
   flutter:
     sdk: flutter
@@ -39,6 +39,7 @@ dependencies:
   flutter_animated_dialog: ^2.0.0
   image_picker: ^0.6.3+4
   share: ^2.0.4
+  progress_indicator_button: ^0.0.3
 
 dev_dependencies:
   flutter_test:
