@@ -4,6 +4,8 @@ import 'package:interlab/colors/interlab_colors.dart';
 import 'package:interlab/models/application.dart';
 import 'package:interlab/models/student.dart';
 import 'package:interlab/services/students_service.dart';
+import 'package:interlab/widgets/company_home_empty.dart';
+import 'package:interlab/widgets/students_applied_empty.dart';
 
 class RequestsStudentsCard extends StatefulWidget {
   final Application offer;
@@ -142,13 +144,13 @@ class _RequestsStudentsCardState extends State<RequestsStudentsCard> {
                 )),
           ),
           Expanded(
-            child: ListView.builder(
+            child: !students.isEmpty ? ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: students.length,
                 itemBuilder: (BuildContext context, int i) {
                   return CardStudent(students[i], widget.offer.internshipId);
-                }),
+                }) : StudentsAppliedEmpty()
           ),
         ],
       ),
